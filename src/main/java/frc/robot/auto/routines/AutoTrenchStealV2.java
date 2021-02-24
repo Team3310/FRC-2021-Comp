@@ -19,6 +19,7 @@ import frc.robot.auto.commands.ResetOdometryAuto;
 import frc.robot.auto.commands.ShooterAutoLegShoot;
 import frc.robot.auto.commands.ShooterAutoLegShotTrack;
 import frc.robot.auto.commands.StopTrajectory;
+import frc.robot.commands.ExtendIntake;
 import frc.robot.commands.IntakeExtendAll;
 import frc.robot.commands.ShooterReset;
 import frc.robot.subsystems.Drive;
@@ -41,6 +42,7 @@ public class AutoTrenchStealV2 extends SequentialCommandGroup {
     public AutoTrenchStealV2() {
         addCommands(new SequentialCommandGroup(
                 new ResetOdometryAuto(),
+                new ExtendIntake(mIntake),
                 new ParallelDeadlineGroup(
                         new RamseteCommand(
                         mTrajectories.getStealStartToStealBallV2(),

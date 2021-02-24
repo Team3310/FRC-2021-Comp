@@ -67,6 +67,7 @@ public final class Constants
     public static final int TURRET_MOTOR_CAN_ID = 10;
     public static final int MAGAZINE_MOTOR_CAN_ID = 5;
     public static final int INTAKE_MOTOR_CAN_ID = 7;
+    public static final int CLIMBER_MOTOR_CAN_ID = 6;
 
     // Gyro
     public static final int GYRO_CAN_ID = 0;
@@ -160,7 +161,7 @@ public final class Constants
     public static final double INTAKE_COLLECT_AUTO_RPM = 1200; // 1500
 
     // Drive
-    public static final double DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES = 0.0;
+    public static final double DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES = -180.0;
 
     // Vision
     public static final int LIMELIGHT_AUTO_PIPELINE = 2;
@@ -180,7 +181,7 @@ public final class Constants
     public static final double LIMELIGHT_OFFSET_ALL_FIELD_SHOT_DEGREES = 0.0;
 
     // Climb
-    public static final double CLIMB_MIN_INCHES = 0.0;
+    public static final double CLIMB_MIN_INCHES = -5.0;
     public static final double CLIMB_MAX_INCHES = 30.0;
     public static final double CLIMB_LEVEL_1_INCHES = 10.0;
 

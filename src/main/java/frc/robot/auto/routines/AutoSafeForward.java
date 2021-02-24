@@ -17,6 +17,7 @@ import frc.robot.auto.TrajectoryGenerator;
 import frc.robot.auto.commands.ResetOdometryAuto;
 import frc.robot.auto.commands.ShooterAutoShortShotTrack;
 import frc.robot.auto.commands.StopTrajectory;
+import frc.robot.commands.ExtendIntake;
 import frc.robot.commands.ShooterReset;
 import frc.robot.subsystems.*;
 
@@ -26,6 +27,7 @@ public class AutoSafeForward extends SequentialCommandGroup {
   Shooter mShooter = Shooter.getInstance();
   Magazine mMagazine = Magazine.getInstance();
   Turret mTurret = Turret.getInstance();
+  Intake mIntake = Intake.getInstance();
 
   /**
    * Add your docs here.
@@ -33,6 +35,7 @@ public class AutoSafeForward extends SequentialCommandGroup {
   public AutoSafeForward() {
     addCommands(
             new ResetOdometryAuto(),
+            new ExtendIntake(mIntake),
             new ShooterAutoShortShotTrack(mShooter,mMagazine,mTurret, Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_3_BALL),
             new RamseteCommand(
                     mTrajectories.getLeftStartToSafeForward(),

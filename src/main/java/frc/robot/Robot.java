@@ -178,6 +178,8 @@ public class Robot extends TimedRobot
     private static final Turret turret = Turret.getInstance();
     private static final Magazine magazine = Magazine.getInstance();
     private static final Shooter shooter = Shooter.getInstance();
+    private static final Climb climb = Climb.getInstance();
+    private static final Intake intake = Intake.getInstance();
 
     /**
      * This method is run when the robot is first started up and should be used for any
