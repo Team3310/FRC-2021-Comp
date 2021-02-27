@@ -11,8 +11,9 @@ public class ResetOdometryAuto extends CommandBase {
 
     private static final Drive mDrive = Drive.getInstance();
     private static final Turret mTurret = Turret.getInstance();
-    private Pose2d startPose;
     private static final Climb mClimb = Climb.getInstance();
+    private Pose2d startPose;
+
 
     public ResetOdometryAuto(Pose2d startPose) {
         this.startPose = startPose;

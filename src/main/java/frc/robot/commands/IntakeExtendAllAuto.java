@@ -15,7 +15,7 @@ public class IntakeExtendAllAuto extends ParallelCommandGroup {
         addCommands(
                 new TurretSetAngle(turret, Constants.TURRET_INTAKE_ANGLE_DEGREES),
                 new IntakeSetRPM(intake, Constants.INTAKE_COLLECT_RPM),
-                new MagazineSetRPM(magazine, 0)//Constants.MAGAZINE_INTAKE_RPM)
+                new MagazineSetRPM(magazine, 0)
         );
     }
 }
