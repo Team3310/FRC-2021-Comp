@@ -215,7 +215,7 @@ public class TrajectoryGenerator {
                 List.of(
                         new Translation2d(Units.inchesToMeters(201), Units.inchesToMeters(-264))
                 ),
-                new Pose2d(Units.inchesToMeters(270), Units.inchesToMeters(-302), Rotation2d.fromDegrees(-45.0)),
+                new Pose2d(Units.inchesToMeters(271), Units.inchesToMeters(-303), Rotation2d.fromDegrees(-45.0)),
                 // Pass config
                 forwardFastConfig
             );
@@ -253,13 +253,13 @@ public class TrajectoryGenerator {
         public Trajectory getStealBallToCenterShotV2() {
             Trajectory stealSpotToCenterShot;
             stealSpotToCenterShot = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
-                    new Pose2d(Units.inchesToMeters(270), Units.inchesToMeters(-302), Rotation2d.fromDegrees(-45)),
+                    new Pose2d(Units.inchesToMeters(271), Units.inchesToMeters(-303), Rotation2d.fromDegrees(-45)),
                     List.of(
                             new Translation2d(Units.inchesToMeters(228), Units.inchesToMeters(-254)),
                             new Translation2d(Units.inchesToMeters(196), Units.inchesToMeters(-192))
     //                        new Translation2d(Units.inchesToMeters(185), Units.inchesToMeters(-171))
                     ),
-                    new Pose2d(Units.inchesToMeters(185), Units.inchesToMeters(-120), Rotation2d.fromDegrees(-71)),
+                    new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-60), Rotation2d.fromDegrees(0)),
                     // Pass config
                     reverseFastConfig
             );
@@ -431,7 +431,7 @@ public class TrajectoryGenerator {
                 List.of(
                         new Translation2d(Units.inchesToMeters(213.098), Units.inchesToMeters(-77.632))
                 ),
-                new Pose2d(Units.inchesToMeters(245.661), Units.inchesToMeters(-129.337), new Rotation2d(Units.degreesToRadians(-60))),
+                new Pose2d(Units.inchesToMeters(257.5), Units.inchesToMeters(-138), new Rotation2d(Units.degreesToRadians(-75))),
                 forwardMediumConfig
         );
         return FirstTwoBalls;
@@ -440,7 +440,7 @@ public class TrajectoryGenerator {
     public Trajectory getFirstTwoBallsReversed() {
         Trajectory FirstTwoBallsReversed;
         FirstTwoBallsReversed = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
-                new Pose2d(Units.inchesToMeters(245.661), Units.inchesToMeters(-129.337), new Rotation2d(Units.degreesToRadians(-60))),
+                new Pose2d(Units.inchesToMeters(257.5), Units.inchesToMeters(-138), new Rotation2d(Units.degreesToRadians(-75))),
                 List.of(
                         new Translation2d(Units.inchesToMeters(213.098), Units.inchesToMeters(-77.632))
                 ),
@@ -449,6 +449,33 @@ public class TrajectoryGenerator {
         );
         return FirstTwoBallsReversed;
     }
+
+    public Trajectory getFirstTwoBallsSteal() {
+        Trajectory FirstTwoBalls;
+        FirstTwoBalls = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-60), new Rotation2d(Units.degreesToRadians(0))),
+                List.of(
+                        new Translation2d(Units.inchesToMeters(213.098), Units.inchesToMeters(-77.632))
+                ),
+                new Pose2d(Units.inchesToMeters(285.5), Units.inchesToMeters(-159), new Rotation2d(Units.degreesToRadians(-75))),
+                forwardMediumConfig
+        );
+        return FirstTwoBalls;
+
+    }
+    public Trajectory getFirstTwoBallsReversedSteal() {
+        Trajectory FirstTwoBallsReversed;
+        FirstTwoBallsReversed = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                new Pose2d(Units.inchesToMeters(285.5), Units.inchesToMeters(-159), new Rotation2d(Units.degreesToRadians(-75))),
+                List.of(
+                        new Translation2d(Units.inchesToMeters(213.098), Units.inchesToMeters(-77.632))
+                ),
+                new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-60), new Rotation2d(Units.degreesToRadians(0))),
+                reverseFastConfig
+        );
+        return FirstTwoBallsReversed;
+    }
+
     public Trajectory getTrench3Ball() {
         Trajectory Trench3Ball;
         Trench3Ball = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(

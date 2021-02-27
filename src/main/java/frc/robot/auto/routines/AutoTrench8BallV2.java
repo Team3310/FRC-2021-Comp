@@ -18,7 +18,7 @@ import frc.robot.auto.commands.ShooterAutoLegShotTrack;
 import frc.robot.auto.commands.ShooterAutoMediumShoot;
 import frc.robot.auto.commands.ShooterAutoMediumShotTrack;
 import frc.robot.auto.commands.StopTrajectory;
-import frc.robot.commands.ExtendIntake;
+import frc.robot.commands.InitializeAuto;
 import frc.robot.commands.IntakeExtendAllAuto;
 import frc.robot.commands.ShooterReset;
 import frc.robot.subsystems.Drive;
@@ -40,7 +40,6 @@ public class AutoTrench8BallV2 extends SequentialCommandGroup {
     public AutoTrench8BallV2() {
         addCommands(
                 new ResetOdometryAuto(new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-60), new Rotation2d(0))),
-                new ExtendIntake(mIntake),
                 new IntakeExtendAllAuto(mIntake, mTurret, mMagazine),
                 new RamseteCommand(
                         mTrajectories.getFirstTwoBalls(),
