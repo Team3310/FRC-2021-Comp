@@ -152,6 +152,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -243,11 +244,13 @@ public class Robot extends TimedRobot
     {
         Limelight.getInstance().setLedMode(Limelight.LightMode.OFF);
         Limelight.getInstance().setPipeline(Constants.LIMELIGHT_AUTO_PIPELINE);
+        drive.setBrakeMode(NeutralMode.Coast);
     }
 
     @Override
     public void disabledPeriodic()
     {
+
     }
 
     /**
@@ -263,6 +266,7 @@ public class Robot extends TimedRobot
         shooter.resetHoodHomePosition();
         drive.resetGyroYawAngle(Constants.DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES);
         drive.setControlMode(Drive.DriveControlMode.PATH_FOLLOWING);
+        drive.setBrakeMode(NeutralMode.Brake);
 
         m_autonomousCommand = autonTaskChooser.getSelected();
 
@@ -299,6 +303,8 @@ public class Robot extends TimedRobot
         }
         drive.setControlMode(Drive.DriveControlMode.JOYSTICK);
         Limelight.getInstance().setLedMode(Limelight.LightMode.OFF);
+//        Turret.getInstance().setTurretMotionMagicPositionAbsolute(-180 + turret.getLagAngle(drive) -drive.getNormalizeGyro(drive));
+        drive.setBrakeMode(NeutralMode.Brake);
       //  shooter.setHoodMotionMagicPositionAbsolute(Constants.HOOD_COMPETITION_HOME_POSITION_DEGREES);
     }
 
@@ -308,6 +314,8 @@ public class Robot extends TimedRobot
     @Override
     public void teleopPeriodic()
     {
+//        Turret.getInstance().setTurretMotionMagicPositionAbsolute(-180 + turret.getLagAngle(drive) -drive.getNormalizeGyro(drive));
+
     }
 
     @Override

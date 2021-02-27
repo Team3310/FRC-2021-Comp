@@ -184,6 +184,15 @@ public class Drive extends SubsystemBase {
         return INSTANCE;
     }
 
+    public void setBrakeMode(NeutralMode status){
+        mLeftMaster.setNeutralMode(status);
+        mLeftSlave1.setNeutralMode(status);
+        mLeftSlave2.setNeutralMode(status);
+        mRightMaster.setNeutralMode(status);
+        mRightSlave1.setNeutralMode(status);
+        mRightSlave2.setNeutralMode(status);
+    }
+
     //Encoder Setup
     public synchronized DriveControlMode getControlMode() {
         return driveControlMode;
@@ -460,6 +469,14 @@ public class Drive extends SubsystemBase {
         mLeftMaster.setVoltage(leftVolts);
         mRightMaster.setVoltage(-rightVolts);
         m_drive.feed();
+    }
+
+    public double getNormalizeGyro(Drive drive){
+
+        if (drive.getGyroFusedHeadingAngleDeg() > 360){
+            resetGyroYawAngle();
+        }
+        return drive.getGyroFusedHeadingAngleDeg();
     }
 
     public void periodic() {

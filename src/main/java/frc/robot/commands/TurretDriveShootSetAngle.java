@@ -8,7 +8,7 @@ public class TurretDriveShootSetAngle extends ExtraTimeoutCommand {
 
     public TurretDriveShootSetAngle(Turret subsystem, double angle) {
         this.turret = subsystem;
-        this.angle = Turret.getInstance().getDriveShootOffSetAngle();
+//        this.angle = Turret.getInstance().getDriveShootOffSetAngle();
         addRequirements(subsystem);
     }
 

@@ -12,7 +12,7 @@ public class TurretSetToDriveShootOffsetAngle extends ExtraTimeoutCommand {
 
     @Override
     public void initialize() {
-        turret.setTurretMotionMagicPositionAbsolute(Turret.getInstance().getDriveShootOffSetAngle());
+//        turret.setTurretMotionMagicPositionAbsolute(Turret.getInstance().getDriveShootOffSetAngle());
         resetExtraOneTimer();
         startExtraOneTimeout(0.1);
     }

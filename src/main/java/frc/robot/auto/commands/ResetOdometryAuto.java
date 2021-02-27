@@ -19,7 +19,7 @@ public class ResetOdometryAuto extends CommandBase {
     }
 
     public ResetOdometryAuto() {
-        this.startPose = new Pose2d();
+        this.startPose = Constants.ROBOT_START_POSITION;;
     }
 
     @Override

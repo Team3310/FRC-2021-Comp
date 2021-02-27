@@ -7,9 +7,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.util.Units;
+import frc.robot.subsystems.Drive;
 
 public final class Constants
 {
@@ -185,6 +188,12 @@ public final class Constants
     public static final double CLIMB_MAX_INCHES = 30.0;
     public static final double CLIMB_LEVEL_1_INCHES = 10.0;
 
-    public static final Translation2d GOAL_ORIGIN = new Translation2d();
-    public static final double FLIGHT_TIME_OF_BALL = 0.3;
+    // Score While Driving
+    public static final Translation2d GOAL_ORIGIN = new Translation2d(Units.inchesToMeters(0), Units.inchesToMeters(-100));
+    public static final Pose2d ROBOT_START_POSITION = new Pose2d(Units.inchesToMeters(136),Units.inchesToMeters(-60),
+            new Rotation2d(Units.degreesToRadians(0)));
+    public static final double FLIGHT_TIME_OF_BALL = 0.635;
+    public static double robotCurrPoseX = Units.metersToInches(Drive.getInstance().getPose().getTranslation().getX());
+    public static double robotCurrPoseY = Units.metersToInches(Drive.getInstance().getPose().getTranslation().getY());
+    public static final Pose2d ROBOT_CURRENT_POSITION = new Pose2d(robotCurrPoseX,robotCurrPoseY, new Rotation2d(Units.degreesToRadians(0)));
 }
