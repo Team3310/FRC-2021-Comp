@@ -141,9 +141,9 @@ public final class Constants
     public static final double SHOOTER_INTAKE_RPM = 3000;
 
     // Magazine
-    public static final double MAGAZINE_INTAKE_RPM = 40;
-    public static final double MAGAZINE_SHOOT_RPM = 60;
-    public static final double MAGAZINE_SHOOT_AUTO_RPM = 40;
+    public static final double MAGAZINE_INTAKE_RPM = 80;
+    public static final double MAGAZINE_SHOOT_RPM = 80;
+    public static final double MAGAZINE_SHOOT_AUTO_RPM = 80;
     public static final double MAGAZINE_SHOOT_AUTO_LEG_RPM = 80;
     public static final double MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_3_BALL = 360.0;
     public static final double MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_5_BALL = 500.0;
@@ -155,7 +155,7 @@ public final class Constants
 
 
     // Intake
-    public static final double INTAKE_COLLECT_RPM = 2000; // 1500
+    public static final double INTAKE_COLLECT_RPM = 1500; // 1500
     public static final double INTAKE_SLOW_RPM = 500;
     public static final double INTAKE_RETRACT_RPM = 1000;
     public static final double INTAKE_COLLECT_AUTO_RPM = 1200; // 1500
