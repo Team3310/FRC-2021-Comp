@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.util.Units;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -21,12 +22,7 @@ import frc.robot.auto.commands.StopTrajectory;
 import frc.robot.commands.InitializeAuto;
 import frc.robot.commands.IntakeExtendAllAuto;
 import frc.robot.commands.ShooterReset;
-import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Limelight;
-import frc.robot.subsystems.Magazine;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Turret;
+import frc.robot.subsystems.*;
 
 public class AutoTrench8BallV2 extends SequentialCommandGroup {
     TrajectoryGenerator mTrajectories = TrajectoryGenerator.getInstance();
@@ -35,11 +31,13 @@ public class AutoTrench8BallV2 extends SequentialCommandGroup {
     Magazine mMagazine = Magazine.getInstance();
     Turret mTurret = Turret.getInstance();
     Intake mIntake = Intake.getInstance();
+    Climb mClimb = Climb.getInstance();
     Limelight mLimelight = Limelight.getInstance();
 
     public AutoTrench8BallV2() {
         addCommands(
                 new ResetOdometryAuto(new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-60), new Rotation2d(0))),
+                new InstantCommand(() ->mClimb.setClimbMotionMagicPositionAbsolute(-3)),
                 new IntakeExtendAllAuto(mIntake, mTurret, mMagazine),
                 new RamseteCommand(
                         mTrajectories.getFirstTwoBalls(),
@@ -75,7 +73,7 @@ public class AutoTrench8BallV2 extends SequentialCommandGroup {
                 ),
                 new StopTrajectory(),
                 new ShooterAutoLegShoot(mShooter,mMagazine,mTurret,
-                        Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_5_BALL),
+                        250),
                 new IntakeExtendAllAuto(mIntake, mTurret, mMagazine),
                 new RamseteCommand(
                             mTrajectories.getTrench3Ball(),

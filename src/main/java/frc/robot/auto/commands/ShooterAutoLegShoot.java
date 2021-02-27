@@ -17,7 +17,7 @@ public class ShooterAutoLegShoot extends SequentialCommandGroup {
                 new MagazineSetRPM(magazine, Constants.MAGAZINE_SHOOT_RPM),
                 new TurretSetToLimelightAngle(turret, Constants.LIMELIGHT_OFFSET_LEG_SHOT_DEGREES),
                 new ShooterIntakeSetRPM(shooter, Constants.SHOOTER_INTAKE_RPM),
-                new WaitCommand(2.2),
+                new WaitCommand(1.2),
                 new ShooterIntakeSetSpeed(shooter, 0)
  //               new MagazineSetRPMRotations(magazine, Constants.MAGAZINE_SHOOT_AUTO_LEG_RPM,
  //                       magazineRotations)
