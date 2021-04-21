@@ -196,7 +196,7 @@ public class Shooter extends SubsystemBase {
         return shooterIntake.getSelectedSensorVelocity() / INTAKE_OUTPUT_TO_ENCODER_RATIO / Constants.ENCODER_TICKS_PER_MOTOR_REVOLUTION * 10.0 * 60.0;
     }
 
-    public void seIntakeRPM(double rpm) {
+    public void setIntakeRPM(double rpm) {
         shooterIntake.set(ControlMode.Velocity, KickerRPMToNativeUnits(rpm));
     }
 
@@ -272,6 +272,15 @@ public class Shooter extends SubsystemBase {
         }
 
         return targetAngle;
+    }
+
+    // Shoot while driving
+    public double getRPMFromDistance() {
+        return 7.98248 * Limelight.getInstance().getDistanceFromTargetInches() + 1542.75;
+    }
+
+    public double getHoodAngleFromDistance() {
+        return 0.0809014 * Limelight.getInstance().getDistanceFromTargetInches() + 27.8;
     }
 
     public void setReady(boolean isReady) {
@@ -368,6 +377,9 @@ public class Shooter extends SubsystemBase {
 //        SmartDashboard.putNumber("Hood Velocity", shooterHood.getSelectedSensorVelocity());
 //        SmartDashboard.putNumber("Hood Position", shooterHood.getSelectedSensorPosition());
         SmartDashboard.putBoolean("Shooter Ready", isReady);
+        SmartDashboard.putNumber("RPM From Distance", getRPMFromDistance());
+        SmartDashboard.putNumber("Hood Angle From Distance", getHoodAngleFromDistance());
+
     }
 }
 

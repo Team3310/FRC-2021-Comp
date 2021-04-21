@@ -18,7 +18,6 @@ public final class Constants
 {
     public static final double kLooperDt = 0.01;
     public static final double ENCODER_TICKS_PER_MOTOR_REVOLUTION = 2048.0;
-
     // USB Port IDs
     public static final int DRIVER_JOYSTICK_1_USB_ID = 0;
     public static final int OPERATOR_JOYSTICK_1_USB_ID = 1;
@@ -103,12 +102,13 @@ public final class Constants
     public static final double HOOD_RETRACT_HOME_POSITION_DEGREES = 2.0;
     public static final double HOOD_AUTO_ZERO_SPEED = -0.1;
     public static final double HOOD_MIN_ANGLE_DEGREES = 0.0;
-    public static final double HOOD_MAX_ANGLE_DEGREES = 55.0;
+    public static final double HOOD_MAX_ANGLE_DEGREES = 53.0;
     public static final double HOOD_FENDER_ANGLE_DEGREES = 0.0;
     public static final double HOOD_KEY_ANGLE_DEGREES = 8.0;
     public static final double HOOD_AUTON_SHORT_ANGLE_DEGREES = 35.0;
     public static final double HOOD_AUTO_ANGLE_DEGREES = 37.0;
     public static final double HOOD_MEDIUM_ANGLE_DEGREES = 47.0;
+    public static final double HOOD_MEDIUM_2_ANGLE_DEGREES = 48.0;
     public static final double HOOD_LONG_ANGLE_DEGREES = 55.0;
     public static final double HOOD_LEG_ANGLE_DEGREES = 46.0;
     public static final double HOOD_AUTO_DOUBLE_ANGLE_DEGREES = 46;
@@ -148,6 +148,7 @@ public final class Constants
     public static final double MAGAZINE_SHOOT_RPM = 80;
     public static final double MAGAZINE_SHOOT_AUTO_RPM = 80;
     public static final double MAGAZINE_SHOOT_AUTO_LEG_RPM = 80;
+    public static final double MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_270 = 270.0;
     public static final double MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_3_BALL = 360.0;
     public static final double MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_5_BALL = 500.0;
     public static final double MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_6_ROTATIONS = 1800.0;
