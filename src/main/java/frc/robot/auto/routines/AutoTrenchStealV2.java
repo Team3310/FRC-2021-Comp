@@ -82,7 +82,7 @@ public class AutoTrenchStealV2 extends SequentialCommandGroup {
                // new IntakeRetractAll(mIntake,mMagazine),
                 new ShooterAutoLegShoot(mShooter,mMagazine,mTurret,
                         Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_5_BALL),
-                new ShooterReset(mShooter, mMagazine, mTurret, Limelight.getInstance())
+                new ShooterReset(mShooter, mMagazine, Limelight.getInstance(), mTurret)
         ));
     }
 }

@@ -21,7 +21,7 @@ public class ShooterAllFieldShot extends ParallelCommandGroup {
                new HoodSetToTrackLimelightAngle(shooter),
                new SequentialCommandGroup(
                        new TurretSetToGyroAngle(turret, Constants.TURRET_GYRO_OFFSET_ALL_FIELD_SHOT_ANGLE_DEGREES),
-                       new TurretSetToTrackLimelightAngle(turret, Constants.LIMELIGHT_OFFSET_ALL_FIELD_SHOT_DEGREES, Constants.TURRET_GYRO_OFFSET_ALL_FIELD_SHOT_ANGLE_DEGREES),
+                       new TurretSetToTrackLimelightAngle(turret, Constants.LIMELIGHT_OFFSET_ALL_FIELD_SHOT_DEGREES, Constants.TURRET_GYRO_OFFSET_ALL_FIELD_SHOT_ANGLE_DEGREES, true),
                        new ShooterSetReady(shooter, true)
                )
        );

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj.util.Units;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 import java.util.List;
 
@@ -114,6 +115,9 @@ public class TrajectoryGenerator {
                     // Pass config
                     reverseConfig
             );
+        }
+        public Trajectory pathBRed(){
+            return RobotContainer.loadPathTrajectory("paths/PathBRed.wpilib.json");
         }
 
         //Start 8 Ball Trench Auto
@@ -458,7 +462,7 @@ public class TrajectoryGenerator {
                         new Translation2d(Units.inchesToMeters(213.098), Units.inchesToMeters(-77.632))
                 ),
                 new Pose2d(Units.inchesToMeters(285.5), Units.inchesToMeters(-159), new Rotation2d(Units.degreesToRadians(-75))),
-                forwardMediumConfig
+                forwardFastConfig
         );
         return FirstTwoBalls;
 

@@ -14,7 +14,7 @@ public class IntakeExtendAll extends SequentialCommandGroup {
         addCommands(
                 new TurretSetAngle(Turret.getInstance(), Constants.TURRET_INTAKE_ANGLE_DEGREES),
                 new IntakeSetRPM(intake, Constants.INTAKE_COLLECT_RPM),
-                new MagazineSetRPMLimit(magazine, Constants.MAGAZINE_INTAKE_RPM, Constants.MAGAZINE_JAM_STATOR_CURRENT)
+                new MagazineSetRPMLimit(magazine, Constants.MAGAZINE_INTAKE_SLOW_RPM, Constants.MAGAZINE_JAM_STATOR_CURRENT)
 
         );
     }

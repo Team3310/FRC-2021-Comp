@@ -18,7 +18,7 @@ public class ShooterIntakeSetRPM extends CommandBase {
 
     @Override
     public void initialize() {
-        shooter.seIntakeRPM(rpm);
+        shooter.setIntakeRPM(rpm);
     }
 
     @Override

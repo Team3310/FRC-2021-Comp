@@ -16,7 +16,7 @@ public class ClimbSetInches extends CommandBase {
 
     @Override
     public void initialize() {
-    climb.setClimbMotionMagicPositionAbsolute(inches);
+        climb.setClimbMotionMagicPositionAbsolute(inches);
     }
 
     @Override

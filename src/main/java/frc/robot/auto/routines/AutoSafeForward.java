@@ -51,7 +51,7 @@ public class AutoSafeForward extends SequentialCommandGroup {
                     mDrive::tankDriveVolts,
                     mDrive),
             new StopTrajectory(),
-            new ShooterReset(mShooter, mMagazine, mTurret, Limelight.getInstance())
+            new ShooterReset(mShooter, mMagazine, Limelight.getInstance(), mTurret)
       );
   }
 }

@@ -10,14 +10,24 @@ import frc.robot.subsystems.Magazine;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 
-public class ShooterMediumShot extends ParallelCommandGroup {
+public class ShooterSetShot extends ParallelCommandGroup {
 
-    public ShooterMediumShot(Shooter shooter, Magazine magazine, Turret turret) {
+    public static class ShooterParams{
+        public double hoodAngle;
+        public double shooterRPM;
+        public double kickerRPM;
+        public double limelightOffset;
+        public int limelightPipeline;
+        public double turretGyroOffset;
+        public boolean isLimelightActive = true;
+    }
+
+    public ShooterSetShot(Shooter shooter, Magazine magazine, Turret turret, ShooterParams params) {
         addCommands(
                 new LimelightSetLED(Limelight.getInstance(), Limelight.LightMode.ON),
-                new InstantCommand(()->Limelight.getInstance().setPipeline(Constants.LIMELIGHT_MEDIUM_PIPELINE)),
+                new InstantCommand(()->Limelight.getInstance().setPipeline(params.limelightPipeline)),
                 new ShooterSetReady(shooter,false),
-                new ShooterSetRPM(shooter, Constants.SHOOTER_MAIN_MEDIUM_RPM, Constants.SHOOTER_KICKER_MEDIUM_RPM),
+                new ShooterSetRPM(shooter, params.shooterRPM, params.kickerRPM),
                 new MagazineSetRPM(magazine, Constants.MAGAZINE_SHOOT_RPM),
                 //               new SequentialCommandGroup(
  //                       new TurretSetToGyroAngle(turret, Constants.TURRET_GYRO_OFFSET_MEDIUM_SHOT_ANGLE_DEGREES)
@@ -25,10 +35,10 @@ public class ShooterMediumShot extends ParallelCommandGroup {
  //               ),
  //               new ShooterSetCachedHoodAngle(shooter, Constants.HOOD_MEDIUM_ANGLE_DEGREES),
  //               new TurretSetCachedLimelightOffset(turret, Constants.LIMELIGHT_OFFSET_MEDIUM_SHOT_DEGREES),
-                new HoodSetAngle(shooter, Constants.HOOD_MEDIUM_ANGLE_DEGREES),
+                new HoodSetAngle(shooter, params.hoodAngle),
                 new SequentialCommandGroup(
-                        new TurretSetToGyroAngle(turret, Constants.TURRET_GYRO_OFFSET_MEDIUM_SHOT_ANGLE_DEGREES),
-                        new TurretSetToTrackLimelightAngle(turret, Constants.LIMELIGHT_OFFSET_MEDIUM_SHOT_DEGREES, Constants.TURRET_GYRO_OFFSET_MEDIUM_SHOT_ANGLE_DEGREES, true),
+                        new TurretSetToGyroAngle(turret, params.turretGyroOffset),
+                        new TurretSetToTrackLimelightAngle(turret, params.limelightOffset, params.turretGyroOffset, params.isLimelightActive),
                         new ShooterSetReady(shooter, true)
                 )
         );

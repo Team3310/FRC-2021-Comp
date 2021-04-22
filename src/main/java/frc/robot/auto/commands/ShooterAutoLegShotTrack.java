@@ -15,7 +15,7 @@ public class ShooterAutoLegShotTrack extends SequentialCommandGroup {
 
     public ShooterAutoLegShotTrack(Shooter shooter, Turret turret) {
         addCommands(
-                new WaitCommand(2.0),
+                new WaitCommand(1.5),
                 new ParallelCommandGroup(
                     new InstantCommand(()-> Limelight.getInstance().setPipeline(Constants.LIMELIGHT_LEG_PIPELINE)),
                     new LimelightSetLED(Limelight.getInstance(), Limelight.LightMode.ON),
@@ -23,7 +23,7 @@ public class ShooterAutoLegShotTrack extends SequentialCommandGroup {
                     new HoodSetAngle(shooter, Constants.HOOD_LEG_ANGLE_DEGREES),
                     new SequentialCommandGroup(
                             new TurretSetToGyroAngle(turret, Constants.TURRET_GYRO_OFFSET_LEG_SHOT_ANGLE_DEGREES),
-                            new TurretSetToTrackLimelightAngle(turret, Constants.LIMELIGHT_OFFSET_LEG_SHOT_DEGREES, Constants.TURRET_GYRO_OFFSET_LEG_SHOT_ANGLE_DEGREES)
+                            new TurretSetToTrackLimelightAngle(turret, Constants.LIMELIGHT_OFFSET_LEG_SHOT_DEGREES, Constants.TURRET_GYRO_OFFSET_LEG_SHOT_ANGLE_DEGREES, true)
                     )
                 )
         );

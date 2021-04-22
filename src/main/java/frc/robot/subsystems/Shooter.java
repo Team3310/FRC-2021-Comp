@@ -4,12 +4,17 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.utilities.Util;
 
 public class Shooter extends SubsystemBase {
+
+
 
     public static enum HoodControlMode {
         MOTION_MAGIC, VELOCITY, MANUAL, MOTION_MAGIC_TRACK_LIMELIGHT
@@ -22,6 +27,8 @@ public class Shooter extends SubsystemBase {
     private final double HOOD_OUTPUT_TO_ENCODER_RATIO = 322.0 / 20.0;
     private final double HOOD_REVOLUTIONS_TO_ENCODER_TICKS = HOOD_OUTPUT_TO_ENCODER_RATIO * Constants.ENCODER_TICKS_PER_MOTOR_REVOLUTION;
     private final double HOOD_DEGREES_TO_ENCODER_TICKS = HOOD_REVOLUTIONS_TO_ENCODER_TICKS / 360.0;
+
+    private double sendableHoodAngle;
 
     // Motion Magic
     private static final int kHoodMotionMagicSlot = 0;
@@ -82,7 +89,7 @@ public class Shooter extends SubsystemBase {
 
         shooterHood.setInverted(TalonFXInvertType.Clockwise);
         shooterHood.setNeutralMode(NeutralMode.Brake);
-        shooterHood.configMotionCruiseVelocity(3000);
+        shooterHood.configMotionCruiseVelocity(3000);//3000
         shooterHood.configMotionAcceleration(6000);
  //       shooterHood.configMotionSCurveStrength(4);
 
@@ -121,10 +128,15 @@ public class Shooter extends SubsystemBase {
         shooterIntake.config_kD(0, 0.0);  // 0.6
 
         shooterHood.config_kF(kHoodMotionMagicSlot, 0.045);
-        shooterHood.config_kP(kHoodMotionMagicSlot, 0.9);
-        shooterHood.config_kI(kHoodMotionMagicSlot, 0.008);
+        shooterHood.config_kP(kHoodMotionMagicSlot, 1.0);//.9
+        shooterHood.config_kI(kHoodMotionMagicSlot, 0.008);//.008
         shooterHood.config_kD(kHoodMotionMagicSlot, 0.0);
         shooterHood.config_IntegralZone(kHoodMotionMagicSlot, (int)(5.0 * HOOD_DEGREES_TO_ENCODER_TICKS));
+        SendableRegistry.addLW(this, "Shooter", 0);
+    }
+
+    public void close() {
+        SendableRegistry.remove(this);
     }
 
     public static Shooter getInstance() {
@@ -231,6 +243,7 @@ public class Shooter extends SubsystemBase {
 
     }
 
+
     // Motion Magic
     public synchronized void setHoodMotionMagicPositionAbsolute(double angle) {
         if (getHoodControlMode() != HoodControlMode.MOTION_MAGIC) {
@@ -239,6 +252,9 @@ public class Shooter extends SubsystemBase {
         setHoodMotionMagicPositionAbsoluteInternal(angle);
     }
 
+    public synchronized void setHoodAngleSendable(){
+        setHoodMotionMagicPositionAbsolute(sendableHoodAngle);
+    }
     public synchronized void setHoodMotionMagicPositionAbsoluteInternal(double angle) {
         shooterHood.selectProfileSlot(kHoodMotionMagicSlot, 0);
         double limitedAngle = limitHoodAngle(angle);
@@ -354,7 +370,7 @@ public class Shooter extends SubsystemBase {
             updateLimelightTrack();
         }
  //       SmartDashboard.putNumber("Shooters Rotations", getMainRotations());
-//        SmartDashboard.putNumber("Shooters RPM", getMainRPM());
+        SmartDashboard.putNumber("Shooters RPM", getMainRPM());
 //        SmartDashboard.putNumber("Shooters RPM Graph", getShooterRPM());
 //        SmartDashboard.putNumber("Shooters Velocity Native", shooterMainMaster.getSelectedSensorVelocity());
 //        SmartDashboard.putNumber("Shooters input", shooterMainMaster.getMotorOutputPercent());
@@ -380,6 +396,23 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putNumber("RPM From Distance", getRPMFromDistance());
         SmartDashboard.putNumber("Hood Angle From Distance", getHoodAngleFromDistance());
 
+    }
+    public double getSendableHoodAngle(){
+        return sendableHoodAngle;
+    }
+    public void setSendableHoodAngle(double angle){
+        if(angle < Constants.HOOD_MIN_ANGLE_DEGREES){
+            angle = Constants.HOOD_MIN_ANGLE_DEGREES;
+        }
+        if(angle > Constants.HOOD_MAX_ANGLE_DEGREES){
+            angle = Constants.HOOD_MAX_ANGLE_DEGREES;
+        }
+        sendableHoodAngle = angle;
+    }
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        builder.setSmartDashboardType("Shooter");
+        builder.addDoubleProperty("Hood angle", this::getSendableHoodAngle, this::setSendableHoodAngle);
     }
 }
 

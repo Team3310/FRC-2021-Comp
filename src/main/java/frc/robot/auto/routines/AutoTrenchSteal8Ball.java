@@ -34,7 +34,6 @@ public class AutoTrenchSteal8Ball extends SequentialCommandGroup {
     Magazine mMagazine = Magazine.getInstance();
     Turret mTurret = Turret.getInstance();
     Intake mIntake = Intake.getInstance();
-    Limelight mLimelight = Limelight.getInstance();
 
     public AutoTrenchSteal8Ball() {
         addCommands(
@@ -114,28 +113,7 @@ public class AutoTrenchSteal8Ball extends SequentialCommandGroup {
                 new StopTrajectory(),
                 new ShooterAutoLegShoot(mShooter,mMagazine,mTurret,
                         Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_5_BALL),
-//                new StopTrajectory(),
-//                new ParallelCommandGroup(
-//                        new RamseteCommand(
-//                                mTrajectories.getStealFarSideRendezvousPoint2BallsReverse(),
-//                                mDrive::getPose,
-//                                new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-//                                new SimpleMotorFeedforward(Constants.ksVolts,
-//                                        Constants.kvVoltSecondsPerMeter,
-//                                        Constants.kaVoltSecondsSquaredPerMeter),
-//                                Constants.kDriveKinematics,
-//                                mDrive::getWheelSpeeds,
-//                                new PIDController(Constants.kPDriveVel, 0, Constants.kDDriveVel),
-//                                new PIDController(Constants.kPDriveVel, 0, Constants.kDDriveVel),
-//                                // RamseteCommand passes volts to the callback
-//                                mDrive::tankDriveVolts,
-//                                mDrive),
-//                        new ShooterAutoLegShotTrack(mShooter, mTurret)
-//                ),
-//                new StopTrajectory(),
-//                new ShooterAutoLegShoot(mShooter,mMagazine,mTurret,
-//                        Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_5_BALL),
-                new ShooterReset(mShooter, mMagazine, mTurret, Limelight.getInstance())
+                new ShooterReset(mShooter, mMagazine,  Limelight.getInstance(), mTurret)
         );
     }
 }

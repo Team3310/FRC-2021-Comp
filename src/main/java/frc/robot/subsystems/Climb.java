@@ -59,9 +59,9 @@ public class Climb extends SubsystemBase {
 
     // Motion Magic
     public synchronized void setClimbMotionMagicPositionAbsolute(double inches) {
-        climbMotor.selectProfileSlot(kClimbMotionMagicSlot, 0);
-        targetPositionTicks = getClimbEncoderTicksAbsolute(limitClimbInches(inches));
-        climbMotor.set(ControlMode.MotionMagic, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.04);
+//        climbMotor.selectProfileSlot(kClimbMotionMagicSlot, 0);
+//        targetPositionTicks = getClimbEncoderTicksAbsolute(limitClimbInches(inches));
+//        climbMotor.set(ControlMode.MotionMagic, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.04);
     }
 
     public synchronized boolean hasFinishedTrajectory() {

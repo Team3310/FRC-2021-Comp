@@ -15,18 +15,23 @@ public class TurretSetToTrackLimelightAngle extends CommandBase
     private final Turret turret;
     private double limelightOffsetAngleDeg;
     private double gyroOffsetAngleDeg;
+    private boolean isActive;
 
-    public TurretSetToTrackLimelightAngle(Turret subsystem, double limelightOffsetAngleDeg, double gyroOffsetAngleDeg)
+    public TurretSetToTrackLimelightAngle(Turret subsystem, double limelightOffsetAngleDeg, double gyroOffsetAngleDeg, boolean isActive)
     {
         this.turret = subsystem;
         this.limelightOffsetAngleDeg = limelightOffsetAngleDeg;
         this.gyroOffsetAngleDeg = gyroOffsetAngleDeg;
+        this.isActive = isActive;
+
         addRequirements(subsystem);
     }
 
     @Override
     public void initialize() {
-        turret.setLimelightTrackMode(limelightOffsetAngleDeg, gyroOffsetAngleDeg);
+        if(isActive){
+            turret.setLimelightTrackMode(limelightOffsetAngleDeg, gyroOffsetAngleDeg);
+        }
     }
 
     @Override

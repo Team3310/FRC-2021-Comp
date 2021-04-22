@@ -66,7 +66,7 @@ public class AutoTrench8Ball extends ParallelCommandGroup {
 ),
 
                 new StopTrajectory(),
-                new ShooterReset(mShooter, mMagazine, mTurret, Limelight.getInstance()),
+                new ShooterReset(mShooter, mMagazine, Limelight.getInstance(), mTurret),
                 new RamseteCommand(
                         mTrajectories.getEndOfTrenchToStartOfTrench(),
                         mDrive::getPose,
@@ -84,7 +84,7 @@ public class AutoTrench8Ball extends ParallelCommandGroup {
                 new StopTrajectory(),
                 new IntakeRetractAll(mIntake,mMagazine),
                 new ShooterAutoMediumShotTrack(mShooter,mMagazine,mTurret, Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_5_BALL),
-                new ShooterReset(mShooter, mMagazine, mTurret, Limelight.getInstance())
+                new ShooterReset(mShooter, mMagazine,  Limelight.getInstance(), mTurret)
         ));
     }
 }

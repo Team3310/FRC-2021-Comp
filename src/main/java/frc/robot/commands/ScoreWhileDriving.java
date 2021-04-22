@@ -20,7 +20,7 @@ public class ScoreWhileDriving extends SequentialCommandGroup {
                     new ShooterSetRPM(shooter, Constants.SHOOTER_MAIN_ALL_FIELD_RPM, Constants.SHOOTER_KICKER_ALL_FIELD_RPM)),
 //                new MagazineSetRPM(magazine, Constants.MAGAZINE_SHOOT_RPM),
 //                new ShooterIntakeSetRPM(shooter, Constants.SHOOTER_INTAKE_RPM),
-                new ShooterReset(shooter,magazine,turret,Limelight.getInstance())
+                new ShooterReset(shooter,magazine,Limelight.getInstance(), turret)
 
 
 

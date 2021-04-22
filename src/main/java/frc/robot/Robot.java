@@ -153,6 +153,7 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -198,7 +199,6 @@ public class Robot extends TimedRobot
 
         autonTaskChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
         autonTaskChooser.addOption("Test 8 Feet Auto", new AutoTest8Feet());
-
         autonTaskChooser.addOption("Trench 8 Ball Auto", new AutoTrench8Ball());
         autonTaskChooser.addOption("Trench Steal 5 Ball Auto", new AutoTrenchSteal());
         autonTaskChooser.addOption("Trench Steal 5 Ball Auto V2", new AutoTrenchStealV2());
@@ -269,6 +269,8 @@ public class Robot extends TimedRobot
         drive.setControlMode(Drive.DriveControlMode.PATH_FOLLOWING);
         drive.setBrakeMode(NeutralMode.Brake);
 
+        drive.getAccelValues();
+
         m_autonomousCommand = autonTaskChooser.getSelected();
 
         /*
@@ -323,7 +325,10 @@ public class Robot extends TimedRobot
     public void testInit()
     {
         // Cancels all running commands at the start of test mode.
+
         CommandScheduler.getInstance().cancelAll();
+
+        teleopInit();
     }
 
     /**
@@ -332,5 +337,7 @@ public class Robot extends TimedRobot
     @Override
     public void testPeriodic()
     {
+        teleopPeriodic();
+
     }
 }

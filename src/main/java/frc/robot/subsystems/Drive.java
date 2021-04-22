@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.PigeonIMU;
+import com.ctre.phoenix.sensors.PigeonIMU.CalibrationMode;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -21,6 +22,8 @@ import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.controller.GameController;
+
+import java.lang.reflect.Array;
 
 public class Drive extends SubsystemBase {
 
@@ -307,7 +310,19 @@ public class Drive extends SubsystemBase {
 
     // Gyro Set Up
     public void calibrateGyro() {
-        gyroPigeon.enterCalibrationMode(PigeonIMU.CalibrationMode.Temperature);
+//        gyroPigeon.enterCalibrationMode(CalibrationMode.Temperature);
+        gyroPigeon.enterCalibrationMode(CalibrationMode.Accelerometer);
+    }
+
+    public int getAccelValues(){
+        double[] accelAngles = new double[3];
+        gyroPigeon.getAccelerometerAngles(accelAngles);
+        if(accelAngles[3]>5){
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
 
     public void endGyroCalibration() {

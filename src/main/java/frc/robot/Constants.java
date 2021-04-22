@@ -109,7 +109,7 @@ public final class Constants
     public static final double HOOD_AUTO_ANGLE_DEGREES = 37.0;
     public static final double HOOD_MEDIUM_ANGLE_DEGREES = 47.0;
     public static final double HOOD_MEDIUM_2_ANGLE_DEGREES = 48.0;
-    public static final double HOOD_LONG_ANGLE_DEGREES = 55.0;
+    public static final double HOOD_LONG_ANGLE_DEGREES = 53.0;
     public static final double HOOD_LEG_ANGLE_DEGREES = 46.0;
     public static final double HOOD_AUTO_DOUBLE_ANGLE_DEGREES = 46;
     public static final double HOOD_DISTANCE_SLOPE = 3.5/59.0;
@@ -140,12 +140,17 @@ public final class Constants
     public static final double SHOOTER_KICKER_AUTO_DOUBLE_RPM = 3600;
     public static final double SHOOTER_KICKER_ALL_FIELD_RPM = 3400;
 
+    //public static final double SHOOTER_KICKER_TEST_RPM = 3500;
+    public static final double SHOOTER_TEST_RPM = 2500;
+    public static final double HOOD_TEST_ANGLE_DEGREES = 37.0;
+    public static final double LIMELIGHT_OFFSET_TEST_SHOT_DEGREES = 0;
 
     public static final double SHOOTER_INTAKE_RPM = 3000;
 
     // Magazine
     public static final double MAGAZINE_INTAKE_RPM = 80;
-    public static final double MAGAZINE_SHOOT_RPM = 80;
+    public static final double MAGAZINE_INTAKE_SLOW_RPM = 10;
+    public static final double MAGAZINE_SHOOT_RPM = 40;//80
     public static final double MAGAZINE_SHOOT_AUTO_RPM = 80;
     public static final double MAGAZINE_SHOOT_AUTO_LEG_RPM = 80;
     public static final double MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_270 = 270.0;
@@ -178,7 +183,7 @@ public final class Constants
     public static final double LIMELIGHT_OFFSET_KEY_SHOT_DEGREES = 0.0;
     public static final double LIMELIGHT_OFFSET_AUTON_SHORT_SHOT_DEGREES = 0.0;
     public static final double LIMELIGHT_OFFSET_AUTO_SHOT_DEGREES = 0.0;
-    public static final double LIMELIGHT_OFFSET_MEDIUM_SHOT_DEGREES = -3.5;
+    public static final double LIMELIGHT_OFFSET_MEDIUM_SHOT_DEGREES = -2.5;//-3.5
     public static final double LIMELIGHT_OFFSET_LONG_SHOT_DEGREES = -2.0;
     public static final double LIMELIGHT_OFFSET_LEG_SHOT_DEGREES = -1.5;
     public static final double LIMELIGHT_OFFSET_AUTO_DOUBLE_SHOT_DEGREES = 1.0;
