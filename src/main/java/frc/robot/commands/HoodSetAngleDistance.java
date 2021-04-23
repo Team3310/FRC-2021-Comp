@@ -13,17 +13,17 @@ public class HoodSetAngleDistance extends ExtraTimeoutCommand {
 
     @Override
     public void initialize() {
-        angle = shooter.getHoodAngleFromDistance();
-        shooter.setHoodMotionMagicPositionAbsolute(angle);
         resetExtraOneTimer();
         startExtraOneTimeout(0.1);
     }
 
     @Override
     public boolean isFinished() {
-        if (isExtraOneTimedOut() && shooter.hasFinishedHoodTrajectory()) {
-            return true;
-        }
+        angle = shooter.getHoodAngleFromDistance();
+        shooter.setHoodMotionMagicPositionAbsolute(angle);
+//        if (isExtraOneTimedOut() && shooter.hasFinishedHoodTrajectory()) {
+//            return true;
+//        }
         return false;
     }
 }
