@@ -167,7 +167,14 @@ public class RobotContainer {
         Button turretAimToGoal = m_driver.getButtonA();
         turretAimToGoal.whenPressed(
                 new InstantCommand(() ->turret.setTurretMotionMagicPositionAbsolute(Util.normalizeAngle90ToMinus270(turret.getLagAngle(drive) - drive.getGyroFusedHeadingAngleDeg()))));
-//        SmartDashboard.putData("Auton Short", new ShooterAutonShortShot(shooter, magazine, turret));
+
+        Button limelightTrack = m_driver.getButtonX();
+        limelightTrack.whenPressed(
+                new TurretSetToTrackLimelightAngle(turret, 0,0, true));
+
+        Button limelightTrackTwo = m_driver.getButtonB();
+        limelightTrackTwo.whenPressed( new TurretSetToLimelightAngle(turret, 0));
+        //        SmartDashboard.putData("Auton Short", new ShooterAutonShortShot(shooter, magazine, turret));
 //
 //        SmartDashboard.putData("Reset All Home", new ResetAllHomePositions(drive, turret, magazine, shooter));
 //        SmartDashboard.putData("Compressor On", new InstantCommand(() -> compressor.turnCompressorOn()));

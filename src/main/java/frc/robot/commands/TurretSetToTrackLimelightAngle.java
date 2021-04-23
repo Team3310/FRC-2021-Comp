@@ -24,7 +24,7 @@ public class TurretSetToTrackLimelightAngle extends CommandBase
         this.gyroOffsetAngleDeg = gyroOffsetAngleDeg;
         this.isActive = isActive;
 
-        addRequirements(subsystem);
+ //       addRequirements(subsystem);
     }
 
     @Override
