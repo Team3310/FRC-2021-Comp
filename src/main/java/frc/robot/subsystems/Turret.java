@@ -394,23 +394,24 @@ public class Turret extends SubsystemBase {
         rCurrPoseX = Units.metersToInches(drive.getPose().getTranslation().getX());
         rCurrPoseY = Units.metersToInches(drive.getPose().getTranslation().getY());
         rDistToGoal = Units.metersToInches(drive.getPose().getTranslation().getDistance(Constants.GOAL_ORIGIN));
-        rTurretGoalAngle = Math.toDegrees(Math.acos(rCurrPoseX / rDistToGoal));
+        rTurretGoalAngle = Math.toDegrees(Math.atan2(rCurrPoseY + 95, rCurrPoseX));
+
         offsetY = Math.abs(drive.getLeftMetersPerSecond()) * Constants.FLIGHT_TIME_OF_BALL;
         movingTurrOffsetAngle = Math.toDegrees(Math.atan(offsetY / rDistToGoal));
 
-        if ((isRobotVelocityPos(drive) && isRobotFacingRight(drive) && isRobotRightOfGoal()) ||
-                (isRobotVelocityNeg(drive) && isRobotFacingLeft(drive)) && isRobotRightOfGoal()) {
-            return turretGoalAngleLag = -rTurretGoalAngle - movingTurrOffsetAngle;
-        } else if ((isRobotVelocityPos(drive) && isRobotFacingRight(drive) && isRobotLeftOfGoal()) ||
-                (isRobotVelocityNeg(drive) && isRobotFacingLeft(drive)) && isRobotLeftOfGoal())
-            return turretGoalAngleLag = rTurretGoalAngle - movingTurrOffsetAngle;
-        else if ((isRobotVelocityNeg(drive) && isRobotFacingRight(drive) && isRobotRightOfGoal()) ||
-                (isRobotVelocityPos(drive) && isRobotFacingLeft(drive)) && isRobotRightOfGoal())
-            return turretGoalAngleLag = -rTurretGoalAngle + movingTurrOffsetAngle;
-        else if ((isRobotVelocityNeg(drive) && isRobotFacingRight(drive) && isRobotLeftOfGoal()) ||
-                (isRobotVelocityPos(drive) && isRobotFacingLeft(drive)) && isRobotLeftOfGoal())
-            return turretGoalAngleLag = rTurretGoalAngle + movingTurrOffsetAngle;
-        else
+//        if ((isRobotVelocityPos(drive) && isRobotFacingRight(drive) && isRobotRightOfGoal()) ||
+//                (isRobotVelocityNeg(drive) && isRobotFacingLeft(drive)) && isRobotRightOfGoal()) {
+//            return turretGoalAngleLag = -rTurretGoalAngle - movingTurrOffsetAngle;
+//        } else if ((isRobotVelocityPos(drive) && isRobotFacingRight(drive) && isRobotLeftOfGoal()) ||
+//                (isRobotVelocityNeg(drive) && isRobotFacingLeft(drive)) && isRobotLeftOfGoal())
+//            return turretGoalAngleLag = rTurretGoalAngle - movingTurrOffsetAngle;
+//        else if ((isRobotVelocityNeg(drive) && isRobotFacingRight(drive) && isRobotRightOfGoal()) ||
+//                (isRobotVelocityPos(drive) && isRobotFacingLeft(drive)) && isRobotRightOfGoal())
+//            return turretGoalAngleLag = -rTurretGoalAngle + movingTurrOffsetAngle;
+//        else if ((isRobotVelocityNeg(drive) && isRobotFacingRight(drive) && isRobotLeftOfGoal()) ||
+//                (isRobotVelocityPos(drive) && isRobotFacingLeft(drive)) && isRobotLeftOfGoal())
+//            return turretGoalAngleLag = rTurretGoalAngle + movingTurrOffsetAngle;
+//        else
             return rTurretGoalAngle;
 
     }
@@ -424,6 +425,7 @@ public class Turret extends SubsystemBase {
             updateLimelightTrack();
         }
         SmartDashboard.putNumber("Turret Angle", this.getTurretAngleAbsoluteDegrees());
+        SmartDashboard.putNumber("Lag Angle: ", getLagAngle(Drive.getInstance()));
 //        SmartDashboard.putNumber("Offset Angle", this.getDriveShootOffSetAngle());
  //       SmartDashboard.putNumber("Turret Angle Ticks", turretMotor.getSelectedSensorPosition());
  //       SmartDashboard.putNumber("Turret Output Percent", turretMotor.getMotorOutputPercent());

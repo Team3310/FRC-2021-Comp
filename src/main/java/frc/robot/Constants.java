@@ -82,8 +82,8 @@ public final class Constants
     public static final double TURRET_COMPETITION_HOME_POSITION_DEGREES = -180.0;
     public static final double TURRET_AUTO_HOME_POSITION_DEGREES = -214.1;
     public static final double TURRET_AUTO_ZERO_SPEED = -0.1;
-    public static final double TURRET_MIN_ANGLE_DEGREES = -250.0;
-    public static final double TURRET_MAX_ANGLE_DEGREES = -45.0;
+    public static final double TURRET_MIN_ANGLE_DEGREES = -255.0;
+    public static final double TURRET_MAX_ANGLE_DEGREES = 85.0;
     public static final double TURRET_INTAKE_ANGLE_DEGREES = -180.0;
     public static final double TURRET_CLIMB_LEVEL_1_ANGLE_DEGREES = -180.0;
     public static final double TURRET_GYRO_OFFSET_FENDER_SHOT_ANGLE_DEGREES = 0.0;
@@ -195,8 +195,8 @@ public final class Constants
     public static final double CLIMB_LEVEL_1_INCHES = 10.0;
 
     // Score While Driving
-    public static final Translation2d GOAL_ORIGIN = new Translation2d(Units.inchesToMeters(0), Units.inchesToMeters(-100));
-    public static final Pose2d ROBOT_START_POSITION = new Pose2d(Units.inchesToMeters(136),Units.inchesToMeters(-60),
+    public static final Translation2d GOAL_ORIGIN = new Translation2d(Units.inchesToMeters(0), Units.inchesToMeters(-95));
+    public static final Pose2d ROBOT_START_POSITION = new Pose2d(Units.inchesToMeters(136),Units.inchesToMeters(-95),
             new Rotation2d(Units.degreesToRadians(0)));
     public static final double FLIGHT_TIME_OF_BALL = 0.635;
     public static double robotCurrPoseX = Units.metersToInches(Drive.getInstance().getPose().getTranslation().getX());

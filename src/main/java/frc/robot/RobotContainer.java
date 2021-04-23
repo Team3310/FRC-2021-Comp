@@ -22,6 +22,7 @@ import frc.robot.controller.GameController;
 import frc.robot.controller.Playstation;
 import frc.robot.controller.Xbox;
 import frc.robot.subsystems.*;
+import frc.robot.utilities.Util;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -162,6 +163,10 @@ public class RobotContainer {
         // Driver
         Button resetHomeButton = m_driver.getStartButton();
         resetHomeButton.whenPressed(new ResetAllHomePositions(drive, turret, magazine, shooter));
+
+        Button turretAimToGoal = m_driver.getButtonA();
+        turretAimToGoal.whenPressed(
+                new InstantCommand(() ->turret.setTurretMotionMagicPositionAbsolute(Util.normalizeAngle90ToMinus270(turret.getLagAngle(drive) - drive.getGyroFusedHeadingAngleDeg()))));
 //        SmartDashboard.putData("Auton Short", new ShooterAutonShortShot(shooter, magazine, turret));
 //
 //        SmartDashboard.putData("Reset All Home", new ResetAllHomePositions(drive, turret, magazine, shooter));

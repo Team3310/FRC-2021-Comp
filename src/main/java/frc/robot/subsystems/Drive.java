@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.controller.GameController;
+import frc.robot.utilities.Util;
 
 import java.lang.reflect.Array;
 
@@ -518,6 +519,8 @@ public class Drive extends SubsystemBase {
         SmartDashboard.putNumber("Right Distance Meters: ", getRightWheelDistanceMeters());
 
         SmartDashboard.putNumber("Heading: ", getGyroFusedHeadingAngleDeg());
+        SmartDashboard.putNumber("Heading -180to180: ", Util.normalizeAngle180ToMinus180(getGyroFusedHeadingAngleDeg()));
+        SmartDashboard.putNumber("Turret Absolute", Util.normalizeAngle90ToMinus270(Turret.getInstance().getLagAngle(this) - getGyroFusedHeadingAngleDeg()));
         SmartDashboard.putNumber("X Pose", Units.metersToInches(getPose().getTranslation().getX()));
         SmartDashboard.putNumber("Y Pose", Units.metersToInches(getPose().getTranslation().getY()));
         SmartDashboard.putNumber("Robot to Goal Angle: ", Math.toDegrees(Math.acos(Units.metersToInches(getPose().getTranslation().getX())/
