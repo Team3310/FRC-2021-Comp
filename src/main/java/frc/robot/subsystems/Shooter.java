@@ -4,9 +4,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
-import edu.wpi.first.wpilibj.Sendable;
-import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
-import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -31,8 +28,6 @@ public class Shooter extends SubsystemBase {
     private final double HOOD_REVOLUTIONS_TO_ENCODER_TICKS = HOOD_OUTPUT_TO_ENCODER_RATIO * Constants.ENCODER_TICKS_PER_MOTOR_REVOLUTION;
     private final double HOOD_DEGREES_TO_ENCODER_TICKS = HOOD_REVOLUTIONS_TO_ENCODER_TICKS / 360.0;
 
-    private double sendableHoodAngle;
-
     // Motion Magic
     private static final int kHoodMotionMagicSlot = 0;
     private HoodControlMode hoodControlMode = HoodControlMode.MANUAL;
@@ -49,15 +44,6 @@ public class Shooter extends SubsystemBase {
     private double homePositionAngleDegrees = Constants.HOOD_COMPETITION_HOME_POSITION_DEGREES;
     private double targetPositionTicks = 0;
     private boolean isReady;
-    private double cachedHoodAngle;
-
-    private double gyroTrackOffsetAngle;
-    private double limelightTrackOffsetAngle;
-    private boolean limelightTargetFound;
-    private double previousLimelightDistance;
-    private int maxNumInvalidLimelightAttempts = 100;
-    private int currentNumInvalidLimelightAttempts;
-    private double cachedLimelightHoodOffset;
     private double lastRPM;
     private double lastHoodAngle;
 
@@ -93,7 +79,7 @@ public class Shooter extends SubsystemBase {
 
         shooterHood.setInverted(TalonFXInvertType.Clockwise);
         shooterHood.setNeutralMode(NeutralMode.Brake);
-        shooterHood.configMotionCruiseVelocity(3000);//3000
+        shooterHood.configMotionCruiseVelocity(3000);
         shooterHood.configMotionAcceleration(6000);
  //       shooterHood.configMotionSCurveStrength(4);
 
@@ -136,11 +122,6 @@ public class Shooter extends SubsystemBase {
         shooterHood.config_kI(kHoodMotionMagicSlot, 0.008);//.008
         shooterHood.config_kD(kHoodMotionMagicSlot, 0.0);
         shooterHood.config_IntegralZone(kHoodMotionMagicSlot, (int)(5.0 * HOOD_DEGREES_TO_ENCODER_TICKS));
-        SendableRegistry.addLW(this, "Shooter", 0);
-    }
-
-    public void close() {
-        SendableRegistry.remove(this);
     }
 
     public static Shooter getInstance() {
@@ -257,7 +238,6 @@ public class Shooter extends SubsystemBase {
 
     }
 
-
     // Motion Magic
     public synchronized void setHoodMotionMagicPositionAbsolute(double angle) {
         if (getHoodControlMode() != HoodControlMode.MOTION_MAGIC) {
@@ -266,16 +246,11 @@ public class Shooter extends SubsystemBase {
         setHoodMotionMagicPositionAbsoluteInternal(angle);
     }
 
-    public synchronized void setHoodAngleSendable(){
-        setHoodMotionMagicPositionAbsolute(sendableHoodAngle);
-    }
     public synchronized void setHoodMotionMagicPositionAbsoluteInternal(double angle) {
         shooterHood.selectProfileSlot(kHoodMotionMagicSlot, 0);
         double limitedAngle = limitHoodAngle(angle);
         targetPositionTicks = getHoodEncoderTicksAbsolute(limitedAngle);
- //       System.out.println("Angle requested = " + angle + ", limitedAngle = " + limitedAngle + ", targetPositionTicks = " + targetPositionTicks);
         shooterHood.set(ControlMode.MotionMagic, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.07);
-//        System.out.println("Hood MM angle = " + angle);
     }
 
     public synchronized boolean hasFinishedHoodTrajectory() {
@@ -326,61 +301,6 @@ public class Shooter extends SubsystemBase {
         return isReady;
     }
 
-    public void setCachedLimelightHoodOffset(double angle) {
-        this.cachedLimelightHoodOffset = angle;
-    }
-
-    public double getHoodCachedLimelightAngle() {
-        return cachedLimelightHoodOffset;
-    }
-
-    public void setCachedHoodAngle(double angle) {
-        System.out.println("set Hood angle cache = " + cachedHoodAngle);
-        this.cachedHoodAngle = angle;
-    }
-
-    public double getCachedHoodAngle() {
-        System.out.println("get Hood angle cache = " + cachedHoodAngle);
-        return cachedHoodAngle;
-    }
-
-    public void setHoodAngleBasedOnDistance(double distanceInches) {
-        setHoodMotionMagicPositionAbsoluteInternal(getInterpolatedHoodAngle(distanceInches));
-    }
-
-    public double getInterpolatedHoodAngle(double distanceInches) {
-        return (distanceInches * Constants.HOOD_DISTANCE_SLOPE + Constants.HOOD_DISTANCE_INTERCEPT);
-    }
-
-    public void setLimelightHoodTrackMode() {
-        limelightTargetFound = false;
-        currentNumInvalidLimelightAttempts = 0;
-        setHoodControlMode(HoodControlMode.MOTION_MAGIC_TRACK_LIMELIGHT);
-        updateLimelightTrack();
- //       System.out.println("Set track mode");
-    }
-
-    private void updateLimelightTrack() {
-        Limelight limelight = Limelight.getInstance();
-        if (limelight.isOnTarget()) {
-            limelightTargetFound = true;
-            previousLimelightDistance = limelight.getDistanceFromTargetInches();
-            setHoodAngleBasedOnDistance(previousLimelightDistance);
-//           System.out.println("Hood track distance = " + previousLimelightDistance);
-        }
-        else if (limelightTargetFound) {
-            currentNumInvalidLimelightAttempts++;
-            if (currentNumInvalidLimelightAttempts > maxNumInvalidLimelightAttempts) {
-                limelightTargetFound = false;
-            }
- //           System.out.println("Target not found attempts = " + currentNumInvalidLimelightAttempts);
-        }
-        else {
-            setHoodMotionMagicPositionAbsoluteInternal(Constants.HOOD_AUTO_ANGLE_DEGREES);
- //           System.out.println("Target not found");
-        }
-    }
-
     private void updateLimelightTrackV2() {
         double rpm = lastRPM;
         double hoodAngle = lastHoodAngle;
@@ -396,8 +316,6 @@ public class Shooter extends SubsystemBase {
     }
 
     public void periodic() {
-//        SmartDashboard.putString("Hood Control Mode", getHoodControlMode().toString());
- //       System.out.println("Hood Mode = " + getHoodControlMode().toString());
         if (getShooterControlMode() == ShooterControlMode.TRACK_LIMELIGHT) {
             updateLimelightTrackV2();
         }
@@ -428,23 +346,6 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putNumber("RPM From Distance", getRPMFromDistance());
         SmartDashboard.putNumber("Hood Angle From Distance", getHoodAngleFromDistance());
 
-    }
-    public double getSendableHoodAngle(){
-        return sendableHoodAngle;
-    }
-    public void setSendableHoodAngle(double angle){
-        if(angle < Constants.HOOD_MIN_ANGLE_DEGREES){
-            angle = Constants.HOOD_MIN_ANGLE_DEGREES;
-        }
-        if(angle > Constants.HOOD_MAX_ANGLE_DEGREES){
-            angle = Constants.HOOD_MAX_ANGLE_DEGREES;
-        }
-        sendableHoodAngle = angle;
-    }
-    @Override
-    public void initSendable(SendableBuilder builder) {
-        builder.setSmartDashboardType("Shooter");
-        builder.addDoubleProperty("Hood angle", this::getSendableHoodAngle, this::setSendableHoodAngle);
     }
 }
 

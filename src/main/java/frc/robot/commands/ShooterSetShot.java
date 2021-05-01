@@ -27,19 +27,12 @@ public class ShooterSetShot extends ParallelCommandGroup {
                 new LimelightSetLED(Limelight.getInstance(), Limelight.LightMode.ON),
                 new InstantCommand(()->Limelight.getInstance().setPipeline(params.limelightPipeline)),
                 new ShooterSetReady(shooter,false),
-                new ShooterSetRPMDistance(shooter),
-                new MagazineSetRPM(magazine, Constants.MAGAZINE_SHOOT_RPM),
-                //               new SequentialCommandGroup(
- //                       new TurretSetToGyroAngle(turret, Constants.TURRET_GYRO_OFFSET_MEDIUM_SHOT_ANGLE_DEGREES)
- //                       new MagazineIndexDividerToTurretTrack(magazine)
- //               ),
- //               new ShooterSetCachedHoodAngle(shooter, Constants.HOOD_MEDIUM_ANGLE_DEGREES),
- //               new TurretSetCachedLimelightOffset(turret, Constants.LIMELIGHT_OFFSET_MEDIUM_SHOT_DEGREES),
-                new HoodSetAngleDistance(shooter),
+                new ShooterSetRPM(shooter, params.shooterRPM, params.kickerRPM),
+                new HoodSetAngle(shooter, params.hoodAngle),
                 new SequentialCommandGroup(
-                        new TurretSetToGyroAngle(turret, params.turretGyroOffset),
-                        new TurretSetToTrackLimelightAngle(turret, params.limelightOffset, params.turretGyroOffset, params.isLimelightActive),
-                        new ShooterSetReady(shooter, true)
+                    new TurretSetToGyroAngle(turret, params.turretGyroOffset),
+                    new TurretSetToTrackLimelightAngle(turret, params.limelightOffset, params.isLimelightActive),
+                    new ShooterSetReady(shooter, true)
                 )
         );
     }

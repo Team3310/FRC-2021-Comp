@@ -24,7 +24,7 @@ public class TurretSetToGoalAngle extends ExtraTimeoutCommand
 
     @Override
     public void initialize() {
-        turret.setTurretToGoalAngle(drive);
+        turret.setPositionToGoalAngle(drive);
         resetExtraOneTimer();
         startExtraOneTimeout(0.1);
     }

@@ -20,7 +20,6 @@ import frc.robot.auto.commands.ResetOdometryAuto;
 import frc.robot.auto.commands.ShooterAutoMediumShotTrack;
 import frc.robot.auto.commands.ShooterAutoShortShotTrack;
 import frc.robot.auto.commands.StopTrajectory;
-import frc.robot.commands.InitializeAuto;
 import frc.robot.commands.IntakeExtendAll;
 import frc.robot.commands.IntakeRetractAll;
 import frc.robot.commands.ShooterReset;

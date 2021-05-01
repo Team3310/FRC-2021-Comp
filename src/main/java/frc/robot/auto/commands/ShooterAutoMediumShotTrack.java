@@ -21,7 +21,7 @@ public class ShooterAutoMediumShotTrack extends SequentialCommandGroup {
                 new HoodSetAngle(shooter, Constants.HOOD_MEDIUM_ANGLE_DEGREES),
                 new SequentialCommandGroup(
                         new TurretSetToGyroAngle(turret, Constants.TURRET_GYRO_OFFSET_MEDIUM_SHOT_ANGLE_DEGREES),
-                        new TurretSetToTrackLimelightAngle(turret, Constants.LIMELIGHT_OFFSET_MEDIUM_SHOT_DEGREES, Constants.TURRET_GYRO_OFFSET_MEDIUM_SHOT_ANGLE_DEGREES, true)
+                        new TurretSetToTrackLimelightAngle(turret, Constants.LIMELIGHT_OFFSET_MEDIUM_SHOT_DEGREES, true)
                 )
         );
     }

@@ -19,10 +19,15 @@ import frc.robot.auto.commands.ShooterAutoLegShotTrack;
 import frc.robot.auto.commands.ShooterAutoMediumShoot;
 import frc.robot.auto.commands.ShooterAutoMediumShotTrack;
 import frc.robot.auto.commands.StopTrajectory;
-import frc.robot.commands.InitializeAuto;
 import frc.robot.commands.IntakeExtendAllAuto;
 import frc.robot.commands.ShooterReset;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.Climb;
+import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Magazine;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Turret;
 
 public class AutoTrench8BallV2 extends SequentialCommandGroup {
     TrajectoryGenerator mTrajectories = TrajectoryGenerator.getInstance();

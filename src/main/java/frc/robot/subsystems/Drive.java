@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
@@ -23,8 +22,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.controller.GameController;
 import frc.robot.utilities.Util;
-
-import java.lang.reflect.Array;
 
 public class Drive extends SubsystemBase {
 
@@ -78,7 +75,6 @@ public class Drive extends SubsystemBase {
     // Gyro
     private PigeonIMU gyroPigeon;
     private double[] yprPigeon = new double[3];
-    private short[] xyzPigeon = new short[3];
     private boolean isCalibrating = false;
     private double gyroYawOffsetAngleDeg = Constants.DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES;
 
@@ -520,7 +516,6 @@ public class Drive extends SubsystemBase {
 
         SmartDashboard.putNumber("Heading: ", getGyroFusedHeadingAngleDeg());
         SmartDashboard.putNumber("Heading -180to180: ", Util.normalizeAngle180ToMinus180(getGyroFusedHeadingAngleDeg()));
-        SmartDashboard.putNumber("Turret Absolute", Util.normalizeAngle90ToMinus270(Turret.getInstance().getLagAngle(this) - getGyroFusedHeadingAngleDeg()));
         SmartDashboard.putNumber("X Pose", Units.metersToInches(getPose().getTranslation().getX()));
         SmartDashboard.putNumber("Y Pose", Units.metersToInches(getPose().getTranslation().getY()));
         SmartDashboard.putNumber("Robot to Goal Angle: ", Math.toDegrees(Math.acos(Units.metersToInches(getPose().getTranslation().getX())/

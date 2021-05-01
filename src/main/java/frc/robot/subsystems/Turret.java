@@ -36,16 +36,10 @@ public class Turret extends SubsystemBase {
     // Misc
     private double homePositionAngleDegrees = Constants.TURRET_COMPETITION_HOME_POSITION_DEGREES;
     private double targetPositionTicks = 0;
-    private double cachedLimelightTurretOffset;
-
+ 
     private double gyroTrackOffsetAngle;
     private double limelightTrackOffsetAngle;
-    private boolean limelightTargetFound;
-    private double previousLimelightAngle;
-    private int maxNumInvalidLimelightAttempts = 100;
-    private int currentNumInvalidLimelightAttempts;
-    public Drive drive;
-
+ 
     public double rCurrPoseX;
     public double rCurrPoseY;
     public double rDistToGoal;
@@ -54,8 +48,6 @@ public class Turret extends SubsystemBase {
     public double movingTurrOffsetAngle;
     public double turretGoalAngleLag;
     public double rVelocity;
-    private double turrAngleFromLocation;
-
 
     // Subsystem Instance
     private final static Turret INSTANCE = new Turret();
@@ -203,16 +195,6 @@ public class Turret extends SubsystemBase {
         return (int) (positionDegrees * TURRET_DEGREES_TO_ENCODER_TICKS);
     }
 
-    public static double toTurretSafeAngleDegrees(double angle) {
-        double result = angle % 360.0;
-        if (result > 270) {
-            result -= 360;
-        } else if (result < -90) {
-            result += 360;
-        }
-        return result;
-    }
-
     private double limitTurretAngle(double targetAngle) {
         if (targetAngle < Constants.TURRET_MIN_ANGLE_DEGREES) {
             return Constants.TURRET_MIN_ANGLE_DEGREES;
@@ -230,14 +212,6 @@ public class Turret extends SubsystemBase {
         return !minRevTurretSensor.get();
     }
 
-    public void setCachedLimelightTurretOffset(double angle) {
-        this.cachedLimelightTurretOffset = angle;
-    }
-
-    public double getTurretCachedLimelightAngle() {
-        return cachedLimelightTurretOffset;
-    }
-
     public void setGyroTrackMode(double gyroOffsetAngle) {
         this.gyroTrackOffsetAngle = gyroOffsetAngle;
         setTurretControlMode(TurretControlMode.MOTION_MAGIC_TRACK_GYRO);
@@ -252,154 +226,36 @@ public class Turret extends SubsystemBase {
         else {
             gyroMirror = (-180 - gyroMirror) - 180;
         }
-        setTurretMotionMagicPositionAbsoluteInternal(Util.normalizeAngle90ToMinus270(gyroMirror) + gyroTrackOffsetAngle);
-//        System.out.println ("Gyro Track angle = " + Util.normalizeAngle90ToMinus270(gyroMirror) + gyroTrackOffsetAngle);
+        setTurretMotionMagicPositionAbsoluteInternal(Util.normalizeAngle90ToMinus270(gyroMirror + gyroTrackOffsetAngle));
     }
     
-    public void setTurretToGoalAngle(Drive drive) {
-        double angle = Util.normalizeAngle90ToMinus270(getLagAngle(drive) - drive.getGyroFusedHeadingAngleDeg());
+    public void setPositionToGoalAngle(Drive drive) {
+        double angle = Util.normalizeAngle90ToMinus270(getTurretToGoalAngle(drive) - drive.getGyroFusedHeadingAngleDeg());
         setTurretMotionMagicPositionAbsolute(angle);
     }
 
-    public void setLimelightTrackMode(double limelightTrackOffsetAngle, double gyroOffsetAngle) {
-        this.gyroTrackOffsetAngle = gyroOffsetAngle;
-        limelightTargetFound = false;
-        currentNumInvalidLimelightAttempts = 0;
+    public void setLimelightTrackMode(double limelightTrackOffsetAngle) {
         this.limelightTrackOffsetAngle = limelightTrackOffsetAngle;
         setTurretControlMode(TurretControlMode.MOTION_MAGIC_TRACK_LIMELIGHT);
         updateLimelightTrack();
     }
-    public void setLimelightTurretTrackMode(double turrAngleFromLocation) {
-        limelightTargetFound = false;
-        currentNumInvalidLimelightAttempts = 0;
-        this.turrAngleFromLocation = turrAngleFromLocation;
-        setTurretControlMode(TurretControlMode.MOTION_MAGIC_TRACK_LIMELIGHT);
-        updateLimelightTurretTrack();
-    }
 
     private void updateLimelightTrack() {
         Limelight limelight = Limelight.getInstance();
+ 
+        // If target is found use limelight to adjust turret angle.  If no target is found, 
+        // stay at the same turret angle.  Drivers can turn robot until the target is acquired.
         if (limelight.isOnTarget()) {
-            limelightTargetFound = true;
-            previousLimelightAngle = -limelight.getTx() + limelightTrackOffsetAngle;
-            //        System.out.println("Target angle = " + previousLimelightAngle);
-            setTurretMotionMagicPositionRelativeInternal(previousLimelightAngle);
-        }
-        else if (limelightTargetFound) {
-            //          System.out.println("Target not found attempts = " + currentNumInvalidLimelightAttempts);
-
-            currentNumInvalidLimelightAttempts++;
-            if (currentNumInvalidLimelightAttempts > maxNumInvalidLimelightAttempts) {
-                limelightTargetFound = false;
-            }
-        }
-        else {
-            //        System.out.println("Target not found");
-            updateGyroTrack();
+            double deltaLimelightAngle = -limelight.getTx() + limelightTrackOffsetAngle;
+            setTurretMotionMagicPositionRelativeInternal(deltaLimelightAngle);
         }
     }
 
-    private void updateLimelightTurretTrack() {
-        Limelight limelight = Limelight.getInstance();
-        if (limelight.isOnTarget()) {
-            limelightTargetFound = true;
-            previousLimelightAngle = -limelight.getTx() + turrAngleFromLocation;
-            //        System.out.println("Target angle = " + previousLimelightAngle);
-            setTurretMotionMagicPositionAbsolute(Math.toDegrees(-180 + previousLimelightAngle - drive.getNormalizeGyro(drive)));
-        }
-        else if (limelightTargetFound) {
-            //          System.out.println("Target not found attempts = " + currentNumInvalidLimelightAttempts);
-
-            currentNumInvalidLimelightAttempts++;
-            if (currentNumInvalidLimelightAttempts > maxNumInvalidLimelightAttempts) {
-                limelightTargetFound = false;
-            }
-        }
-        else {
-            //        System.out.println("Target not found");
-            updateGyroTrack();
-        }
-
-    }
-    public static boolean between(double i, double minValueInclusive, double maxValueInclusive) {
-        if (i >= minValueInclusive && i <= maxValueInclusive)
-            return true;
-        else
-            return false;
-    }
-
-    public boolean isRobotFacingLeft(Drive drive){
-
-        this.drive = drive;
-
-        double gyroAngle = drive.getNormalizeGyro(drive);
-        if(between(gyroAngle,0.0,180.0) || between(gyroAngle,-180.0, -360.0))
-            return true;
-        else
-            return false;
-
-    }
-
-    public boolean isRobotFacingRight(Drive drive){
-
-        this.drive = drive;
-
-        double gyroAngle = drive.getNormalizeGyro(drive);
-        if(between(gyroAngle,0.0,-180.0) || between(gyroAngle,180.0, 360.0))
-            return true;
-        else
-            return false;
-
-    }
-
-    public boolean isRobotLeftOfGoal(){
-
-        if(rCurrPoseY > -100){
-            return true;
-        }
-        else return false;
-    }
-
-    public boolean isRobotRightOfGoal(){
-
-        if(rCurrPoseY < -100){
-            return true;
-        }
-        else return false;
-    }
-    public boolean isRobotVelocityPos(Drive drive){
-        this.drive = drive;
-
-        rVelocity = drive.getLeftMetersPerSecond();
-
-        if(rVelocity > 0){
-            return true;
-        }
-        else
-            return false;
-    }
-
-    public boolean isRobotVelocityNeg(Drive drive){
-        this.drive = drive;
-
-        rVelocity = drive.getLeftMetersPerSecond();
-
-        if(rVelocity < 0){
-            return true;
-        }
-        else
-            return false;
-    }
-
-    public double getLagAngle(Drive drive) {
-
-
-        this.drive = drive;
-
+    private double getTurretToGoalAngle(Drive drive) {
         rCurrPoseX = Units.metersToInches(drive.getPose().getTranslation().getX());
         rCurrPoseY = Units.metersToInches(drive.getPose().getTranslation().getY());
         rDistToGoal = Units.metersToInches(drive.getPose().getTranslation().getDistance(Constants.GOAL_ORIGIN));
-        rTurretGoalAngle = Math.toDegrees(Math.atan2(rCurrPoseY + 95, rCurrPoseX));
+        rTurretGoalAngle = Math.toDegrees(Math.atan2(rCurrPoseY - Constants.GOAL_ORIGIN.getY(), rCurrPoseX - Constants.GOAL_ORIGIN.getX()));
 
         offsetY = Math.abs(drive.getLeftMetersPerSecond()) * Constants.FLIGHT_TIME_OF_BALL;
         movingTurrOffsetAngle = Math.toDegrees(Math.atan(offsetY / rDistToGoal));
@@ -418,9 +274,7 @@ public class Turret extends SubsystemBase {
 //            return turretGoalAngleLag = rTurretGoalAngle + movingTurrOffsetAngle;
 //        else
             return rTurretGoalAngle;
-
     }
-
 
     public void periodic() {
         if (getTurretControlMode() == TurretControlMode.MOTION_MAGIC_TRACK_GYRO) {
@@ -429,9 +283,10 @@ public class Turret extends SubsystemBase {
         else if (getTurretControlMode() == TurretControlMode.MOTION_MAGIC_TRACK_LIMELIGHT) {
             updateLimelightTrack();
         }
+
         SmartDashboard.putNumber("Turret Angle", this.getTurretAngleAbsoluteDegrees());
-        SmartDashboard.putNumber("Lag Angle: ", getLagAngle(Drive.getInstance()));
-        SmartDashboard.putNumber("Turret Track Angle: ", Util.normalizeAngle90ToMinus270(getLagAngle(Drive.getInstance()) - Drive.getInstance().getGyroFusedHeadingAngleDeg()));
+        SmartDashboard.putNumber("Lag Angle: ", getTurretToGoalAngle(Drive.getInstance()));
+        SmartDashboard.putNumber("Turret Track Angle: ", Util.normalizeAngle90ToMinus270(getTurretToGoalAngle(Drive.getInstance()) - Drive.getInstance().getGyroFusedHeadingAngleDeg()));
 //        SmartDashboard.putNumber("Offset Angle", this.getDriveShootOffSetAngle());
  //       SmartDashboard.putNumber("Turret Angle Ticks", turretMotor.getSelectedSensorPosition());
  //       SmartDashboard.putNumber("Turret Output Percent", turretMotor.getMotorOutputPercent());

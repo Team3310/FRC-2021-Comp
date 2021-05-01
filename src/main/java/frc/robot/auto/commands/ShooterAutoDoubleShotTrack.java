@@ -20,7 +20,7 @@ public class ShooterAutoDoubleShotTrack extends ParallelCommandGroup {
                 new HoodSetAngle(shooter, Constants.HOOD_LEG_ANGLE_DEGREES),
                 new SequentialCommandGroup(
                         new TurretSetToGyroAngle(turret, Constants.TURRET_GYRO_OFFSET_LEG_SHOT_ANGLE_DEGREES),
-                        new TurretSetToTrackLimelightAngle(turret, Constants.LIMELIGHT_OFFSET_LEG_SHOT_DEGREES, Constants.TURRET_GYRO_OFFSET_LEG_SHOT_ANGLE_DEGREES, true)
+                        new TurretSetToTrackLimelightAngle(turret, Constants.LIMELIGHT_OFFSET_LEG_SHOT_DEGREES, true)
                 )
         );
     }

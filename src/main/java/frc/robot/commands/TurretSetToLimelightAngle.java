@@ -31,7 +31,6 @@ public class TurretSetToLimelightAngle extends ExtraTimeoutCommand
         limelight.setPipeline(0);
         if (limelight.isOnTarget()) {
             targetFound = true;
-            System.out.println("Limelight tracking = " + -limelight.getTx());
             turret.setTurretMotionMagicPositionRelative(-limelight.getTx() + offsetAngleDeg);
             resetExtraOneTimer();
             startExtraOneTimeout(0.1);

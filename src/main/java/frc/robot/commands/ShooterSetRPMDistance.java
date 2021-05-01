@@ -1,17 +1,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
-import frc.robot.utilities.Util;
-
 
 public class ShooterSetRPMDistance extends CommandBase {
     private final Shooter shooter;
     private double rpm;
     private double lastRPM;
-
 
     public ShooterSetRPMDistance(Shooter shooter) {
         this.shooter = shooter;

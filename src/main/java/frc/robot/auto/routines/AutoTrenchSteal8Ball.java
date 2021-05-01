@@ -1,6 +1,5 @@
 package frc.robot.auto.routines;
 
-
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
@@ -20,6 +19,7 @@ import frc.robot.auto.commands.StopTrajectory;
 import frc.robot.commands.InitializeAuto;
 import frc.robot.commands.IntakeExtendAllAuto;
 import frc.robot.commands.ShooterReset;
+import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Limelight;
@@ -34,13 +34,14 @@ public class AutoTrenchSteal8Ball extends SequentialCommandGroup {
     Magazine mMagazine = Magazine.getInstance();
     Turret mTurret = Turret.getInstance();
     Intake mIntake = Intake.getInstance();
+    Climb mClimb = Climb.getInstance();
 
     public AutoTrenchSteal8Ball() {
         addCommands(
                 new ResetOdometryAuto(new Pose2d(Units.inchesToMeters(147), Units.inchesToMeters(-245), new Rotation2d(0))),
                 new IntakeExtendAllAuto(mIntake, mTurret, mMagazine),
                 new ParallelCommandGroup(
-                        new InitializeAuto(mIntake),
+                        new InitializeAuto(mIntake, mClimb),
                         new RamseteCommand(
                         mTrajectories.getStealStartToStealBallV2(),
                         mDrive::getPose,
