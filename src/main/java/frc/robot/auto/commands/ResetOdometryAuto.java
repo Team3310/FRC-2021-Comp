@@ -30,7 +30,7 @@ public class ResetOdometryAuto extends CommandBase {
         mDrive.resetGyroYawAngle(Constants.DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES);
         mTurret.resetHomePosition(Constants.TURRET_COMPETITION_HOME_POSITION_DEGREES);
         mClimb.resetClimbEncoder();
-
+        mClimb.setClimbMotionMagicPositionAbsolute(0);
     }
 
     @Override

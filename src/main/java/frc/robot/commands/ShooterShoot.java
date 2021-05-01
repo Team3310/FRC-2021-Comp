@@ -17,8 +17,9 @@ public class ShooterShoot extends SequentialCommandGroup {
 //                new TurretSetToCachedLimelightAngle(turret),
 //                new MagazineIndexDividerToTurret(magazine, turret),
 //                new ShooterSetRPM(shooter, Constants.SHOOTER_MAIN_ALL_FIELD_RPM, Constants.SHOOTER_KICKER_ALL_FIELD_RPM),
-                new ShooterIntakeSetRPM(shooter, Constants.SHOOTER_INTAKE_RPM))
+                    new MagazineSetRPM(magazine, Constants.MAGAZINE_SHOOT_RPM),
+                    new ShooterIntakeSetRPM(shooter, Constants.SHOOTER_INTAKE_RPM)
 //                new MagazineSetRPMLimit(magazine, Constants.MAGAZINE_SHOOT_RPM, Constants.MAGAZINE_JAM_STATOR_CURRENT))
-        ;
+        );
     }
 }

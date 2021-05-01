@@ -12,7 +12,8 @@ public class IntakeRetractAll extends SequentialCommandGroup {
 
        addCommands(
 //               new IntakeSetRPM(intake, Constants.INTAKE_RETRACT_RPM),
-               new MagazineSetRPMRotations(magazine, Constants.MAGAZINE_INTAKE_RPM, 360),
+//               new MagazineSetRPMRotations(magazine, Constants.MAGAZINE_INTAKE_RPM, 360),
+               new MagazineSetSpeed(magazine, 0),
 //               new WaitCommand(1.0),
                new IntakeSetSpeed(intake, 0)
                );

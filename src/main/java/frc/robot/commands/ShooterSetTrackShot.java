@@ -25,18 +25,16 @@ public class ShooterSetTrackShot extends SequentialCommandGroup {
                 new LimelightSetLED(Limelight.getInstance(), Limelight.LightMode.ON),
                 new InstantCommand(()->Limelight.getInstance().setPipeline(params.limelightPipeline)),
                 new ShooterSetReady(shooter,false),
-                new MagazineSetRPM(magazine, Constants.MAGAZINE_SHOOT_RPM),
+ //               new MagazineSetRPM(magazine, Constants.MAGAZINE_SHOOT_RPM),
                 //               new SequentialCommandGroup(
  //                       new TurretSetToGyroAngle(turret, Constants.TURRET_GYRO_OFFSET_MEDIUM_SHOT_ANGLE_DEGREES)
  //                       new MagazineIndexDividerToTurretTrack(magazine)
  //               ),
  //               new ShooterSetCachedHoodAngle(shooter, Constants.HOOD_MEDIUM_ANGLE_DEGREES),
  //               new TurretSetCachedLimelightOffset(turret, Constants.LIMELIGHT_OFFSET_MEDIUM_SHOT_DEGREES),
-                new TurretSetAngle(turret, Util.normalizeAngle90ToMinus270(turret.getLagAngle(Drive.getInstance()) - Drive.getInstance().getGyroFusedHeadingAngleDeg())),
-                new ParallelCommandGroup(
-                         new TurretSetToTrackLimelightAngle(turret, 0, 0, true),
-                        new ShooterSetEverything(shooter)
-                ),
+                new TurretSetToGoalAngle(turret, drive),
+                new TurretSetToTrackLimelightAngle(turret, 0, 0, true),
+                new ShooterSetEverything(shooter),
                 new ShooterSetReady(shooter, true)
         );
     }

@@ -15,8 +15,11 @@ import frc.robot.utilities.Util;
 public class Shooter extends SubsystemBase {
 
 
+    public enum ShooterControlMode {
+        MANUAL, TRACK_LIMELIGHT
+    };
 
-    public static enum HoodControlMode {
+    public enum HoodControlMode {
         MOTION_MAGIC, VELOCITY, MANUAL, MOTION_MAGIC_TRACK_LIMELIGHT
     };
 
@@ -33,6 +36,7 @@ public class Shooter extends SubsystemBase {
     // Motion Magic
     private static final int kHoodMotionMagicSlot = 0;
     private HoodControlMode hoodControlMode = HoodControlMode.MANUAL;
+    private ShooterControlMode shooterControlMode = ShooterControlMode.MANUAL;
 
     // Motor Controllers
     private TalonFX shooterMainMaster;
@@ -54,8 +58,8 @@ public class Shooter extends SubsystemBase {
     private int maxNumInvalidLimelightAttempts = 100;
     private int currentNumInvalidLimelightAttempts;
     private double cachedLimelightHoodOffset;
-
-
+    private double lastRPM;
+    private double lastHoodAngle;
 
     private final static Shooter INSTANCE = new Shooter();
 
@@ -161,6 +165,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public void setMainRPM(double rpm) {
+        setShooterControlMode(ShooterControlMode.MANUAL);
         shooterMainMaster.set(ControlMode.Velocity, ShooterRPMToNativeUnits(rpm));
     }
 
@@ -185,7 +190,8 @@ public class Shooter extends SubsystemBase {
     }
 
     public void setKickerRPM(double rpm) {
-        shooterKicker.set(ControlMode.Velocity, IntakeRPMToNativeUnits(rpm));
+        setShooterControlMode(ShooterControlMode.MANUAL);
+        shooterKicker.set(ControlMode.Velocity, KickerRPMToNativeUnits(rpm));
     }
 
     public double KickerRPMToNativeUnits(double rpm) {
@@ -218,7 +224,15 @@ public class Shooter extends SubsystemBase {
     }
 
     // Turret Control Mode
-    private synchronized void setHoodControlMode(Shooter.HoodControlMode controlMode) {
+    public synchronized void setShooterControlMode(ShooterControlMode controlMode) {
+        this.shooterControlMode = controlMode;
+    }
+
+    public synchronized ShooterControlMode getShooterControlMode() {
+        return this.shooterControlMode;
+    }
+
+    private synchronized void setHoodControlMode(HoodControlMode controlMode) {
         this.hoodControlMode = controlMode;
     }
 
@@ -259,9 +273,9 @@ public class Shooter extends SubsystemBase {
         shooterHood.selectProfileSlot(kHoodMotionMagicSlot, 0);
         double limitedAngle = limitHoodAngle(angle);
         targetPositionTicks = getHoodEncoderTicksAbsolute(limitedAngle);
-        System.out.println("Angle requested = " + angle + ", limitedAngle = " + limitedAngle + ", targetPositionTicks = " + targetPositionTicks);
+ //       System.out.println("Angle requested = " + angle + ", limitedAngle = " + limitedAngle + ", targetPositionTicks = " + targetPositionTicks);
         shooterHood.set(ControlMode.MotionMagic, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.07);
-        System.out.println("Hood MM angle = " + angle);
+//        System.out.println("Hood MM angle = " + angle);
     }
 
     public synchronized boolean hasFinishedHoodTrajectory() {
@@ -297,6 +311,11 @@ public class Shooter extends SubsystemBase {
 
     public double getHoodAngleFromDistance() {
         return 0.0809014 * Limelight.getInstance().getDistanceFromTargetInches() + 27.8;
+    }
+
+    public void setShooterLimelightTrackMode() {
+        setShooterControlMode(ShooterControlMode.TRACK_LIMELIGHT);
+        updateLimelightTrackV2();
     }
 
     public void setReady(boolean isReady) {
@@ -362,12 +381,25 @@ public class Shooter extends SubsystemBase {
         }
     }
 
+    private void updateLimelightTrackV2() {
+        double rpm = lastRPM;
+        double hoodAngle = lastHoodAngle;
+        if (Limelight.getInstance().isOnTarget()) {            
+            rpm = getRPMFromDistance();
+            hoodAngle = getHoodAngleFromDistance();
+            lastRPM = rpm;
+            lastHoodAngle = hoodAngle;
+        } 
+        shooterMainMaster.set(ControlMode.Velocity, ShooterRPMToNativeUnits(rpm));
+        shooterKicker.set(ControlMode.Velocity, IntakeRPMToNativeUnits(rpm));
+        setHoodMotionMagicPositionAbsolute(hoodAngle);
+    }
+
     public void periodic() {
 //        SmartDashboard.putString("Hood Control Mode", getHoodControlMode().toString());
  //       System.out.println("Hood Mode = " + getHoodControlMode().toString());
-        if (getHoodControlMode() == HoodControlMode.MOTION_MAGIC_TRACK_LIMELIGHT) {
- //           System.out.println("Update Track");
-            updateLimelightTrack();
+        if (getShooterControlMode() == ShooterControlMode.TRACK_LIMELIGHT) {
+            updateLimelightTrackV2();
         }
  //       SmartDashboard.putNumber("Shooters Rotations", getMainRotations());
         SmartDashboard.putNumber("Shooters RPM", getMainRPM());

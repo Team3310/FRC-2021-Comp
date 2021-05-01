@@ -195,8 +195,8 @@ public class Robot extends TimedRobot
         // autonomous chooser on the dashboard.
         robotContainer = new RobotContainer();
         drive.resetOdometry(new Pose2d());
-
-
+        climb.resetClimbEncoder();
+        climb.setClimbMotionMagicPositionAbsolute(0);
         autonTaskChooser = new SendableChooser<>();
 
         autonTaskChooser.setDefaultOption("Do Nothing", new AutoDoNothing());

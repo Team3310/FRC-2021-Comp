@@ -255,6 +255,11 @@ public class Turret extends SubsystemBase {
         setTurretMotionMagicPositionAbsoluteInternal(Util.normalizeAngle90ToMinus270(gyroMirror) + gyroTrackOffsetAngle);
 //        System.out.println ("Gyro Track angle = " + Util.normalizeAngle90ToMinus270(gyroMirror) + gyroTrackOffsetAngle);
     }
+    
+    public void setTurretToGoalAngle(Drive drive) {
+        double angle = Util.normalizeAngle90ToMinus270(getLagAngle(drive) - drive.getGyroFusedHeadingAngleDeg());
+        setTurretMotionMagicPositionAbsolute(angle);
+    }
 
     public void setLimelightTrackMode(double limelightTrackOffsetAngle, double gyroOffsetAngle) {
         this.gyroTrackOffsetAngle = gyroOffsetAngle;
@@ -426,6 +431,7 @@ public class Turret extends SubsystemBase {
         }
         SmartDashboard.putNumber("Turret Angle", this.getTurretAngleAbsoluteDegrees());
         SmartDashboard.putNumber("Lag Angle: ", getLagAngle(Drive.getInstance()));
+        SmartDashboard.putNumber("Turret Track Angle: ", Util.normalizeAngle90ToMinus270(getLagAngle(Drive.getInstance()) - Drive.getInstance().getGyroFusedHeadingAngleDeg()));
 //        SmartDashboard.putNumber("Offset Angle", this.getDriveShootOffSetAngle());
  //       SmartDashboard.putNumber("Turret Angle Ticks", turretMotor.getSelectedSensorPosition());
  //       SmartDashboard.putNumber("Turret Output Percent", turretMotor.getMotorOutputPercent());
