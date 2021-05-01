@@ -8,8 +8,8 @@ public class ShooterEject extends SequentialCommandGroup {
 
     public ShooterEject(Shooter shooter) {
         addCommands(
-                new ShooterSetSpeed(shooter, -0.3, -0.3),
-                new ShooterIntakeSetSpeed(shooter, -0.3)
-         );
+//          new ShooterSetSpeed(shooter, -0.3, -0.3),
+            new ShooterIntakeSetSpeed(shooter, -0.3)
+        );
     }
 }

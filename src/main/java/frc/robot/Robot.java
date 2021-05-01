@@ -195,8 +195,6 @@ public class Robot extends TimedRobot
         // autonomous chooser on the dashboard.
         robotContainer = new RobotContainer();
         drive.resetOdometry(new Pose2d());
-        climb.resetClimbEncoder();
-        climb.setClimbMotionMagicPositionAbsolute(0);
         autonTaskChooser = new SendableChooser<>();
 
         autonTaskChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
@@ -213,13 +211,7 @@ public class Robot extends TimedRobot
         autonTaskChooser.addOption("Trench 8 Ball V2 Auto", new AutoTrench8BallV2());
         autonTaskChooser.addOption("Safe 8 Ball Auto", new AutoSafe8Ball());
 
-
-
-//        autonTaskChooser.addOption("Test", new AutoTest());
-
         SmartDashboard.putData("Autonomous", autonTaskChooser);
-
-       // Limelight.getInstance().setLedMode(Limelight.LightMode.OFF);
     }
 
     /**

@@ -41,7 +41,7 @@ public class AutoSafe8Ball extends SequentialCommandGroup {
                 new ExtendIntake(mIntake),
                 new ParallelCommandGroup(
                         new IntakeExtendAllAuto(mIntake, mTurret, mMagazine),
-                        new ClimbSetInches(mClimb, -3.0)
+                        new ClimbSetSpeed(mClimb, -3.0)
                 ),
                 new ShooterAutoShortShotTrack(mShooter, mMagazine, mTurret, Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_6_ROTATIONS),
                 new HoodSetAngle(mShooter, Constants. HOOD_RETRACT_HOME_POSITION_DEGREES),

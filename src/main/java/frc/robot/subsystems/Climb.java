@@ -56,7 +56,13 @@ public class Climb extends SubsystemBase {
         return INSTANCE;
     }
 
+    public synchronized void setClimbHold() {
+        setClimbMotionMagicPositionAbsolute(getClimbInches());
+    }
 
+    public synchronized void setClimbSpeed(double speed) {
+        climbMotor.set(ControlMode.PercentOutput, speed);
+    }
     // Motion Magic
     public synchronized void setClimbMotionMagicPositionAbsolute(double inches) {
         climbMotor.selectProfileSlot(kClimbMotionMagicSlot, 0);
@@ -70,10 +76,6 @@ public class Climb extends SubsystemBase {
 
     private int getClimbEncoderTicksAbsolute(double inches) {
         return (int) (inches * CLIMB_INCHES_TO_ENCODER_TICKS);
-    }
-
-    public double getClimbAbsoluteInches() {
-        return (double) climbMotor.getSelectedSensorPosition() / CLIMB_INCHES_TO_ENCODER_TICKS;
     }
 
     private double limitClimbInches(double targetInches) {
@@ -90,7 +92,7 @@ public class Climb extends SubsystemBase {
         this.climbMotor.setSelectedSensorPosition(0);
     }
 
-    public double getClimbRotations() {
+    private double getClimbRotations() {
         return climbMotor.getSelectedSensorPosition() / Constants.ENCODER_TICKS_PER_MOTOR_REVOLUTION / CLIMB_OUTPUT_TO_ENCODER_RATIO;
     }
 

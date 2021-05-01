@@ -13,7 +13,7 @@ public class InitializeAuto extends SequentialCommandGroup {
             addCommands(
                     new ParallelCommandGroup(
                             new IntakeSetRPM(intake, Constants.INTAKE_COLLECT_RPM),
-                            new ClimbSetInches(climb, -3.0)
+                            new ClimbSetSpeed(climb, -3.0)
                     )
             );
 

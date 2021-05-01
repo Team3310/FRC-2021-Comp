@@ -15,10 +15,12 @@ public class ResetAllHomePositions extends SequentialCommandGroup {
     public ResetAllHomePositions(Drive drive, Turret turret, Magazine magazine, Shooter shooter, Climb climb) {
         addCommands(
                 new InstantCommand(()-> shooter.resetHoodHomePosition()),
-                new ResetOdometryAuto(),
+                new InstantCommand(()-> climb.resetClimbEncoder()),
+                new InstantCommand(()-> climb.setClimbMotionMagicPositionAbsolute(0)),
                 new InstantCommand(()-> magazine.resetHomePosition()),
                 new InstantCommand(()-> turret.resetHomePosition(Constants.TURRET_COMPETITION_HOME_POSITION_DEGREES)),
-                new InstantCommand(()-> drive.resetGyroYawAngle(Constants.DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES))
-        );
+                new InstantCommand(()-> drive.resetGyroYawAngle(Constants.DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES)),
+                new ResetOdometryAuto()
+         );
     }
 }

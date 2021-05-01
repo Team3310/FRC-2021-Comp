@@ -3,17 +3,12 @@ package frc.robot.auto.commands;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Turret;
 
 public class ResetOdometryAuto extends CommandBase {
 
     private static final Drive mDrive = Drive.getInstance();
-    private static final Turret mTurret = Turret.getInstance();
-    private static final Climb mClimb = Climb.getInstance();
     private Pose2d startPose;
-
 
     public ResetOdometryAuto(Pose2d startPose) {
         this.startPose = startPose;
@@ -27,10 +22,6 @@ public class ResetOdometryAuto extends CommandBase {
     public void initialize() {
         System.out.println("Reset Odometry Started");
         mDrive.resetOdometry(startPose);
-        mDrive.resetGyroYawAngle(Constants.DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES);
-        mTurret.resetHomePosition(Constants.TURRET_COMPETITION_HOME_POSITION_DEGREES);
-        mClimb.resetClimbEncoder();
-        mClimb.setClimbMotionMagicPositionAbsolute(0);
     }
 
     @Override

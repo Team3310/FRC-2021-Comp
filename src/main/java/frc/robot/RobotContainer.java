@@ -20,8 +20,8 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.Button;
-import frc.robot.commands.ClimbSetSpeedUp;
-import frc.robot.commands.HoodSetAngle;
+import frc.robot.commands.ClimbSetHold;
+import frc.robot.commands.ClimbSetSpeed;
 import frc.robot.commands.IntakeExtendAll;
 import frc.robot.commands.IntakeRetractAll;
 import frc.robot.commands.IntakeReverseExtendAll;
@@ -68,7 +68,6 @@ public class RobotContainer {
     private final Drive drive = Drive.getInstance();
     private final Limelight limelight = Limelight.getInstance();
 
-
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
      */
@@ -96,11 +95,15 @@ public class RobotContainer {
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton JoystickButton}.
      */
     private void configureButtonBindings() {
+        
         // Operator
-
         Button shooterBumper = m_operator.getRightBumper();
         shooterBumper.whenPressed(new ShooterShoot(shooter, magazine, turret, limelight));
         shooterBumper.whenReleased(new ShooterReset(shooter, magazine, limelight, turret));
+
+        Button shooterEjectButton = m_operator.getLeftBumper();
+        shooterEjectButton.whenPressed(new ShooterEject(shooter));
+        shooterEjectButton.whenReleased(new ShooterReset(shooter, magazine, limelight, turret));
 
         Button intakeTrigger = m_operator.getRightTrigger();
         intakeTrigger.whenPressed(new IntakeExtendAll(intake, magazine));
@@ -109,7 +112,6 @@ public class RobotContainer {
         Button intakeReverseTrigger = m_operator.getLeftTrigger();
         intakeReverseTrigger.whenPressed(new IntakeReverseExtendAll(intake, magazine));
         intakeReverseTrigger.whenReleased(new IntakeExtendAll(intake, magazine));
-
 
         Button longShotButton = m_operator.getButtonY();
         ShooterSetShot.ShooterParams paramsLong = new ShooterSetShot.ShooterParams();
@@ -147,16 +149,13 @@ public class RobotContainer {
         paramsKey.turretGyroOffset = Constants.TURRET_GYRO_OFFSET_KEY_SHOT_ANGLE_DEGREES;
         keyShotButton.whenPressed(new ShooterSetShot(shooter, magazine, turret, paramsKey));
 
-        // Button climbReleaseButton = m_operator.getStartButton();
-        // climbReleaseButton.whenPressed(new ClimbRelease(intake, turret, magazine));
-
         Button climbUpButton = m_operator.getDPadUp();
-        climbUpButton.whenPressed(new ClimbSetSpeedUp(intake, turret, magazine));
-        climbUpButton.whenReleased(new IntakeSetSpeed(intake,0.0));
+        climbUpButton.whenPressed(new ClimbSetSpeed(climb, 1.0));
+        climbUpButton.whenReleased(new ClimbSetHold(climb));
 
         Button climbDownButton = m_operator.getDPadDown();
-        climbDownButton.whenPressed(new IntakeSetSpeed(intake,-0.5));
-        climbDownButton.whenReleased(new IntakeSetSpeed(intake,0.0));
+        climbDownButton.whenPressed(new ClimbSetSpeed(climb, -1.0));
+        climbDownButton.whenReleased(new ClimbSetHold(climb));
 
         Button magazineForwardButton = m_operator.getDPadLeft();
         magazineForwardButton.whenPressed(new MagazineForward(intake, magazine));
@@ -165,16 +164,6 @@ public class RobotContainer {
         Button magazineReverseButton = m_operator.getDPadRight();
         magazineReverseButton.whenPressed(new MagazineReverse(intake, magazine));
         magazineReverseButton.whenReleased(new SequentialCommandGroup(new MagazineSetSpeed(magazine, 0), new IntakeSetSpeed(intake,0)));
-
-        Button shooterEjectButton = m_operator.getLeftBumper();
-        shooterEjectButton.whenPressed(new ShooterEject(shooter));
-        shooterEjectButton.whenReleased(new ShooterReset(shooter, magazine, limelight, turret));
-
-        Button driveGyroResetButton = m_driver.getButtonY();
-        driveGyroResetButton.whenPressed(new SequentialCommandGroup(
-                new InstantCommand(() -> drive.resetGyroYawAngle(Constants.DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES)),
-                new TurretAutoZero(turret)
-        ));
 
         // Driver
         Button resetHomeButton = m_driver.getStartButton();
@@ -186,10 +175,15 @@ public class RobotContainer {
         Button limelightTrack = m_driver.getButtonX();
         limelightTrack.whenPressed(new TurretSetToTrackLimelightAngle(turret, 0, true));
 
+        Button driveGyroResetButton = m_driver.getButtonY();
+        driveGyroResetButton.whenPressed(new SequentialCommandGroup(
+                new InstantCommand(() -> drive.resetGyroYawAngle(Constants.DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES)),
+                new TurretAutoZero(turret)
+        ));
+
         Button limelightTrackTwo = m_driver.getButtonB();
         limelightTrackTwo.whenPressed( new TurretSetToLimelightAngle(turret, 0));
-        //        SmartDashboard.putData("Auton Short", new ShooterAutonShortShot(shooter, magazine, turret));
-//
+ 
 //        SmartDashboard.putData("Reset All Home", new ResetAllHomePositions(drive, turret, magazine, shooter));
 //        SmartDashboard.putData("Compressor On", new InstantCommand(() -> compressor.turnCompressorOn()));
 //        SmartDashboard.putData("Compressor Off", new InstantCommand(() -> compressor.turnCompressorOff()));
@@ -201,14 +195,12 @@ public class RobotContainer {
 //        SmartDashboard.putData("Climb PTO Lock", new InstantCommand(() -> intake.climbPTOLock()));
 //        SmartDashboard.putData("Climb PTO Engage", new InstantCommand(() -> intake.climbPTOEngage()));
 //
-      SmartDashboard.putData("Limelight LED off", new InstantCommand(() -> limelight.setLedMode(Limelight.LightMode.OFF)));
+        SmartDashboard.putData("Limelight LED off", new InstantCommand(() -> limelight.setLedMode(Limelight.LightMode.OFF)));
         SmartDashboard.putData("Limelight LED on", new InstantCommand(() -> limelight.setLedMode(Limelight.LightMode.ON)));
 
 //        SmartDashboard.putData("Intake Set Speed", new InstantCommand(()-> intake.setRollerSpeed(0.2)));
 //        SmartDashboard.putData("Intake Set Speed OFF", new InstantCommand(() -> intake.setRollerSpeed(0.0)));
 //        SmartDashboard.putData("Intake Set RPM", new InstantCommand(() -> intake.setRollerRPM(2000.0)));
-        SmartDashboard.putData("Set Climb Zero", new InstantCommand(()-> climb.setClimbMotionMagicPositionAbsolute(0)));
-        SmartDashboard.putData("Set Climb -3", new InstantCommand(()-> climb.setClimbMotionMagicPositionAbsolute(-3)));
 
         SmartDashboard.putData("Mag Set Speed", new InstantCommand(()-> magazine.setMagazineSpeed(0.2)));
         SmartDashboard.putData("Mag Set Speed OFF", new InstantCommand(() -> magazine.setMagazineSpeed(0.0)));
@@ -265,10 +257,9 @@ public class RobotContainer {
 //        SmartDashboard.putData("Hood Set Forward", new InstantCommand(()-> shooter.setHoodSpeed(0.3)));
 //        SmartDashboard.putData("Hood Set OFF", new InstantCommand(() -> shooter.setHoodSpeed(0.0)));
 //        SmartDashboard.putData("Hood Reset", new InstantCommand(() -> shooter.resetHoodHomePosition()));
-        SmartDashboard.putData("Hood MM", new HoodSetAngle(shooter, Constants.HOOD_TEST_ANGLE_DEGREES));
-        SmartDashboard.putData("Hood MM minus 5", new HoodSetAngle(shooter, Constants.HOOD_TEST_ANGLE_DEGREES-5));
-        SmartDashboard.putData("Hood MM V2", new HoodSetAngle(shooter, 2));
-
+//        SmartDashboard.putData("Hood MM", new HoodSetAngle(shooter, Constants.HOOD_TEST_ANGLE_DEGREES));
+//        SmartDashboard.putData("Hood MM minus 5", new HoodSetAngle(shooter, Constants.HOOD_TEST_ANGLE_DEGREES-5));
+//        SmartDashboard.putData("Hood MM V2", new HoodSetAngle(shooter, 2));
 
 //        SmartDashboard.putData("Reset Gyro", new InstantCommand(() -> drive.resetGyroYawAngle(Constants.DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES)));
 //        SmartDashboard.putData("Reset Encoders", new InstantCommand(() -> drive.resetEncoders()));
@@ -281,6 +272,5 @@ public class RobotContainer {
         SmartDashboard.putData("Climb MM Down", new InstantCommand(() ->climb.setClimbMotionMagicPositionAbsolute(-3)));
         SmartDashboard.putData("Climb MM Zero", new InstantCommand(() ->climb.setClimbMotionMagicPositionAbsolute(0)));
         SmartDashboard.putData("Climb MM Up", new InstantCommand(() ->climb.setClimbMotionMagicPositionAbsolute(20)));
-
     }
 }
