@@ -175,11 +175,11 @@ public class RobotContainer {
         Button limelightTrack = m_driver.getButtonX();
         limelightTrack.whenPressed(new TurretSetToTrackLimelightAngle(turret, 0, true));
 
-        Button driveGyroResetButton = m_driver.getButtonY();
-        driveGyroResetButton.whenPressed(new SequentialCommandGroup(
-                new InstantCommand(() -> drive.resetGyroYawAngle(Constants.DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES)),
-                new TurretAutoZero(turret)
-        ));
+        // Button driveGyroResetButton = m_driver.getButtonY();
+        // driveGyroResetButton.whenPressed(new SequentialCommandGroup(
+        //         new InstantCommand(() -> drive.resetGyroYawAngle(Constants.DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES)),
+        //         new TurretAutoZero(turret)
+        // ));
 
         Button limelightTrackTwo = m_driver.getButtonB();
         limelightTrackTwo.whenPressed( new TurretSetToLimelightAngle(turret, 0));

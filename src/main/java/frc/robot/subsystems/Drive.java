@@ -377,18 +377,24 @@ public class Drive extends SubsystemBase {
             updateOpenLoopVoltageRamp();
         }
 
-        double shiftScaleFactor = OPEN_LOOP_PERCENT_OUTPUT_LO;
-        if (isHighGear == true) {
-            shiftScaleFactor = OPEN_LOOP_PERCENT_OUTPUT_HI;
-        }
-
+        // double shiftScaleFactor = OPEN_LOOP_PERCENT_OUTPUT_LO;
+        // if (isHighGear == true) {
+        //     shiftScaleFactor = OPEN_LOOP_PERCENT_OUTPUT_HI;
+        // }
+        // m_moveOutput = adjustForSensitivity(MOVE_SCALE * shiftScaleFactor, MOVE_TRIM, m_moveInput, MOVE_NON_LINEAR, MOVE_NON_LINEARITY);
+ 
         m_moveInput = -m_driverController.getLeftYAxis();
         m_steerInput = m_driverController.getRightXAxis();
 
-        m_moveOutput = adjustForSensitivity(MOVE_SCALE * shiftScaleFactor, MOVE_TRIM, m_moveInput, MOVE_NON_LINEAR, MOVE_NON_LINEARITY);
+//         m_moveOutput = adjustForSensitivity(MOVE_SCALE, MOVE_TRIM, m_moveInput, MOVE_NON_LINEAR, MOVE_NON_LINEARITY);
+        m_moveOutput = squareStick(m_moveInput);
         m_steerOutput = adjustForSensitivity(STEER_SCALE, STEER_TRIM, m_steerInput, STEER_NON_LINEAR, STEER_NON_LINEARITY);
 
         m_drive.arcadeDrive(m_moveOutput, m_steerOutput);
+    }
+
+    private double squareStick(double stick) {
+        return Math.signum(stick) * stick * stick;
     }
 
     public double adjustForSensitivity(double scale, double trim, double steer, int nonLinearFactor,
@@ -483,14 +489,6 @@ public class Drive extends SubsystemBase {
         m_drive.feed();
     }
 
-    public double getNormalizeGyro(Drive drive){
-
-        if (drive.getGyroFusedHeadingAngleDeg() > 360){
-            resetGyroYawAngle();
-        }
-        return drive.getGyroFusedHeadingAngleDeg();
-    }
-
     public void periodic() {
         synchronized (Drive.this){
             DriveControlMode currentControlMode = getControlMode();
@@ -507,11 +505,10 @@ public class Drive extends SubsystemBase {
                     getLeftWheelDistanceMeters(),getRightWheelDistanceMeters());
         }
 
-
         SmartDashboard.putNumber("Left Distance Inches: ", getLeftWheelDistanceInches());
-       SmartDashboard.putNumber("Right Distance Inches: ", getRightWheelDistanceInches());
+        SmartDashboard.putNumber("Right Distance Inches: ", getRightWheelDistanceInches());
 
-       SmartDashboard.putNumber("Left Distance Meters: ", getLeftWheelDistanceMeters());
+        SmartDashboard.putNumber("Left Distance Meters: ", getLeftWheelDistanceMeters());
         SmartDashboard.putNumber("Right Distance Meters: ", getRightWheelDistanceMeters());
 
         SmartDashboard.putNumber("Heading: ", getGyroFusedHeadingAngleDeg());
@@ -522,6 +519,12 @@ public class Drive extends SubsystemBase {
                 Units.metersToInches(getPose().getTranslation().getDistance(Constants.GOAL_ORIGIN)))));
         SmartDashboard.putNumber("Robot to Goal Distance", Units.metersToInches(getPose().getTranslation().getDistance(Constants.GOAL_ORIGIN)));
         SmartDashboard.putNumber("Rotation", getPose().getRotation().getDegrees());
+        SmartDashboard.putNumber("Motor Left Master Amp", mLeftMaster.getStatorCurrent());
+        SmartDashboard.putNumber("Motor Left Slave 1 Amp", mLeftSlave1.getStatorCurrent());
+        SmartDashboard.putNumber("Motor Left Slave 2 Amp", mLeftSlave2.getStatorCurrent());
+        SmartDashboard.putNumber("Motor Right Master Amp", mRightMaster.getStatorCurrent());
+        SmartDashboard.putNumber("Motor Right Slave 1 Amp", mRightSlave1.getStatorCurrent());
+        SmartDashboard.putNumber("Motor Right Slave 2 Amp", mRightSlave2.getStatorCurrent());
     }
 }
 

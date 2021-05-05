@@ -255,7 +255,7 @@ public class Turret extends SubsystemBase {
         rCurrPoseX = Units.metersToInches(drive.getPose().getTranslation().getX());
         rCurrPoseY = Units.metersToInches(drive.getPose().getTranslation().getY());
         rDistToGoal = Units.metersToInches(drive.getPose().getTranslation().getDistance(Constants.GOAL_ORIGIN));
-        rTurretGoalAngle = Math.toDegrees(Math.atan2(rCurrPoseY - Constants.GOAL_ORIGIN.getY(), rCurrPoseX - Constants.GOAL_ORIGIN.getX()));
+        rTurretGoalAngle = Math.toDegrees(Math.atan2(rCurrPoseY + 95, rCurrPoseX));
 
         offsetY = Math.abs(drive.getLeftMetersPerSecond()) * Constants.FLIGHT_TIME_OF_BALL;
         movingTurrOffsetAngle = Math.toDegrees(Math.atan(offsetY / rDistToGoal));

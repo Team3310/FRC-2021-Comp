@@ -90,7 +90,7 @@ public final class Constants
     public static final double TURRET_GYRO_OFFSET_KEY_SHOT_ANGLE_DEGREES = 0.0;
     public static final double TURRET_GYRO_OFFSET_AUTON_SHORT_SHOT_ANGLE_DEGREES = 0.0;
     public static final double TURRET_GYRO_OFFSET_AUTO_SHOT_ANGLE_DEGREES = 0.0;
-    public static final double TURRET_GYRO_OFFSET_MEDIUM_SHOT_ANGLE_DEGREES = 14.0;
+    public static final double TURRET_GYRO_OFFSET_MEDIUM_SHOT_ANGLE_DEGREES = 10.0;
     public static final double TURRET_GYRO_OFFSET_LONG_SHOT_ANGLE_DEGREES = 12.3;
     public static final double TURRET_GYRO_OFFSET_LEG_SHOT_ANGLE_DEGREES = -10.0;
     public static final double TURRET_GYRO_OFFSET_AUTO_DOUBLE_SHOT_ANGLE_DEGREES = -10.0;

@@ -194,9 +194,8 @@ public class Robot extends TimedRobot
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         robotContainer = new RobotContainer();
-        drive.resetOdometry(new Pose2d());
+        
         autonTaskChooser = new SendableChooser<>();
-
         autonTaskChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
         autonTaskChooser.addOption("Test 8 Feet Auto", new AutoTest8Feet());
         autonTaskChooser.addOption("Trench 8 Ball Auto", new AutoTrench8Ball());

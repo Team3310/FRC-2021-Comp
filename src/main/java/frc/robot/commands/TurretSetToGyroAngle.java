@@ -32,7 +32,7 @@ public class TurretSetToGyroAngle extends ExtraTimeoutCommand
         else {
             gyroMirror = (-180 - gyroMirror) - 180;
         }
-        turret.setTurretMotionMagicPositionAbsolute(Util.normalizeAngle90ToMinus270(gyroMirror) + offsetAngleDeg);
+        turret.setTurretMotionMagicPositionAbsolute(Util.normalizeAngle90ToMinus270(gyroMirror + offsetAngleDeg));
         resetExtraOneTimer();
         startExtraOneTimeout(0.1);
     }
