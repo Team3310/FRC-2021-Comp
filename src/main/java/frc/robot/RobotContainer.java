@@ -37,6 +37,7 @@ import frc.robot.commands.ShooterSetShot;
 import frc.robot.commands.ShooterSetTrackShot;
 import frc.robot.commands.ShooterShoot;
 import frc.robot.commands.TurretAutoZero;
+import frc.robot.commands.TurretSetToGyroAngle;
 import frc.robot.commands.TurretSetToLimelightAngle;
 import frc.robot.commands.TurretSetToTrackLimelightAngle;
 import frc.robot.controller.GameController;
@@ -111,7 +112,7 @@ public class RobotContainer {
 
         Button intakeReverseTrigger = m_operator.getLeftTrigger();
         intakeReverseTrigger.whenPressed(new IntakeReverseExtendAll(intake, magazine));
-        intakeReverseTrigger.whenReleased(new IntakeExtendAll(intake, magazine));
+        intakeReverseTrigger.whenReleased(new IntakeSetSpeed(intake, 0));
 
         Button longShotButton = m_operator.getButtonY();
         ShooterSetShot.ShooterParams paramsLong = new ShooterSetShot.ShooterParams();
@@ -180,6 +181,8 @@ public class RobotContainer {
         //         new InstantCommand(() -> drive.resetGyroYawAngle(Constants.DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES)),
         //         new TurretAutoZero(turret)
         // ));
+        Button driveGyroTurnButton = m_driver.getButtonY();
+        driveGyroTurnButton.whenPressed(new TurretSetToGyroAngle(turret, 0));
 
         Button limelightTrackTwo = m_driver.getButtonB();
         limelightTrackTwo.whenPressed( new TurretSetToLimelightAngle(turret, 0));

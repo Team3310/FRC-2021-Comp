@@ -168,6 +168,7 @@ public final class Constants
     public static final double INTAKE_SLOW_RPM = 500;
     public static final double INTAKE_RETRACT_RPM = 1000;
     public static final double INTAKE_COLLECT_AUTO_RPM = 1200; // 1500
+    public static final double INTAKE_REVERSE_RPM = -2000; // -1500
 
     // Drive
     public static final double DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES = -180.0;
@@ -177,7 +178,7 @@ public final class Constants
     public static final int LIMELIGHT_MEDIUM_PIPELINE = 0;
     public static final int LIMELIGHT_LEG_PIPELINE = 3;
     public static final int LIMELIGHT_ALL_FIELD_PIPELINE = 3;
-    public static final double INTAKE_REVERSE_RPM = -1000; // -1500
+
     public static final int LIMELIGHT_LONG_PIPELINE = 1;
     public static final double LIMELIGHT_OFFSET_FENDER_SHOT_DEGREES = 0.0;
     public static final double LIMELIGHT_OFFSET_KEY_SHOT_DEGREES = 0.0;

@@ -219,14 +219,14 @@ public class Turret extends SubsystemBase {
     }
 
     private void updateGyroTrack() {
-        double gyroMirror = Util.normalizeAngle90ToMinus270(Drive.getInstance().getGyroFusedHeadingAngleDeg());
-        if (Math.abs(gyroMirror) < 90) {
-            gyroMirror = -gyroMirror;
-        }
-        else {
-            gyroMirror = (-180 - gyroMirror) - 180;
-        }
-        setTurretMotionMagicPositionAbsoluteInternal(Util.normalizeAngle90ToMinus270(gyroMirror + gyroTrackOffsetAngle));
+        // double gyroMirror = Util.normalizeAngle90ToMinus270(Drive.getInstance().getGyroFusedHeadingAngleDeg());
+        // if (Math.abs(gyroMirror) < 90) {
+        //     gyroMirror = -gyroMirror;
+        // }
+        // else {
+        //     gyroMirror = (-180 - gyroMirror) - 180;
+        // }
+        setTurretMotionMagicPositionAbsoluteInternal(Util.normalizeAngle90ToMinus270(-Drive.getInstance().getGyroFusedHeadingAngleDeg() + gyroTrackOffsetAngle));
     }
     
     public void setPositionToGoalAngle(Drive drive) {

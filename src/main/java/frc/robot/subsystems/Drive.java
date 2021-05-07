@@ -51,8 +51,8 @@ public class Drive extends SubsystemBase {
     public static final double OPEN_LOOP_PERCENT_OUTPUT_LO = 0.6;
     public static final double OPEN_LOOP_PERCENT_OUTPUT_HI = 1.0;
 
-    public static final double OPEN_LOOP_VOLTAGE_RAMP_HI = 0.3;
-    public static final double OPEN_LOOP_VOLTAGE_RAMP_LO = 0.3;
+    public static final double OPEN_LOOP_VOLTAGE_RAMP_HI = 0.0;  //0.3
+    public static final double OPEN_LOOP_VOLTAGE_RAMP_LO = 0.0;  //0.3
 
     private double m_moveInput = 0.0;
     private double m_steerInput = 0.0;
@@ -370,12 +370,12 @@ public class Drive extends SubsystemBase {
             return;
         }
 
-        boolean isHighGearPrevious = isHighGear;
+        // boolean isHighGearPrevious = isHighGear;
  //       isHighGear = m_driverController.getRightBumper().get();
-        isHighGear = m_driverController.getRightTrigger().get();
-        if (isHighGearPrevious != isHighGear) {
-            updateOpenLoopVoltageRamp();
-        }
+        // isHighGear = m_driverController.getRightTrigger().get();
+        // if (isHighGearPrevious != isHighGear) {
+        //     updateOpenLoopVoltageRamp();
+        // }
 
         // double shiftScaleFactor = OPEN_LOOP_PERCENT_OUTPUT_LO;
         // if (isHighGear == true) {
@@ -388,7 +388,8 @@ public class Drive extends SubsystemBase {
 
 //         m_moveOutput = adjustForSensitivity(MOVE_SCALE, MOVE_TRIM, m_moveInput, MOVE_NON_LINEAR, MOVE_NON_LINEARITY);
         m_moveOutput = squareStick(m_moveInput);
-        m_steerOutput = adjustForSensitivity(STEER_SCALE, STEER_TRIM, m_steerInput, STEER_NON_LINEAR, STEER_NON_LINEARITY);
+        m_steerOutput = squareStick(m_steerInput);
+        // m_steerOutput = adjustForSensitivity(STEER_SCALE, STEER_TRIM, m_steerInput, STEER_NON_LINEAR, STEER_NON_LINEARITY);
 
         m_drive.arcadeDrive(m_moveOutput, m_steerOutput);
     }
