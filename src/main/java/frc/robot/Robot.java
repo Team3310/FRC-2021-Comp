@@ -262,8 +262,6 @@ public class Robot extends TimedRobot
         drive.setControlMode(Drive.DriveControlMode.PATH_FOLLOWING);
         drive.setBrakeMode(NeutralMode.Brake);
 
-        drive.getAccelValues();
-
         m_autonomousCommand = autonTaskChooser.getSelected();
 
         /*

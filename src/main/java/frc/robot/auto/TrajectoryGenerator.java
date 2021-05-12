@@ -418,11 +418,11 @@ public class TrajectoryGenerator {
     public Trajectory getTestAuton(){
         Trajectory testAuton;
         testAuton = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
-                new Pose2d(Units.inchesToMeters(76), Units.inchesToMeters(-155), new Rotation2d(Units.degreesToRadians(0))),
+                new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(0))),
                 List.of(
-                        new Translation2d(Units.inchesToMeters(100), Units.inchesToMeters(-155))
+                        new Translation2d(Units.inchesToMeters(48), Units.inchesToMeters(0))
                 ),
-                new Pose2d(Units.inchesToMeters(120), Units.inchesToMeters(-155), new Rotation2d(Units.degreesToRadians(0))),
+                new Pose2d(Units.inchesToMeters(96), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(0))),
                 // Pass config
                 forwardConfig
         );
@@ -500,14 +500,14 @@ public class TrajectoryGenerator {
     public Trajectory getTrench5Ball() {
         Trajectory Trench5Ball;
         Trench5Ball = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
-                new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-60), new Rotation2d(Units.degreesToRadians(0))),
+                new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-60), new Rotation2d(0)),
                 List.of(
                         new Translation2d(Units.inchesToMeters(181.547), Units.inchesToMeters(-39.622)),
                         new Translation2d(Units.inchesToMeters(212.104), Units.inchesToMeters(-30.927))
 
                 ),
 
-                new Pose2d(Units.inchesToMeters(388.694), Units.inchesToMeters(-28.691), new Rotation2d(Units.degreesToRadians(0))),
+                new Pose2d(Units.inchesToMeters(388.694), Units.inchesToMeters(-28.691), new Rotation2d(0)),
                 forwardConfig
         );
         return Trench5Ball;

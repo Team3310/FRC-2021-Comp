@@ -21,7 +21,7 @@ public class AutoTest8Feet extends SequentialCommandGroup {
 
     public AutoTest8Feet() {
         addCommands(new SequentialCommandGroup(
-                new ResetOdometryAuto(new Pose2d(Units.inchesToMeters(76), Units.inchesToMeters(-155), new Rotation2d(Units.degreesToRadians(0)))),
+                new ResetOdometryAuto(new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(0)))),
                 new RamseteCommand(
                         mTrajectories.getTestAuton(),
                         mDrive::getPose,
