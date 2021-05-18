@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class GameController extends Joystick {
 
-	private static final double DEADZONE = 0.1;
+	private static final double DEADZONE = 0.05;//.1
 	private static final double TRIGGER_TOLERANCE = 0.5;
 
 	private static final double AXIS_UP_TOLERANCE = -0.9;

@@ -149,7 +149,7 @@ public final class Constants
     // Magazine
     public static final double MAGAZINE_INTAKE_RPM = 80;
     public static final double MAGAZINE_INTAKE_SLOW_RPM = 10;
-    public static final double MAGAZINE_SHOOT_RPM = 40;//80
+    public static final double MAGAZINE_SHOOT_RPM = 100;//40
     public static final double MAGAZINE_SHOOT_AUTO_RPM = 80;
     public static final double MAGAZINE_SHOOT_AUTO_LEG_RPM = 80;
     public static final double MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_270 = 270.0;
