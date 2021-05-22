@@ -27,7 +27,7 @@ import frc.robot.subsystems.Magazine;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 
-public class AutoTrenchSteal8Ball extends SequentialCommandGroup {
+public class AutoTrenchSteal8BallAlex extends SequentialCommandGroup {
     TrajectoryGenerator mTrajectories = TrajectoryGenerator.getInstance();
     Drive mDrive = Drive.getInstance();
     Shooter mShooter = Shooter.getInstance();
@@ -36,7 +36,7 @@ public class AutoTrenchSteal8Ball extends SequentialCommandGroup {
     Intake mIntake = Intake.getInstance();
     Climb mClimb = Climb.getInstance();
 
-    public AutoTrenchSteal8Ball() {
+    public AutoTrenchSteal8BallAlex() {
         addCommands(
                 new ResetOdometryAuto(new Pose2d(Units.inchesToMeters(147), Units.inchesToMeters(-245), new Rotation2d(0))),
                 new IntakeExtendAllAuto(mIntake, mTurret, mMagazine),
