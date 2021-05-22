@@ -22,7 +22,7 @@ import frc.robot.auto.commands.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
-public class AutoSafe8Ball extends SequentialCommandGroup {
+public class AutoSafe8BallMorgan extends SequentialCommandGroup {
     TrajectoryGenerator mTrajectories = TrajectoryGenerator.getInstance();
     Drive mDrive = Drive.getInstance();
     Shooter mShooter = Shooter.getInstance();
@@ -34,7 +34,7 @@ public class AutoSafe8Ball extends SequentialCommandGroup {
     /**
      * Add your docs here.
      */
-    public AutoSafe8Ball() {
+    public AutoSafe8BallMorgan() {
 
         ShooterSetShot.ShooterParams paramsAuto = new ShooterSetShot.ShooterParams();
         paramsAuto.limelightOffset = Constants.LIMELIGHT_OFFSET_AUTON_SHORT_SHOT_DEGREES;
