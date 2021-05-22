@@ -41,7 +41,7 @@ public class Climb extends SubsystemBase {
         climbMotor.configMotionSCurveStrength(4);
 
         final StatorCurrentLimitConfiguration statorCurrentConfigs = new StatorCurrentLimitConfiguration();
-        statorCurrentConfigs.currentLimit = 40;
+        statorCurrentConfigs.currentLimit = 80;
         statorCurrentConfigs.enable = true;
         climbMotor.configStatorCurrentLimit(statorCurrentConfigs);
 

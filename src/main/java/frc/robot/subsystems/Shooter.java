@@ -281,11 +281,11 @@ public class Shooter extends SubsystemBase {
 
     // Shoot while driving
     public double getRPMFromDistance() {
-        return 7.98248 * Limelight.getInstance().getDistanceFromTargetInches() + 1542.75;
+        return 7.98248 * Limelight.getInstance().getFilteredDistanceFromTargetInches() + 1542.75;
     }
 
     public double getHoodAngleFromDistance() {
-        return 0.0809014 * Limelight.getInstance().getDistanceFromTargetInches() + 27.8;
+        return 0.0809014 * Limelight.getInstance().getFilteredDistanceFromTargetInches() + 27.8;
     }
 
     public void setShooterLimelightTrackMode() {

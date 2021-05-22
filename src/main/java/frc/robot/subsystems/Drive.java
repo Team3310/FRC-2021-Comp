@@ -388,7 +388,7 @@ public class Drive extends SubsystemBase {
 
 //         m_moveOutput = adjustForSensitivity(MOVE_SCALE, MOVE_TRIM, m_moveInput, MOVE_NON_LINEAR, MOVE_NON_LINEARITY);
         m_moveOutput = squareStick(m_moveInput);
-        m_steerOutput = (squareStick(squareStick(m_steerInput)) + squareStick(m_steerInput))/2;
+        m_steerOutput = squareStick(m_steerInput);
         // m_steerOutput = adjustForSensitivity(STEER_SCALE, STEER_TRIM, m_steerInput, STEER_NON_LINEAR, STEER_NON_LINEARITY);
 
         m_drive.arcadeDrive(m_moveOutput, m_steerOutput);
