@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.LinearFilter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -11,6 +12,14 @@ public class Limelight extends SubsystemBase {
     private static final double CAMERA_ANGLE_DEGREES = 35.0; //31.0
     private static final double TARGET_HEIGHT_INCHES = 81.25;
     private static final double CAMERA_HEIGHT_INCHES = 24.0;
+
+    private LinearFilter txFilter;
+    private LinearFilter tyFilter;
+    private LinearFilter distanceFilter;
+
+    private double txFilteredValue;
+    private double tyFilteredValue;
+    private double distanceFilteredValue;
 
     private NetworkTableInstance table = null;
 
@@ -25,8 +34,10 @@ public class Limelight extends SubsystemBase {
     private final static Limelight INSTANCE = new Limelight();
 
     private Limelight() {
-
-    }
+        txFilter = LinearFilter.movingAverage(5);
+        tyFilter = LinearFilter.movingAverage(5);
+        distanceFilter = LinearFilter.movingAverage(5);
+   }
 
     public static Limelight getInstance() {
         return INSTANCE;
@@ -45,6 +56,10 @@ public class Limelight extends SubsystemBase {
         return getValue("tx").getDouble(0.00);
     }
 
+    public double getFilteredTx() {
+        return txFilteredValue;
+    }
+
     /**
      * Vertical offset from crosshair to target (-20.5 degrees to 20.5 degrees).
      *
@@ -52,6 +67,10 @@ public class Limelight extends SubsystemBase {
      */
     public double getTy() {
         return getValue("ty").getDouble(0.00);
+    }
+
+    public double getFilteredTy() {
+        return tyFilteredValue;
     }
 
     /**
@@ -122,6 +141,10 @@ public class Limelight extends SubsystemBase {
         return distance;
     }
 
+    public double getFilteredDistanceFromTargetInches() {
+        return distanceFilteredValue;
+    }
+
     /**
      * Helper method to get an entry from the Limelight NetworkTable.
      *
@@ -139,7 +162,12 @@ public class Limelight extends SubsystemBase {
 
     @Override
     public void periodic() {
+        txFilteredValue = txFilter.calculate(getTx());
+        tyFilteredValue = tyFilter.calculate(getTy());
+        distanceFilteredValue = distanceFilter.calculate(getDistanceFromTargetInches());
         SmartDashboard.putNumber("Limelight Distance", getDistanceFromTargetInches());
+        SmartDashboard.putNumber("Limelight Ty", getTy());
+        SmartDashboard.putNumber("Limelight Filtered Ty", getFilteredTy());
     }
 }
 

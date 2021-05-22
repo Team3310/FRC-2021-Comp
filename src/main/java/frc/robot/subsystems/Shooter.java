@@ -24,7 +24,7 @@ public class Shooter extends SubsystemBase {
     private final double KICKER_OUTPUT_TO_ENCODER_RATIO = 48.0/48.0;
     private final double SHOOTER_OUTPUT_TO_ENCODER_RATIO = 48.0/48.0;
     private final double INTAKE_OUTPUT_TO_ENCODER_RATIO = 48.0/48.0;
-    private final double HOOD_OUTPUT_TO_ENCODER_RATIO = 322.0 / 20.0;
+    private final double HOOD_OUTPUT_TO_ENCODER_RATIO = 4.0 * 322.0 / 20.0; // Added 4:1 VP
     private final double HOOD_REVOLUTIONS_TO_ENCODER_TICKS = HOOD_OUTPUT_TO_ENCODER_RATIO * Constants.ENCODER_TICKS_PER_MOTOR_REVOLUTION;
     private final double HOOD_DEGREES_TO_ENCODER_TICKS = HOOD_REVOLUTIONS_TO_ENCODER_TICKS / 360.0;
 

@@ -240,13 +240,19 @@ public class Turret extends SubsystemBase {
         updateLimelightTrack();
     }
 
+    public void setLimelightFixedMode(double limelightTrackOffsetAngle) {
+        this.limelightTrackOffsetAngle = limelightTrackOffsetAngle;
+        setTurretControlMode(TurretControlMode.MOTION_MAGIC);
+        updateLimelightTrack();
+    }
+
     private void updateLimelightTrack() {
         Limelight limelight = Limelight.getInstance();
  
         // If target is found use limelight to adjust turret angle.  If no target is found, 
         // stay at the same turret angle.  Drivers can turn robot until the target is acquired.
         if (limelight.isOnTarget()) {
-            double deltaLimelightAngle = -limelight.getTx() + limelightTrackOffsetAngle;
+            double deltaLimelightAngle = -limelight.getFilteredTx() + limelightTrackOffsetAngle;
             setTurretMotionMagicPositionRelativeInternal(deltaLimelightAngle);
         }
     }
