@@ -94,6 +94,7 @@ public final class Constants
     public static final double TURRET_GYRO_OFFSET_LEG_SHOT_ANGLE_DEGREES = -10.0;
     public static final double TURRET_GYRO_OFFSET_AUTO_DOUBLE_SHOT_ANGLE_DEGREES = -10.0;
     public static final double TURRET_GYRO_OFFSET_ALL_FIELD_SHOT_ANGLE_DEGREES = 0.0;
+    public static final double TURRET_GYRO_OFFSET_BAR_SHOT_ANGLE_DEGREES = 0.0;
 
     // Hood
     public static final double HOOD_COMPETITION_HOME_POSITION_DEGREES = 0.0;
@@ -113,6 +114,7 @@ public final class Constants
     public static final double HOOD_AUTO_DOUBLE_ANGLE_DEGREES = 46;
     public static final double HOOD_DISTANCE_SLOPE = 3.5/59.0;
     public static final double HOOD_DISTANCE_INTERCEPT = 38.0;
+    public static final double HOOD_BAR_ANGLE_DEGREES = 38.0;
 
     // Shooter
     public static final double SHOOTER_MAIN_FENDER_RPM = 2000;
@@ -127,6 +129,7 @@ public final class Constants
     public static final double SHOOTER_MAIN_ALL_FIELD_RPM = 3400;
     public static final double SHOOTER_DISTANCE_SLOPE = 6.53;
     public static final double SHOOTER_DISTANCE_INTERCEPT = 2090.74;
+    public static final double SHOOTER_BAR_RPM = 3400;
 
     public static final double SHOOTER_KICKER_FENDER_RPM = 2000;
     public static final double SHOOTER_KICKER_KEY_RPM = 2200;
@@ -138,6 +141,7 @@ public final class Constants
     public static final double SHOOTER_KICKER_LEG_RPM = 3400;
     public static final double SHOOTER_KICKER_AUTO_DOUBLE_RPM = 3600;
     public static final double SHOOTER_KICKER_ALL_FIELD_RPM = 3400;
+    public static final double SHOOTER_KICKER_BAR_RPM = 3400;
 
     //public static final double SHOOTER_KICKER_TEST_RPM = 3500;
     public static final double SHOOTER_TEST_RPM = 2500;
@@ -177,6 +181,7 @@ public final class Constants
     public static final int LIMELIGHT_MEDIUM_PIPELINE = 0;
     public static final int LIMELIGHT_LEG_PIPELINE = 3;
     public static final int LIMELIGHT_ALL_FIELD_PIPELINE = 3;
+    public static final int LIMELIGHT_BAR_PIPELINE = 3;
 
     public static final int LIMELIGHT_LONG_PIPELINE = 1;
     public static final double LIMELIGHT_OFFSET_FENDER_SHOT_DEGREES = 0.0;
@@ -188,6 +193,7 @@ public final class Constants
     public static final double LIMELIGHT_OFFSET_LEG_SHOT_DEGREES = -1.5;
     public static final double LIMELIGHT_OFFSET_AUTO_DOUBLE_SHOT_DEGREES = 1.0;
     public static final double LIMELIGHT_OFFSET_ALL_FIELD_SHOT_DEGREES = 0.0;
+    public static final double LIMELIGHT_OFFSET_BAR_DEGREES = 0.0;
 
     // Climb
     public static final double CLIMB_MIN_INCHES = -5.0;

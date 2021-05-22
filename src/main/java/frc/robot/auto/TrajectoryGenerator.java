@@ -428,6 +428,20 @@ public class TrajectoryGenerator {
         );
         return testAuton;
     }
+
+    public Trajectory getTestRightAuton(){
+        Trajectory testAuton;
+        testAuton = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(0))),
+                List.of(
+                        new Translation2d(Units.inchesToMeters(100), Units.inchesToMeters(0))
+                ),
+                new Pose2d(Units.inchesToMeters(200), Units.inchesToMeters(-200), new Rotation2d(Units.degreesToRadians(0))),
+                // Pass config
+                forwardConfig
+        );
+        return testAuton;
+    }
     public Trajectory getFirstTwoBalls() {
         Trajectory FirstTwoBalls;
         FirstTwoBalls = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
@@ -474,10 +488,23 @@ public class TrajectoryGenerator {
                 List.of(
                         new Translation2d(Units.inchesToMeters(213.098), Units.inchesToMeters(-77.632))
                 ),
-                new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-60), new Rotation2d(Units.degreesToRadians(0))),
+                new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-60), new Rotation2d(Units.degreesToRadians(-45))),
                 reverseFastConfig
         );
         return FirstTwoBallsReversed;
+    }
+
+    public Trajectory goFromAutoLineToBarShot() {
+        Trajectory goFromAutoLineToBarShot;
+        goFromAutoLineToBarShot = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-60), new Rotation2d(Units.degreesToRadians(-45))),
+                List.of(
+                        new Translation2d(Units.inchesToMeters(151), Units.inchesToMeters(-98.7))
+                ),
+                new Pose2d(Units.inchesToMeters(189), Units.inchesToMeters(-155), new Rotation2d(Units.degreesToRadians(0))),
+                forwardFastConfig
+        );
+        return goFromAutoLineToBarShot;
     }
 
     public Trajectory getTrench3Ball() {
