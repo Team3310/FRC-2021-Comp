@@ -13,13 +13,11 @@ import frc.robot.subsystems.Turret;
 public class TurretSetToFixedLimelightAngle extends CommandBase
 {
     private final Turret turret;
-    private double limelightOffsetAngleDeg;
     private boolean isActive;
 
-    public TurretSetToFixedLimelightAngle(Turret subsystem, double limelightOffsetAngleDeg, boolean isActive)
+    public TurretSetToFixedLimelightAngle(Turret subsystem, boolean isActive)
     {
         this.turret = subsystem;
-        this.limelightOffsetAngleDeg = limelightOffsetAngleDeg;
         this.isActive = isActive;
 
  //       addRequirements(subsystem);
@@ -28,7 +26,7 @@ public class TurretSetToFixedLimelightAngle extends CommandBase
     @Override
     public void initialize() {
         if(isActive){
-            turret.setLimelightFixedMode(limelightOffsetAngleDeg);
+            turret.setLimelightFixedMode();
         }
     }
 

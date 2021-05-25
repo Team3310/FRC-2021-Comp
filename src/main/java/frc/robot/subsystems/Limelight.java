@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Limelight extends SubsystemBase {
 
-    private static final double CAMERA_ANGLE_DEGREES = 35.0; //31.0
+    private static final double CAMERA_ANGLE_DEGREES = 30.81; //31.0 //35.0
     private static final double TARGET_HEIGHT_INCHES = 81.25;
     private static final double CAMERA_HEIGHT_INCHES = 24.0;
 

@@ -234,7 +234,7 @@ public class Robot extends TimedRobot
     @Override
     public void disabledInit()
     {
-        Limelight.getInstance().setLedMode(Limelight.LightMode.OFF);
+       // Limelight.getInstance().setLedMode(Limelight.LightMode.OFF);
         Limelight.getInstance().setPipeline(Constants.LIMELIGHT_AUTO_PIPELINE);
         drive.setBrakeMode(NeutralMode.Coast);
     }

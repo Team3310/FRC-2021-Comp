@@ -240,8 +240,7 @@ public class Turret extends SubsystemBase {
         updateLimelightTrack();
     }
 
-    public void setLimelightFixedMode(double limelightTrackOffsetAngle) {
-        this.limelightTrackOffsetAngle = limelightTrackOffsetAngle;
+    public void setLimelightFixedMode() {
         setTurretControlMode(TurretControlMode.MOTION_MAGIC);
         updateLimelightTrack();
     }
