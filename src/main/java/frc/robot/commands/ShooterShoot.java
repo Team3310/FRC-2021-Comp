@@ -15,7 +15,7 @@ public class ShooterShoot extends SequentialCommandGroup {
         addCommands(
             new TurretSetToFixedLimelightAngle(turret, true),
             new ShooterIntakeSetRPM(shooter, Constants.SHOOTER_INTAKE_RPM),
-            new MagazineSetRPM(magazine, Constants.MAGAZINE_SHOOT_RPM)
+            new MagazineSetRPMToValue(magazine)
             //          new MagazineSetRPMLimit(magazine, Constants.MAGAZINE_SHOOT_RPM, Constants.MAGAZINE_JAM_STATOR_CURRENT))
         );
     }

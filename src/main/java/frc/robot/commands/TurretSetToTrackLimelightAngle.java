@@ -28,6 +28,9 @@ public class TurretSetToTrackLimelightAngle extends CommandBase
     @Override
     public void initialize() {
         if(isActive){
+            if (limelightOffsetAngleDeg < -100.0) {
+                limelightOffsetAngleDeg = turret.getTurretToGoalOffsetAngle();
+            }
             turret.setLimelightTrackMode(limelightOffsetAngleDeg);
         }
     }

@@ -20,6 +20,7 @@ public class ShooterSetShot extends ParallelCommandGroup {
         public int limelightPipeline;
         public double turretGyroOffset;
         public boolean isLimelightActive = true;
+        public double magazineRPM = Constants.MAGAZINE_SHOOT_RPM;
     }
 
     public ShooterSetShot(Shooter shooter, Magazine magazine, Turret turret, ShooterParams params) {
@@ -29,6 +30,7 @@ public class ShooterSetShot extends ParallelCommandGroup {
                 new ShooterSetReady(shooter,false),
                 new ShooterSetRPM(shooter, params.shooterRPM, params.kickerRPM),
                 new HoodSetAngle(shooter, params.hoodAngle),
+                new InstantCommand(()->magazine.setMagazineRPMValue(params.magazineRPM)),
                 new SequentialCommandGroup(
                     new TurretSetToGyroAngle(turret, params.turretGyroOffset),
                     new TurretSetToTrackLimelightAngle(turret, params.limelightOffset, params.isLimelightActive),

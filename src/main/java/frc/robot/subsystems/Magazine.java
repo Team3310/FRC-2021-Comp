@@ -29,6 +29,7 @@ public class Magazine extends SubsystemBase {
     private static final int kMagazineMotionMagicSlot = 1;
     private double homePositionAngleDegrees = Constants.MAGAZINE_COMPETITION_HOME_POSITION_DEGREES;
     private double targetPositionTicks = 0;
+    private double magazineRPMValue;
 
     private MagazineControlMode magazineControlMode;
 
@@ -89,6 +90,14 @@ public class Magazine extends SubsystemBase {
 
     public void resetHomePosition() {
         this.magMotor.setSelectedSensorPosition(0);
+    }
+
+    public void setMagazineRPMValue(double rpm) {
+        magazineRPMValue = rpm;
+    }
+
+    public double getMagazineValue() {
+        return magazineRPMValue;
     }
 
     public double getMagazineRPM() {

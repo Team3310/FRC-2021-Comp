@@ -89,6 +89,7 @@ public final class Constants
     public static final double TURRET_GYRO_OFFSET_KEY_SHOT_ANGLE_DEGREES = 0.0;
     public static final double TURRET_GYRO_OFFSET_AUTON_SHORT_SHOT_ANGLE_DEGREES = 0.0;
     public static final double TURRET_GYRO_OFFSET_AUTO_SHOT_ANGLE_DEGREES = 0.0;
+    public static final double TURRET_GYRO_OFFSET_SUPER_LONG_SHOT_ANGLE_DEGREES = 0.0;
     public static final double TURRET_GYRO_OFFSET_MEDIUM_SHOT_ANGLE_DEGREES = 10.0;
     public static final double TURRET_GYRO_OFFSET_LONG_SHOT_ANGLE_DEGREES = 12.3;
     public static final double TURRET_GYRO_OFFSET_LEG_SHOT_ANGLE_DEGREES = -10.0;
@@ -102,12 +103,13 @@ public final class Constants
     public static final double HOOD_RETRACT_HOME_POSITION_DEGREES = 2.0;
     public static final double HOOD_AUTO_ZERO_SPEED = -0.1;
     public static final double HOOD_MIN_ANGLE_DEGREES = 0.0;
-    public static final double HOOD_MAX_ANGLE_DEGREES = 53.0;
+    public static final double HOOD_MAX_ANGLE_DEGREES = 62.0;
     public static final double HOOD_FENDER_ANGLE_DEGREES = 0.0;
     public static final double HOOD_KEY_ANGLE_DEGREES = 8.0;
     public static final double HOOD_AUTON_SHORT_ANGLE_DEGREES = 35.0;
     public static final double HOOD_AUTO_ANGLE_DEGREES = 37.0;
     public static final double HOOD_MEDIUM_ANGLE_DEGREES = 47.0;
+    public static final double HOOD_SUPER_LONG_ANGLE_DEGREES = 56.0;
     public static final double HOOD_MEDIUM_2_ANGLE_DEGREES = 48.0;
     public static final double HOOD_LONG_ANGLE_DEGREES = 53.0;
     public static final double HOOD_LEG_ANGLE_DEGREES = 46.0;
@@ -122,6 +124,7 @@ public final class Constants
     public static final double SHOOTER_MAIN_AUTO_RPM = 2500;
     public static final double SHOOTER_MAIN_AUTON_SHORT_RPM = 2350;
     public static final double SHOOTER_MAIN_MEDIUM_RPM = 3500;
+    public static final double SHOOTER_MAIN_SUPER_LONG_RPM = 4700;
     public static final double SHOOTER_MAIN_LONG_RPM = 4300;
     public static final double SHOOTER_MAIN_RPM_EPSILON = 100;
     public static final double SHOOTER_MAIN_LEG_RPM = 3400;
@@ -136,6 +139,7 @@ public final class Constants
     public static final double SHOOTER_KICKER_AUTON_SHORT_RPM = 2350;
     public static final double SHOOTER_KICKER_AUTO_RPM = 2500;
     public static final double SHOOTER_KICKER_MEDIUM_RPM = 3500;
+    public static final double SHOOTER_KICKER_SUPER_LONG_RPM = 4700;
     public static final double SHOOTER_KICKER_LONG_RPM = 4300;
     public static final double SHOOTER_KICKER_RPM_EPSILON = 100;
     public static final double SHOOTER_KICKER_LEG_RPM = 3400;
@@ -154,6 +158,7 @@ public final class Constants
     public static final double MAGAZINE_INTAKE_RPM = 80;
     public static final double MAGAZINE_INTAKE_SLOW_RPM = 10;
     public static final double MAGAZINE_SHOOT_RPM = 100;//40
+    public static final double MAGAZINE_SHOOT_SLOW_RPM = 20;//40
     public static final double MAGAZINE_SHOOT_AUTO_RPM = 80;
     public static final double MAGAZINE_SHOOT_AUTO_LEG_RPM = 80;
     public static final double MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_270 = 270.0;
@@ -182,6 +187,7 @@ public final class Constants
     public static final int LIMELIGHT_LEG_PIPELINE = 3;
     public static final int LIMELIGHT_ALL_FIELD_PIPELINE = 3;
     public static final int LIMELIGHT_BAR_PIPELINE = 3;
+    public static final int LIMELIGHT_SUPER_LONG_PIPELINE = 3;
 
     public static final int LIMELIGHT_LONG_PIPELINE = 1;
     public static final double LIMELIGHT_OFFSET_FENDER_SHOT_DEGREES = 0.0;
@@ -189,11 +195,13 @@ public final class Constants
     public static final double LIMELIGHT_OFFSET_AUTON_SHORT_SHOT_DEGREES = 0.0;
     public static final double LIMELIGHT_OFFSET_AUTO_SHOT_DEGREES = 0.0;
     public static final double LIMELIGHT_OFFSET_MEDIUM_SHOT_DEGREES = -2.5;//-3.5
+    public static final double LIMELIGHT_OFFSET_SUPER_LONG_SHOT_DEGREES = 0;
     public static final double LIMELIGHT_OFFSET_LONG_SHOT_DEGREES = -2.0;
     public static final double LIMELIGHT_OFFSET_LEG_SHOT_DEGREES = -1.5;
     public static final double LIMELIGHT_OFFSET_AUTO_DOUBLE_SHOT_DEGREES = 1.0;
     public static final double LIMELIGHT_OFFSET_ALL_FIELD_SHOT_DEGREES = 0.0;
     public static final double LIMELIGHT_OFFSET_BAR_DEGREES = 0.0;
+    public static final double LIMELIGHT_OFFSET_MAX_DEGREES = 2.5;
 
     // Climb
     public static final double CLIMB_MIN_INCHES = -5.0;

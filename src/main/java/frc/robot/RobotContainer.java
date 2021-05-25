@@ -114,15 +114,26 @@ public class RobotContainer {
         intakeReverseTrigger.whenPressed(new IntakeReverseExtendAll(intake, magazine));
         intakeReverseTrigger.whenReleased(new IntakeSetSpeed(intake, 0));
 
-        Button longShotButton = m_operator.getButtonY();
-        ShooterSetShot.ShooterParams paramsLong = new ShooterSetShot.ShooterParams();
-        paramsLong.limelightOffset = Constants.LIMELIGHT_OFFSET_LONG_SHOT_DEGREES;
-        paramsLong.hoodAngle = Constants.HOOD_LONG_ANGLE_DEGREES;
-        paramsLong.kickerRPM = Constants.SHOOTER_KICKER_LONG_RPM;
-        paramsLong.limelightPipeline = Constants.LIMELIGHT_LONG_PIPELINE;
-        paramsLong.shooterRPM = Constants.SHOOTER_MAIN_LONG_RPM;
-        paramsLong.turretGyroOffset = Constants.TURRET_GYRO_OFFSET_LONG_SHOT_ANGLE_DEGREES;
-        longShotButton.whenPressed(new ShooterSetShot(shooter, magazine, turret, paramsLong));
+        Button superLongShotButton = m_operator.getButtonY();
+        ShooterSetShot.ShooterParams paramsSuperLong = new ShooterSetShot.ShooterParams();
+        paramsSuperLong.limelightOffset = Constants.LIMELIGHT_OFFSET_SUPER_LONG_SHOT_DEGREES;
+        paramsSuperLong.hoodAngle = Constants.HOOD_SUPER_LONG_ANGLE_DEGREES;
+        paramsSuperLong.kickerRPM = Constants.SHOOTER_KICKER_SUPER_LONG_RPM;
+        paramsSuperLong.limelightPipeline = Constants.LIMELIGHT_SUPER_LONG_PIPELINE;
+        paramsSuperLong.shooterRPM = Constants.SHOOTER_MAIN_SUPER_LONG_RPM;
+        paramsSuperLong.turretGyroOffset = Constants.TURRET_GYRO_OFFSET_SUPER_LONG_SHOT_ANGLE_DEGREES;
+        paramsSuperLong.magazineRPM = Constants.MAGAZINE_SHOOT_SLOW_RPM;
+        superLongShotButton.whenPressed(new ShooterSetShot(shooter, magazine, turret, paramsSuperLong));
+
+        // Button longShotButton = m_operator.getButtonY();
+        // ShooterSetShot.ShooterParams paramsLong = new ShooterSetShot.ShooterParams();
+        // paramsLong.limelightOffset = Constants.LIMELIGHT_OFFSET_LONG_SHOT_DEGREES;
+        // paramsLong.hoodAngle = Constants.HOOD_LONG_ANGLE_DEGREES;
+        // paramsLong.kickerRPM = Constants.SHOOTER_KICKER_LONG_RPM;
+        // paramsLong.limelightPipeline = Constants.LIMELIGHT_LONG_PIPELINE;
+        // paramsLong.shooterRPM = Constants.SHOOTER_MAIN_LONG_RPM;
+        // paramsLong.turretGyroOffset = Constants.TURRET_GYRO_OFFSET_LONG_SHOT_ANGLE_DEGREES;
+        // longShotButton.whenPressed(new ShooterSetShot(shooter, magazine, turret, paramsLong));
 
         Button mediumShotButton = m_operator.getButtonB();
         ShooterSetShot.ShooterParams paramsMedium = new ShooterSetShot.ShooterParams();
@@ -184,8 +195,8 @@ public class RobotContainer {
         Button driveGyroTurnButton = m_driver.getButtonY();
         driveGyroTurnButton.whenPressed(new TurretSetToGyroAngle(turret, 0));
 
-        Button limelightTrackTwo = m_driver.getButtonB();
-        limelightTrackTwo.whenPressed( new TurretSetToLimelightAngle(turret, 0));
+        // Button limelightTrackTwo = m_driver.getButtonB();
+        // limelightTrackTwo.whenPressed( new TurretSetToLimelightAngle(turret, 0));
  
 //        SmartDashboard.putData("Reset All Home", new ResetAllHomePositions(drive, turret, magazine, shooter));
 //        SmartDashboard.putData("Compressor On", new InstantCommand(() -> compressor.turnCompressorOn()));

@@ -44,6 +44,7 @@ public class Turret extends SubsystemBase {
     public double rCurrPoseY;
     public double rDistToGoal;
     public double rTurretGoalAngle;
+    public double rTurretGoalOffsetAngle;
     public double offsetY;
     public double movingTurrOffsetAngle;
     public double turretGoalAngleLag;
@@ -261,9 +262,11 @@ public class Turret extends SubsystemBase {
         rCurrPoseY = Units.metersToInches(drive.getPose().getTranslation().getY());
         rDistToGoal = Units.metersToInches(drive.getPose().getTranslation().getDistance(Constants.GOAL_ORIGIN));
         rTurretGoalAngle = Math.toDegrees(Math.atan2(rCurrPoseY + 95, rCurrPoseX));
+        double rTurretBackGoalAngle = Math.toDegrees(Math.atan2(rCurrPoseY + 95, rCurrPoseX + 32));
+        rTurretGoalOffsetAngle = rTurretBackGoalAngle - rTurretGoalAngle;
 
-        offsetY = Math.abs(drive.getLeftMetersPerSecond()) * Constants.FLIGHT_TIME_OF_BALL;
-        movingTurrOffsetAngle = Math.toDegrees(Math.atan(offsetY / rDistToGoal));
+//        offsetY = Math.abs(drive.getLeftMetersPerSecond()) * Constants.FLIGHT_TIME_OF_BALL;
+//        movingTurrOffsetAngle = Math.toDegrees(Math.atan(offsetY / rDistToGoal));
 
 //        if ((isRobotVelocityPos(drive) && isRobotFacingRight(drive) && isRobotRightOfGoal()) ||
 //                (isRobotVelocityNeg(drive) && isRobotFacingLeft(drive)) && isRobotRightOfGoal()) {
@@ -281,6 +284,13 @@ public class Turret extends SubsystemBase {
             return rTurretGoalAngle;
     }
 
+    public double getTurretToGoalOffsetAngle() {
+        if (Math.abs(rTurretGoalOffsetAngle) > Constants.LIMELIGHT_OFFSET_MAX_DEGREES) {
+            rTurretGoalOffsetAngle = Math.signum(rTurretGoalOffsetAngle) * Constants.LIMELIGHT_OFFSET_MAX_DEGREES;
+        }
+        return rTurretGoalOffsetAngle;
+    }
+
     public void periodic() {
         if (getTurretControlMode() == TurretControlMode.MOTION_MAGIC_TRACK_GYRO) {
             updateGyroTrack();
@@ -291,6 +301,7 @@ public class Turret extends SubsystemBase {
 
         SmartDashboard.putNumber("Turret Angle", this.getTurretAngleAbsoluteDegrees());
         SmartDashboard.putNumber("Lag Angle: ", getTurretToGoalAngle(Drive.getInstance()));
+        SmartDashboard.putNumber("Lag Offset Angle: ", getTurretToGoalOffsetAngle());
         SmartDashboard.putNumber("Turret Track Angle: ", Util.normalizeAngle90ToMinus270(getTurretToGoalAngle(Drive.getInstance()) - Drive.getInstance().getGyroFusedHeadingAngleDeg()));
 //        SmartDashboard.putNumber("Offset Angle", this.getDriveShootOffSetAngle());
  //       SmartDashboard.putNumber("Turret Angle Ticks", turretMotor.getSelectedSensorPosition());
