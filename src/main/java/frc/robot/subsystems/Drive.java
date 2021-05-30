@@ -23,6 +23,7 @@ import frc.robot.Constants;
 import frc.robot.controller.GameController;
 import frc.robot.utilities.Util;
 
+
 public class Drive extends SubsystemBase {
 
     public static enum DriveControlMode {
@@ -61,6 +62,9 @@ public class Drive extends SubsystemBase {
     private double m_steerOutput = 0.0;
 
     private boolean isHighGear = false;
+
+    public double newX;
+    public double newY;
 
     // Left Drive
     private WPI_TalonFX mLeftMaster;
@@ -448,6 +452,21 @@ public class Drive extends SubsystemBase {
         m_driverController = driverController;
     }
 
+    public void coordinateAdjustFromLimelight(){
+        if(Limelight.getInstance().isOnTarget()) {
+            double turretAngle = Turret.getInstance().getTurretAngleAbsoluteDegrees();
+            double robotAngle = getGyroFusedHeadingAngleDeg();
+            double distance = Limelight.getInstance().getFilteredDistanceFromTargetInches();
+
+            double theta = turretAngle + robotAngle;
+//
+            newX = Math.cos(Math.toRadians(theta)) * distance;
+            newY = -95 + Math.sin(Math.toRadians(theta)) * distance;
+            Rotation2d angle = Rotation2d.fromDegrees(getGyroFusedHeadingAngleDeg());
+          resetEncoders();
+          m_odometry.resetPosition(new Pose2d(Units.inchesToMeters(newX), Units.inchesToMeters(newY), angle), angle);
+        }
+    }
     //Path Following
     /**
      * Returns the currently-estimated pose of the robot.
@@ -526,6 +545,8 @@ public class Drive extends SubsystemBase {
         SmartDashboard.putNumber("Motor Right Master Amp", mRightMaster.getStatorCurrent());
         SmartDashboard.putNumber("Motor Right Slave 1 Amp", mRightSlave1.getStatorCurrent());
         SmartDashboard.putNumber("Motor Right Slave 2 Amp", mRightSlave2.getStatorCurrent());
+        SmartDashboard.putNumber(" New x", newX);
+        SmartDashboard.putNumber(" New y",newY);
     }
 }
 

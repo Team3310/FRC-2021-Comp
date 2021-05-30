@@ -246,8 +246,8 @@ public class RobotContainer {
 //        SmartDashboard.putData("Turret Set Speed", new InstantCommand(()-> turret.setTurretSpeed(0.2)));
 //        SmartDashboard.putData("Turret Set OFF", new InstantCommand(() -> turret.setTurretSpeed(0.0)));
 //        SmartDashboard.putData("Turret Reset", new InstantCommand(() -> turret.resetHomePosition(Constants.TURRET_COMPETITION_HOME_POSITION_DEGREES)));
-//        SmartDashboard.putData("Turret MM", new InstantCommand(() -> turret.setTurretMotionMagicPositionAbsolute(-135)));
-//        SmartDashboard.putData("Turret MM 180", new InstantCommand(() -> turret.setTurretMotionMagicPositionAbsolute(-180)));
+       SmartDashboard.putData("Turret MM", new InstantCommand(() -> turret.setTurretMotionMagicPositionAbsolute(-135)));
+        SmartDashboard.putData("Turret MM 180", new InstantCommand(() -> turret.setTurretMotionMagicPositionAbsolute(-180)));
 //        SmartDashboard.putData("Turret Position", new InstantCommand(()-> turret.setTurretPositionRelative(5)));
 //        SmartDashboard.putData("Turret Position Neg", new InstantCommand(()-> turret.setTurretPositionRelative(-5)));
 //          SmartDashboard.putData("Turret Auto Zero", new TurretAutoZero(turret));
