@@ -131,7 +131,7 @@ public class Turret extends SubsystemBase {
         turretMotor.selectProfileSlot(kTurretMotionMagicSlot, 0);
         targetPositionTicks = getTurretEncoderTicksAbsolute(limitTurretAngle(angle));
  //       System.out.println("Set point MM absolute encoder ticks = " + targetPositionTicks);
-        turretMotor.set(ControlMode.MotionMagic, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.04);
+        turretMotor.set(ControlMode.Position, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.0);
     }
 
     public synchronized void setTurretMotionMagicPositionRelative(double delta_angle) {
@@ -145,7 +145,7 @@ public class Turret extends SubsystemBase {
         turretMotor.selectProfileSlot(kTurretMotionMagicSlot, 0);
         targetPositionTicks = getTurretEncoderTicksRelative(delta_angle);
 //        System.out.println("Set point MM relative encoder ticks = " + targetPositionTicks);
-        turretMotor.set(ControlMode.MotionMagic, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.04);
+        turretMotor.set(ControlMode.Position, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.0);
     }
 
     public synchronized void setTurretPositionRelative(double delta_angle) {
@@ -156,7 +156,7 @@ public class Turret extends SubsystemBase {
         targetPositionTicks = getTurretEncoderTicksRelative(delta_angle);
         System.out.println("Set position ticks = " + targetPositionTicks);
         System.out.println("Set point position encoder ticks = " + targetPositionTicks);
-        turretMotor.set(ControlMode.Position, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.04);
+        turretMotor.set(ControlMode.Position, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.0);
     }
 
     public synchronized boolean hasFinishedTrajectory() {
