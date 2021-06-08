@@ -77,10 +77,10 @@ public class Turret extends SubsystemBase {
         statorCurrentConfigs.triggerThresholdTime = 0.5;
         turretMotor.configStatorCurrentLimit(statorCurrentConfigs);
 
-        turretMotor.config_kF(kTurretMotionMagicSlot, 0.00);
-        turretMotor.config_kP(kTurretMotionMagicSlot, 0.1);
-        turretMotor.config_kI(kTurretMotionMagicSlot, 0.001);
-        turretMotor.config_kD(kTurretMotionMagicSlot, 3.0);
+        turretMotor.config_kF(kTurretMotionMagicSlot, 0.04);
+        turretMotor.config_kP(kTurretMotionMagicSlot, 0.9);
+        turretMotor.config_kI(kTurretMotionMagicSlot, 0.004);
+        turretMotor.config_kD(kTurretMotionMagicSlot, 0.0);
         turretMotor.config_IntegralZone(kTurretMotionMagicSlot, (int)(5.0 * TURRET_DEGREES_TO_ENCODER_TICKS));
 
         turretMotor.config_kF(kTurretPositionSlot, 0.0);  //0.03
@@ -131,7 +131,7 @@ public class Turret extends SubsystemBase {
         turretMotor.selectProfileSlot(kTurretMotionMagicSlot, 0);
         targetPositionTicks = getTurretEncoderTicksAbsolute(limitTurretAngle(angle));
  //       System.out.println("Set point MM absolute encoder ticks = " + targetPositionTicks);
-        turretMotor.set(ControlMode.Position, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.0);
+        turretMotor.set(ControlMode.MotionMagic, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.04);
     }
 
     public synchronized void setTurretMotionMagicPositionRelative(double delta_angle) {
@@ -145,7 +145,7 @@ public class Turret extends SubsystemBase {
         turretMotor.selectProfileSlot(kTurretMotionMagicSlot, 0);
         targetPositionTicks = getTurretEncoderTicksRelative(delta_angle);
 //        System.out.println("Set point MM relative encoder ticks = " + targetPositionTicks);
-        turretMotor.set(ControlMode.Position, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.0);
+        turretMotor.set(ControlMode.MotionMagic, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.04);
     }
 
     public synchronized void setTurretPositionRelative(double delta_angle) {
@@ -156,7 +156,7 @@ public class Turret extends SubsystemBase {
         targetPositionTicks = getTurretEncoderTicksRelative(delta_angle);
         System.out.println("Set position ticks = " + targetPositionTicks);
         System.out.println("Set point position encoder ticks = " + targetPositionTicks);
-        turretMotor.set(ControlMode.Position, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.0);
+        turretMotor.set(ControlMode.Position, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.04);
     }
 
     public synchronized boolean hasFinishedTrajectory() {
