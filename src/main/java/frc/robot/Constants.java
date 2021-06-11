@@ -205,7 +205,7 @@ public final class Constants
 
     // Climb
     public static final double CLIMB_MIN_INCHES = -5.0;
-    public static final double CLIMB_MAX_INCHES = 30.0;
+    public static final double CLIMB_MAX_INCHES = 40.0;
     public static final double CLIMB_LEVEL_1_INCHES = 10.0;
 
     // Score While Driving

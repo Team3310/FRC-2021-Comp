@@ -11,6 +11,10 @@ import frc.robot.utilities.Util;
 
 public class Climb extends SubsystemBase {
 
+    public static enum ClimbControlMode {
+        MOTION_MAGIC, MANUAL
+    };
+
     // Conversions
     private static final double CLIMB_OUTPUT_TO_ENCODER_RATIO = (15.0 / 4.0) * (15.0 / 7.0) * (15.0 / 8.0);
     public static final double CLIMB_DRUM_DIAMETER_INCHES = 1.25;
@@ -27,6 +31,9 @@ public class Climb extends SubsystemBase {
 
     private final static Climb INSTANCE = new Climb();
 
+    private ClimbControlMode controlMode = ClimbControlMode.MANUAL;
+    private double manualSpeed;
+
     private Climb() {
         climbMotor = new TalonFX(Constants.CLIMBER_MOTOR_CAN_ID);
 
@@ -36,8 +43,8 @@ public class Climb extends SubsystemBase {
 
         climbMotor.setInverted(TalonFXInvertType.CounterClockwise);
         climbMotor.setNeutralMode(NeutralMode.Brake);
-        climbMotor.configMotionCruiseVelocity(6000);
-        climbMotor.configMotionAcceleration(14000);
+        climbMotor.configMotionCruiseVelocity(15000);
+        climbMotor.configMotionAcceleration(35000);
         climbMotor.configMotionSCurveStrength(4);
 
         final StatorCurrentLimitConfiguration statorCurrentConfigs = new StatorCurrentLimitConfiguration();
@@ -61,10 +68,21 @@ public class Climb extends SubsystemBase {
     }
 
     public synchronized void setClimbSpeed(double speed) {
-        climbMotor.set(ControlMode.PercentOutput, speed);
+        controlMode = ClimbControlMode.MANUAL;
+        manualSpeed = speed;
+        double curSpeed = speed;
+        if (getClimbInches() < Constants.CLIMB_MIN_INCHES && speed < 0.0) {
+            curSpeed = 0;
+        } else if (getClimbInches() > Constants.CLIMB_MAX_INCHES && speed > 0.0) {
+            curSpeed = 0;
+        }
+
+        climbMotor.set(ControlMode.PercentOutput, curSpeed);
+
     }
     // Motion Magic
     public synchronized void setClimbMotionMagicPositionAbsolute(double inches) {
+        controlMode = ClimbControlMode.MOTION_MAGIC;
         climbMotor.selectProfileSlot(kClimbMotionMagicSlot, 0);
         targetPositionTicks = getClimbEncoderTicksAbsolute(limitClimbInches(inches));
         climbMotor.set(ControlMode.MotionMagic, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.04);
@@ -101,6 +119,13 @@ public class Climb extends SubsystemBase {
     }
 
     public void periodic() {
+        if (controlMode == ClimbControlMode.MANUAL) {
+            if (getClimbInches() < Constants.CLIMB_MIN_INCHES && manualSpeed < 0.0) {
+                setClimbHold();
+            } else if (getClimbInches() > Constants.CLIMB_MAX_INCHES && manualSpeed > 0.0) {
+                setClimbHold();
+            }
+        }
         SmartDashboard.putNumber("Climb Inches", this.getClimbInches());
     }
 }

@@ -250,7 +250,7 @@ public class Shooter extends SubsystemBase {
         shooterHood.selectProfileSlot(kHoodMotionMagicSlot, 0);
         double limitedAngle = limitHoodAngle(angle);
         targetPositionTicks = getHoodEncoderTicksAbsolute(limitedAngle);
-        shooterHood.set(ControlMode.MotionMagic, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.07);
+        shooterHood.set(ControlMode.Position, targetPositionTicks, DemandType.ArbitraryFeedForward, 0.0);
     }
 
     public synchronized boolean hasFinishedHoodTrajectory() {
