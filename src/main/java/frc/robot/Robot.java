@@ -195,19 +195,20 @@ public class Robot extends TimedRobot
         
         autonTaskChooser = new SendableChooser<>();
         autonTaskChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
-        autonTaskChooser.addOption("Test 8 Feet Auto", new AutoTest8Feet());
-        autonTaskChooser.addOption("Trench 8 Ball Auto", new AutoTrench8Ball());
-        autonTaskChooser.addOption("Trench Steal 5 Ball Auto", new AutoTrenchSteal());
-        autonTaskChooser.addOption("Trench Steal 5 Ball Auto V2", new AutoTrenchStealV2());
-        autonTaskChooser.addOption("Rendezvous/Trench 10 Ball Auto", new AutoRendezvousTrench10Ball());
-        autonTaskChooser.addOption("Safe 3 Ball Auto", new AutoSafe());
-        autonTaskChooser.addOption("Safe 3 Ball Auto Forward", new AutoSafeForward());
-        autonTaskChooser.addOption("Trench 6 Ball Auto", new AutoTrench6Ball());
-        autonTaskChooser.addOption("Safe 6 Ball Auto", new AutoSafe6Ball());
+//        autonTaskChooser.addOption("Test 8 Feet Auto", new AutoTest8Feet());
+//        autonTaskChooser.addOption("Trench 8 Ball Auto", new AutoTrench8Ball());
+//        autonTaskChooser.addOption("Trench Steal 5 Ball Auto", new AutoTrenchSteal());
+//        autonTaskChooser.addOption("Trench Steal 5 Ball Auto V2", new AutoTrenchStealV2());
+//        autonTaskChooser.addOption("Rendezvous/Trench 10 Ball Auto", new AutoRendezvousTrench10Ball());
+//        autonTaskChooser.addOption("Safe 3 Ball Auto", new AutoSafe());
+//        autonTaskChooser.addOption("Safe 3 Ball Auto Forward", new AutoSafeForward());
+//        autonTaskChooser.addOption("Trench 6 Ball Auto", new AutoTrench6Ball());
+//        autonTaskChooser.addOption("Safe 6 Ball Auto", new AutoSafe6Ball());
         autonTaskChooser.addOption("Trench Steal 8 Ball Auto Alex", new AutoTrenchSteal8BallAlex());
         autonTaskChooser.addOption("Trench 8 Ball V2 Auto Michael", new AutoTrench8BallV2Michael());
         autonTaskChooser.addOption("Safe 8 Ball Auto Morgan", new AutoSafe8BallMorgan());
-        autonTaskChooser.addOption("Trench 8 ball V3", new AutoTrench8BallV3());
+        autonTaskChooser.addOption("Shoot3DriveRenShoot4", new Shoot3DriveRenShoot4());
+        autonTaskChooser.addOption("DriveTrenchShoot5DriveShoot3", new DriveTrenchShoot5DriveShoot3());
 
         SmartDashboard.putData("Autonomous", autonTaskChooser);
     }

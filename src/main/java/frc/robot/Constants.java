@@ -172,7 +172,7 @@ public final class Constants
 
 
     // Intake
-    public static final double INTAKE_COLLECT_RPM = 1500; // 1500
+    public static final double INTAKE_COLLECT_RPM = 1550; // 1500
     public static final double INTAKE_SLOW_RPM = 500;
     public static final double INTAKE_RETRACT_RPM = 1000;
     public static final double INTAKE_COLLECT_AUTO_RPM = 1200; // 1500

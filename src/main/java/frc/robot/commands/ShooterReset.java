@@ -1,11 +1,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.subsystems.*;
 
-public class ShooterReset extends SequentialCommandGroup {
+public class ShooterReset extends ParallelCommandGroup {
 
     public ShooterReset(Shooter shooter, Magazine magazine, Limelight limelight, Turret turret) {
         addCommands(

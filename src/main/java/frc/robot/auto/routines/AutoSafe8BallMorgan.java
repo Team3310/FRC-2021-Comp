@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.auto.TrajectoryGenerator;
 import frc.robot.auto.commands.*;
@@ -41,7 +42,7 @@ public class AutoSafe8BallMorgan extends SequentialCommandGroup {
         paramsAuto.hoodAngle = Constants.HOOD_AUTON_SHORT_ANGLE_DEGREES;
         paramsAuto.kickerRPM = Constants.SHOOTER_KICKER_AUTON_SHORT_RPM;
         paramsAuto.limelightPipeline = Constants.LIMELIGHT_AUTO_PIPELINE;
-        paramsAuto.shooterRPM = Constants.SHOOTER_MAIN_AUTON_SHORT_RPM;
+        paramsAuto.shooterRPM = Constants.SHOOTER_MAIN_AUTO_RPM;
         paramsAuto.turretGyroOffset = Constants.TURRET_GYRO_OFFSET_AUTON_SHORT_SHOT_ANGLE_DEGREES;
 
         ShooterSetShot.ShooterParams paramsMedium = new ShooterSetShot.ShooterParams();
@@ -53,16 +54,17 @@ public class AutoSafe8BallMorgan extends SequentialCommandGroup {
         paramsMedium.turretGyroOffset = Constants.TURRET_GYRO_OFFSET_MEDIUM_SHOT_ANGLE_DEGREES;
 
         addCommands(
-                new ResetAllHomeAuto(mDrive, mTurret, mMagazine, mShooter, mClimb, new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-60), new Rotation2d(0))),
+                new ResetAllHomeAuto(mDrive, mTurret, mMagazine, mShooter, mClimb, new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-29.5), new Rotation2d(0))),
                 new ExtendIntake(mIntake),
-                new ParallelCommandGroup(
-                        new IntakeExtendAllAuto(mIntake, mTurret, mMagazine),
+                new ShooterSetShot(mShooter, mMagazine, mTurret, paramsAuto),
+                new SequentialCommandGroup(
+                        new WaitCommand(0.5),
                         new ClimbSetInches(mClimb, -3.0)
                 ),
-                new ShooterSetShot(mShooter, mMagazine, mTurret, paramsAuto),
-                new ShooterShootAuto(mShooter, mMagazine, Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_6_ROTATIONS),
+                new ShooterShootAuto(mShooter, mMagazine, Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_3_BALL),
 //                new ShooterAutoShortShotTrack(mShooter, mMagazine, mTurret, Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_6_ROTATIONS),
-                new HoodSetAngle(mShooter, Constants. HOOD_RETRACT_HOME_POSITION_DEGREES),
+                new HoodSetAngle(mShooter, Constants.HOOD_RETRACT_HOME_POSITION_DEGREES),
+                new IntakeExtendAllAuto(mIntake, mTurret, mMagazine),
                 new RamseteCommand(
                         mTrajectories.getTrench5Ball(),
                         mDrive::getPose,
@@ -93,7 +95,10 @@ public class AutoSafe8BallMorgan extends SequentialCommandGroup {
                                 // RamseteCommand passes volts to the callback
                                 mDrive::tankDriveVolts,
                                 mDrive),
-                                new ShooterSetShot(mShooter, mMagazine, mTurret, paramsMedium)
+                                new SequentialCommandGroup(
+                                    new WaitCommand(1),
+                                    new ShooterSetShot(mShooter, mMagazine, mTurret, paramsMedium)
+                                )
         //                       new ShooterAutoMediumShotTrack(mShooter, mMagazine, mTurret, Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_5_BALL)
                 ),
                 new StopTrajectory(),
