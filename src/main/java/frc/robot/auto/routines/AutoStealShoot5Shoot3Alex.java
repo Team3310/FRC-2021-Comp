@@ -25,7 +25,7 @@ import frc.robot.subsystems.Magazine;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 
-public class AutoTrenchSteal8BallAlex extends SequentialCommandGroup {
+public class AutoStealShoot5Shoot3Alex extends SequentialCommandGroup {
     TrajectoryGenerator mTrajectories = TrajectoryGenerator.getInstance();
     Drive mDrive = Drive.getInstance();
     Shooter mShooter = Shooter.getInstance();
@@ -34,7 +34,7 @@ public class AutoTrenchSteal8BallAlex extends SequentialCommandGroup {
     Intake mIntake = Intake.getInstance();
     Climb mClimb = Climb.getInstance();
 
-    public AutoTrenchSteal8BallAlex() {
+    public AutoStealShoot5Shoot3Alex() {
 
         ShooterSetShot.ShooterParams paramsLeg = new ShooterSetShot.ShooterParams();
         paramsLeg.limelightOffset = Constants.LIMELIGHT_OFFSET_LEG_SHOT_DEGREES;
@@ -93,60 +93,43 @@ public class AutoTrenchSteal8BallAlex extends SequentialCommandGroup {
                        //new ShooterAutoLegShotTrack(mShooter, mTurret)
                 ),
                 new StopTrajectory(),
-                new ShooterShootAuto(mShooter, mMagazine, Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_5_BALL),
-                new IntakeExtendAllAuto(mIntake, mTurret, mMagazine),
-                new RamseteCommand(
-                        mTrajectories.getFirstTwoBallsSteal(),
-                        mDrive::getPose,
-                        new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-                        new SimpleMotorFeedforward(Constants.ksVolts,
-                                Constants.kvVoltSecondsPerMeter,
-                                Constants.kaVoltSecondsSquaredPerMeter),
-                        Constants.kDriveKinematics,
-                        mDrive::getWheelSpeeds,
-                        new PIDController(Constants.kPDriveVel, 0, Constants.kDDriveVel),
-                        new PIDController(Constants.kPDriveVel, 0, Constants.kDDriveVel),
-                        // RamseteCommand passes volts to the callback
-                        mDrive::tankDriveVolts,
-                        mDrive),
-                new StopTrajectory(),
-                new ParallelCommandGroup(
-                        new RamseteCommand(
-                                mTrajectories.getFirstTwoBallsReversedSteal(),
-                                mDrive::getPose,
-                                new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-                                new SimpleMotorFeedforward(Constants.ksVolts,
-                                        Constants.kvVoltSecondsPerMeter,
-                                        Constants.kaVoltSecondsSquaredPerMeter),
-                                Constants.kDriveKinematics,
-                                mDrive::getWheelSpeeds,
-                                new PIDController(Constants.kPDriveVel, 0, Constants.kDDriveVel),
-                                new PIDController(Constants.kPDriveVel, 0, Constants.kDDriveVel),
-                                // RamseteCommand passes volts to the callback
-                                mDrive::tankDriveVolts,
-                                mDrive)
-                ),
-                new StopTrajectory(),
-                new ParallelCommandGroup(
-                        new RamseteCommand(
-                                mTrajectories.getFirstTwoBallsReversedSteal(),
-                                mDrive::getPose,
-                                new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-                                new SimpleMotorFeedforward(Constants.ksVolts,
-                                        Constants.kvVoltSecondsPerMeter,
-                                        Constants.kaVoltSecondsSquaredPerMeter),
-                                Constants.kDriveKinematics,
-                                mDrive::getWheelSpeeds,
-                                new PIDController(Constants.kPDriveVel, 0, Constants.kDDriveVel),
-                                new PIDController(Constants.kPDriveVel, 0, Constants.kDDriveVel),
-                                // RamseteCommand passes volts to the callback
-                                mDrive::tankDriveVolts,
-                                mDrive),
-                        new ShooterSetShot(mShooter, mMagazine,mTurret,paramsBar)
-                ),
-                new StopTrajectory(),
-                new ShooterShootAuto(mShooter, mMagazine, Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_5_BALL),
-                new ShooterReset(mShooter, mMagazine,  Limelight.getInstance(), mTurret)
+                new ShooterShootAuto(mShooter, mMagazine, Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_5_BALL)
+//                new IntakeExtendAllAuto(mIntake, mTurret, mMagazine),
+//                new RamseteCommand(
+//                        mTrajectories.getFirstTwoBallsSteal(),
+//                        mDrive::getPose,
+//                        new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
+//                        new SimpleMotorFeedforward(Constants.ksVolts,
+//                                Constants.kvVoltSecondsPerMeter,
+//                                Constants.kaVoltSecondsSquaredPerMeter),
+//                        Constants.kDriveKinematics,
+//                        mDrive::getWheelSpeeds,
+//                        new PIDController(Constants.kPDriveVel, 0, Constants.kDDriveVel),
+//                        new PIDController(Constants.kPDriveVel, 0, Constants.kDDriveVel),
+//                        // RamseteCommand passes volts to the callback
+//                        mDrive::tankDriveVolts,
+//                        mDrive),
+//                new StopTrajectory(),
+//                new ParallelCommandGroup(
+//                        new RamseteCommand(
+//                                mTrajectories.getFirstTwoBallsReversedSteal(),
+//                                mDrive::getPose,
+//                                new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
+//                                new SimpleMotorFeedforward(Constants.ksVolts,
+//                                        Constants.kvVoltSecondsPerMeter,
+//                                        Constants.kaVoltSecondsSquaredPerMeter),
+//                                Constants.kDriveKinematics,
+//                                mDrive::getWheelSpeeds,
+//                                new PIDController(Constants.kPDriveVel, 0, Constants.kDDriveVel),
+//                                new PIDController(Constants.kPDriveVel, 0, Constants.kDDriveVel),
+//                                // RamseteCommand passes volts to the callback
+//                                mDrive::tankDriveVolts,
+//                                mDrive)
+//                ),
+//                new StopTrajectory(),
+//                new ShooterSetShot(mShooter, mMagazine,mTurret,paramsBar),
+//                new ShooterShootAuto(mShooter, mMagazine, Constants.MAGAZINE_SHOOT_AUTO_ROTATIONS_DEGREES_5_BALL),
+//                new ShooterReset(mShooter, mMagazine,  Limelight.getInstance(), mTurret)
         );
     }
 }

@@ -18,7 +18,7 @@ import frc.robot.auto.commands.StopTrajectory;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
-public class DriveTrenchShoot5DriveShoot3 extends SequentialCommandGroup{
+public class AutoTrenchShoot5Shoot3 extends SequentialCommandGroup{
     TrajectoryGenerator mTrajectories = TrajectoryGenerator.getInstance();
     Drive mDrive = Drive.getInstance();
     Shooter mShooter = Shooter.getInstance();
@@ -30,7 +30,7 @@ public class DriveTrenchShoot5DriveShoot3 extends SequentialCommandGroup{
     /**
      * Add your docs here.
      */
-    public DriveTrenchShoot5DriveShoot3() {
+    public AutoTrenchShoot5Shoot3() {
 
         ShooterSetShot.ShooterParams paramsAuto = new ShooterSetShot.ShooterParams();
         paramsAuto.limelightOffset = Constants.LIMELIGHT_OFFSET_AUTON_SHORT_SHOT_DEGREES;

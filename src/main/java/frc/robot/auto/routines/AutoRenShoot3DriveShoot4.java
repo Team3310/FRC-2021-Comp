@@ -15,7 +15,7 @@ import frc.robot.auto.commands.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
-public class Shoot3DriveRenShoot4 extends SequentialCommandGroup {
+public class AutoRenShoot3DriveShoot4 extends SequentialCommandGroup {
 
     TrajectoryGenerator mTrajectories = TrajectoryGenerator.getInstance();
     Drive mDrive = Drive.getInstance();
@@ -26,7 +26,7 @@ public class Shoot3DriveRenShoot4 extends SequentialCommandGroup {
     Climb mClimb = Climb.getInstance();
     Limelight mLimelight = Limelight.getInstance();
 
-    public Shoot3DriveRenShoot4() {
+    public AutoRenShoot3DriveShoot4() {
 
         ShooterSetShot.ShooterParams paramsLeg = new ShooterSetShot.ShooterParams();
         paramsLeg.limelightOffset = Constants.LIMELIGHT_OFFSET_LEG_SHOT_DEGREES;
