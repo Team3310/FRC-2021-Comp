@@ -160,7 +160,7 @@ RobotContainer {
         magazineReverseButton.whenReleased(new SequentialCommandGroup(new MagazineSetSpeed(magazine, 0), new IntakeSetSpeed(intake,0)));
 
         Button shooterOff = m_operator.getRightJoystickButton();
-        shooterOff.whenPressed(new ShooterReset(shooter, magazine, limelight, turret));
+        shooterOff.whenPressed(new ShooterSetSpeed(shooter, 0,0));
 
         // Driver
         Button resetHomeButton = m_driver.getStartButton();

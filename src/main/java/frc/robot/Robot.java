@@ -196,19 +196,13 @@ public class Robot extends TimedRobot
         autonTaskChooser = new SendableChooser<>();
         autonTaskChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
 //        autonTaskChooser.addOption("Test 8 Feet Auto", new AutoTest8Feet());
-//        autonTaskChooser.addOption("Trench 8 Ball Auto", new AutoTrench8Ball());
-//        autonTaskChooser.addOption("Trench Steal 5 Ball Auto", new AutoTrenchSteal());
-//        autonTaskChooser.addOption("Trench Steal 5 Ball Auto V2", new AutoTrenchStealV2());
-//        autonTaskChooser.addOption("Rendezvous/Trench 10 Ball Auto", new AutoRendezvousTrench10Ball());
-//        autonTaskChooser.addOption("Safe 3 Ball Auto", new AutoSafe());
-//        autonTaskChooser.addOption("Safe 3 Ball Auto Forward", new AutoSafeForward());
-//        autonTaskChooser.addOption("Trench 6 Ball Auto", new AutoTrench6Ball());
-//        autonTaskChooser.addOption("Safe 6 Ball Auto", new AutoSafe6Ball());
-        autonTaskChooser.addOption("Trench Steal 8 Ball Auto Alex", new AutoTrenchSteal8BallAlex());
         autonTaskChooser.addOption("Trench 8 Ball V2 Auto Michael", new AutoTrench8BallV2Michael());
-        autonTaskChooser.addOption("Safe 8 Ball Auto Morgan", new AutoSafe8BallMorgan());
-        autonTaskChooser.addOption("Shoot3DriveRenShoot4", new Shoot3DriveRenShoot4());
-        autonTaskChooser.addOption("DriveTrenchShoot5DriveShoot3", new DriveTrenchShoot5DriveShoot3());
+        autonTaskChooser.addOption("Auto Steal 2 Shoot 5 Steal ? Shoot ?", new AutoStealShoot5Shoot3Alex());
+        autonTaskChooser.addOption("Auto Trench Shoot 3 Grab 5 Shoot 5", new AutoTrenchShoot3Shoot5());
+        autonTaskChooser.addOption("Auto Ren Shoot 3 Grab 4 Shoot 4", new AutoRenShoot3DriveShoot4());
+        autonTaskChooser.addOption("Auto Trench Grab 2 Shoot 5 Grab 3 Shoot 3", new AutoTrenchShoot5Shoot3());
+        autonTaskChooser.addOption("Auto Ren Grab 2 Shoot 5 Grab ? Shoot ?", new AutoRenShoot5Shoot4());
+
 
         SmartDashboard.putData("Autonomous", autonTaskChooser);
     }
