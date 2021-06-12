@@ -166,7 +166,7 @@ public class RobotContainer {
         climbUpButton.whenReleased(new ClimbSetHold(climb));
 
         Button climbDownButton = m_operator.getDPadDown();
-        climbDownButton.whenPressed(new ClimbSetSpeed(climb, -1.0));
+        climbDownButton.whenPressed(new ClimbSetSpeed(climb, -0.75));
         climbDownButton.whenReleased(new ClimbSetHold(climb));
 
         Button magazineForwardButton = m_operator.getDPadLeft();
