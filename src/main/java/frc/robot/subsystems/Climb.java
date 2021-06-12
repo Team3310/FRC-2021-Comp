@@ -127,5 +127,7 @@ public class Climb extends SubsystemBase {
             }
         }
         SmartDashboard.putNumber("Climb Inches", this.getClimbInches());
+        SmartDashboard.putNumber("Climb Stator Amps", this.climbMotor.getStatorCurrent());
+        SmartDashboard.putNumber("Climb Supply Amps", this.climbMotor.getSupplyCurrent());
     }
 }
