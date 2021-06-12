@@ -1,11 +1,11 @@
 package frc.robot.subsystems;
 
-
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.LinearFilter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.utilities.MovingAverage;
 
 public class Limelight extends SubsystemBase {
 
@@ -13,9 +13,9 @@ public class Limelight extends SubsystemBase {
     private static final double TARGET_HEIGHT_INCHES = 81.25;
     private static final double CAMERA_HEIGHT_INCHES = 24.0;
 
-    private LinearFilter txFilter;
-    private LinearFilter tyFilter;
-    private LinearFilter distanceFilter;
+    private MovingAverage txFilter;
+    private MovingAverage tyFilter;
+    private MovingAverage distanceFilter;
 
     private double txFilteredValue;
     private double tyFilteredValue;
@@ -34,10 +34,10 @@ public class Limelight extends SubsystemBase {
     private final static Limelight INSTANCE = new Limelight();
 
     private Limelight() {
-        txFilter = LinearFilter.movingAverage(5);
-        tyFilter = LinearFilter.movingAverage(5);
-        distanceFilter = LinearFilter.movingAverage(5);
-   }
+        txFilter = new MovingAverage(5);
+        tyFilter = new MovingAverage(5);
+        distanceFilter = new MovingAverage(5);
+    } 
 
     public static Limelight getInstance() {
         return INSTANCE;
