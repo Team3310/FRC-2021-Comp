@@ -455,6 +455,21 @@ public class TrajectoryGenerator {
         return FirstTwoBalls;
 
     }
+
+    public Trajectory getFirstFourBalls() {
+        Trajectory FirstFourBalls;
+        FirstFourBalls = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-95), new Rotation2d(Units.degreesToRadians(0))),
+                List.of(
+                        new Translation2d(Units.inchesToMeters(250), Units.inchesToMeters(-95))
+                ),
+                new Pose2d(Units.inchesToMeters(270), Units.inchesToMeters(-171), new Rotation2d(Units.degreesToRadians(-75))),
+                forwardMediumConfig
+        );
+        return FirstFourBalls;
+
+    }
+
     public Trajectory getFirstTwoBallsReversed() {
         Trajectory FirstTwoBallsReversed;
         FirstTwoBallsReversed = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(

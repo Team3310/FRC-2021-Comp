@@ -20,26 +20,7 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.Button;
-import frc.robot.commands.ClimbSetHold;
-import frc.robot.commands.ClimbSetSpeed;
-import frc.robot.commands.IntakeExtendAll;
-import frc.robot.commands.IntakeRetractAll;
-import frc.robot.commands.IntakeReverseExtendAll;
-import frc.robot.commands.IntakeSetSpeed;
-import frc.robot.commands.MagazineForward;
-import frc.robot.commands.MagazineReverse;
-import frc.robot.commands.MagazineSetRPMLimit;
-import frc.robot.commands.MagazineSetSpeed;
-import frc.robot.commands.ResetAllHomePositions;
-import frc.robot.commands.ShooterEject;
-import frc.robot.commands.ShooterReset;
-import frc.robot.commands.ShooterSetShot;
-import frc.robot.commands.ShooterSetTrackShot;
-import frc.robot.commands.ShooterShoot;
-import frc.robot.commands.TurretAutoZero;
-import frc.robot.commands.TurretSetToGyroAngle;
-import frc.robot.commands.TurretSetToLimelightAngle;
-import frc.robot.commands.TurretSetToTrackLimelightAngle;
+import frc.robot.commands.*;
 import frc.robot.controller.GameController;
 import frc.robot.controller.Playstation;
 import frc.robot.controller.Xbox;
@@ -57,7 +38,8 @@ import frc.robot.subsystems.Turret;
  * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
  * (including subsystems, commands, and button mappings) should be declared here.
  */
-public class RobotContainer {
+public class
+RobotContainer {
     private final GameController m_driver = new GameController(Constants.DRIVER_JOYSTICK_1_USB_ID, new Xbox());
     private final GameController m_operator = new GameController(Constants.OPERATOR_JOYSTICK_1_USB_ID, new Playstation());
 
@@ -176,6 +158,9 @@ public class RobotContainer {
         Button magazineReverseButton = m_operator.getDPadRight();
         magazineReverseButton.whenPressed(new MagazineReverse(intake, magazine));
         magazineReverseButton.whenReleased(new SequentialCommandGroup(new MagazineSetSpeed(magazine, 0), new IntakeSetSpeed(intake,0)));
+
+        Button shooterOff = m_operator.getRightJoystickButton();
+        shooterOff.whenPressed(new ShooterReset(shooter, magazine, limelight, turret));
 
         // Driver
         Button resetHomeButton = m_driver.getStartButton();

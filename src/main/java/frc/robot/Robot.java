@@ -207,6 +207,7 @@ public class Robot extends TimedRobot
         autonTaskChooser.addOption("Trench Steal 8 Ball Auto Alex", new AutoTrenchSteal8BallAlex());
         autonTaskChooser.addOption("Trench 8 Ball V2 Auto Michael", new AutoTrench8BallV2Michael());
         autonTaskChooser.addOption("Safe 8 Ball Auto Morgan", new AutoSafe8BallMorgan());
+        autonTaskChooser.addOption("Trench 8 ball V3", new AutoTrench8BallV3());
 
         SmartDashboard.putData("Autonomous", autonTaskChooser);
     }
