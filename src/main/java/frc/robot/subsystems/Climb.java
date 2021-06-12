@@ -17,7 +17,7 @@ public class Climb extends SubsystemBase {
 
     // Conversions
     private static final double CLIMB_OUTPUT_TO_ENCODER_RATIO = (15.0 / 4.0) * (15.0 / 7.0) * (15.0 / 8.0);
-    public static final double CLIMB_DRUM_DIAMETER_INCHES = 1.25;
+    public static final double CLIMB_DRUM_DIAMETER_INCHES = 0.59;
     public static final double CLIMB_REVOLUTIONS_TO_INCHES = Math.PI * CLIMB_DRUM_DIAMETER_INCHES;
     public static final double CLIMB_INCHES_TO_ENCODER_TICKS = CLIMB_OUTPUT_TO_ENCODER_RATIO * Constants.ENCODER_TICKS_PER_MOTOR_REVOLUTION / CLIMB_REVOLUTIONS_TO_INCHES;
 

@@ -204,8 +204,8 @@ public final class Constants
     public static final double LIMELIGHT_OFFSET_MAX_DEGREES = 2.5;
 
     // Climb
-    public static final double CLIMB_MIN_INCHES = -5.0;
-    public static final double CLIMB_MAX_INCHES = 40.0;
+    public static final double CLIMB_MIN_INCHES = -3.5;
+    public static final double CLIMB_MAX_INCHES = 33.0;
     public static final double CLIMB_LEVEL_1_INCHES = 10.0;
 
     // Score While Driving
