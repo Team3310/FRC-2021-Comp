@@ -202,6 +202,8 @@ public class Robot extends TimedRobot
         autonTaskChooser.addOption("Auto Ren Shoot 3 Grab 4 Shoot 4", new AutoRenShoot3DriveShoot4());
         autonTaskChooser.addOption("Auto Trench Grab 2 Shoot 5 Grab 3 Shoot 3", new AutoTrenchShoot5Shoot3());
         autonTaskChooser.addOption("Auto Ren Grab 2 Shoot 5 Grab ? Shoot ?", new AutoRenShoot5Shoot4());
+        autonTaskChooser.addOption("Auto Ren Test?", new AutoTestv2());
+
 
 
         SmartDashboard.putData("Autonomous", autonTaskChooser);

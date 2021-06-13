@@ -198,6 +198,32 @@ public class TrajectoryGenerator {
         return ShootFromFour;
     }
 
+    public Trajectory grab1Ball() {
+        Trajectory grab1Ball;
+        grab1Ball = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                new Pose2d(Units.inchesToMeters(230), Units.inchesToMeters(-35), new Rotation2d(Units.degreesToRadians(-70))),
+                List.of(
+                        new Translation2d(Units.inchesToMeters(220), Units.inchesToMeters(-95))
+                ),
+                new Pose2d(Units.inchesToMeters(220), Units.inchesToMeters(-100), new Rotation2d(Units.degreesToRadians(-70))),
+                forwardConfig
+        );
+        return grab1Ball;
+    }
+
+    public Trajectory grab1BallToShoot() {
+        Trajectory grab1BallToShoot;
+        grab1BallToShoot = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                new Pose2d(Units.inchesToMeters(220), Units.inchesToMeters(-100), new Rotation2d(Units.degreesToRadians(-70))),
+                List.of(
+                        new Translation2d(Units.inchesToMeters(230), Units.inchesToMeters(-90))
+                ),
+                new Pose2d(Units.inchesToMeters(235), Units.inchesToMeters(-70), new Rotation2d(Units.degreesToRadians(-70))),
+                reverseConfig
+        );
+        return grab1BallToShoot;
+    }
+
     public Trajectory getFirst2BallsRend() {
         Trajectory First2BallsRend;
         First2BallsRend = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
