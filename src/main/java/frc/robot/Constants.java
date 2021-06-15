@@ -108,7 +108,7 @@ public final class Constants
     public static final double HOOD_KEY_ANGLE_DEGREES = 8.0;
     public static final double HOOD_AUTON_SHORT_ANGLE_DEGREES = 35.0;
     public static final double HOOD_AUTO_ANGLE_DEGREES = 37.0;
-    public static final double HOOD_MEDIUM_ANGLE_DEGREES = 47.0;
+    public static final double HOOD_MEDIUM_ANGLE_DEGREES = 48.0; // 47.0; old balls
     public static final double HOOD_SUPER_LONG_ANGLE_DEGREES = 56.0;
     public static final double HOOD_MEDIUM_2_ANGLE_DEGREES = 48.0;
     public static final double HOOD_LONG_ANGLE_DEGREES = 53.0;
@@ -182,12 +182,12 @@ public final class Constants
     public static final double DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES = -180.0;
 
     // Vision
-    public static final int LIMELIGHT_AUTO_PIPELINE = 5;
-    public static final int LIMELIGHT_MEDIUM_PIPELINE = 5;
-    public static final int LIMELIGHT_LEG_PIPELINE = 5;
-    public static final int LIMELIGHT_ALL_FIELD_PIPELINE = 5;
-    public static final int LIMELIGHT_BAR_PIPELINE = 5;
-    public static final int LIMELIGHT_SUPER_LONG_PIPELINE = 5;
+    public static final int LIMELIGHT_AUTO_PIPELINE = 7;
+    public static final int LIMELIGHT_MEDIUM_PIPELINE = 7;
+    public static final int LIMELIGHT_LEG_PIPELINE = 7;
+    public static final int LIMELIGHT_ALL_FIELD_PIPELINE = 7;
+    public static final int LIMELIGHT_BAR_PIPELINE = 7;
+    public static final int LIMELIGHT_SUPER_LONG_PIPELINE = 7;
 
     public static final int LIMELIGHT_LONG_PIPELINE = 1;
     public static final double LIMELIGHT_OFFSET_FENDER_SHOT_DEGREES = 0.0;

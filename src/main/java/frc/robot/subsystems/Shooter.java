@@ -285,7 +285,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public double getHoodAngleFromDistance() {
-        return 0.0809014 * Limelight.getInstance().getFilteredDistanceFromTargetInches() + 27.8;
+        return 0.0809014 * Limelight.getInstance().getFilteredDistanceFromTargetInches() + 27.8; // 27.8
     }
 
     public void setShooterLimelightTrackMode() {

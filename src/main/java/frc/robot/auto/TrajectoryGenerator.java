@@ -47,7 +47,7 @@ public class TrajectoryGenerator {
                     .addConstraint(autoVoltageConstraint);
 
     TrajectoryConfig forwardMediumSlowConfig =
-            new TrajectoryConfig(Constants.kMaxSpeedMetersPerSecond * .9,
+            new TrajectoryConfig(Constants.kMaxSpeedMetersPerSecond * .82,
                     Constants.kMaxAccelerationMetersPerSecondSquared)
                     // Add kinematics to ensure max speed is actually obeyed
                     .setKinematics(Constants.kDriveKinematics)
@@ -149,7 +149,7 @@ public class TrajectoryGenerator {
                     List.of(
                             new Translation2d(Units.inchesToMeters(235), Units.inchesToMeters(-200))
                     ),
-                    new Pose2d(Units.inchesToMeters(180), Units.inchesToMeters(-120), Rotation2d.fromDegrees(-90)),
+                    new Pose2d(Units.inchesToMeters(185), Units.inchesToMeters(-120), Rotation2d.fromDegrees(-90)),
                     // Pass config
                     reverseFastConfig
             );
@@ -246,6 +246,32 @@ public class TrajectoryGenerator {
                 reverseConfig
         );
         return  ShootRend;
+    }
+
+    public Trajectory getRend3BallTrajectory() {
+        Trajectory grabRend3;
+        grabRend3 = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                new Pose2d(Units.inchesToMeters(230), Units.inchesToMeters(-72), new Rotation2d(Units.degreesToRadians(-75))),
+                List.of(
+                        new Translation2d(Units.inchesToMeters(241), Units.inchesToMeters(-115))
+                ),
+                new Pose2d(Units.inchesToMeters(260), Units.inchesToMeters(-159), new Rotation2d(Units.degreesToRadians(-95))),
+                forwardConfig
+        );
+        return  grabRend3;
+    }
+
+    public Trajectory getRend3BallTrajectoryReverse() {
+        Trajectory grabRend3Rev;
+        grabRend3Rev = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                new Pose2d(Units.inchesToMeters(260), Units.inchesToMeters(-159), new Rotation2d(Units.degreesToRadians(-95))),
+                List.of(
+                        new Translation2d(Units.inchesToMeters(241), Units.inchesToMeters(-115))
+                ),
+                new Pose2d(Units.inchesToMeters(230), Units.inchesToMeters(-72), new Rotation2d(Units.degreesToRadians(-75))),
+                reverseConfig
+        );
+        return  grabRend3Rev;
     }
 
     public Trajectory RendGetFour() {
