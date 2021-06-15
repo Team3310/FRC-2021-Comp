@@ -147,8 +147,6 @@ public class TrajectoryGenerator {
             stealSpotToCenterShot = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
                     new Pose2d(Units.inchesToMeters(271), Units.inchesToMeters(-303), Rotation2d.fromDegrees(-45)),
                     List.of(
-//                            new Translation2d(Units.inchesToMeters(228), Units.inchesToMeters(-254)),
-//                            new Translation2d(Units.inchesToMeters(196), Units.inchesToMeters(-192))
                             new Translation2d(Units.inchesToMeters(235), Units.inchesToMeters(-200))
                     ),
                     new Pose2d(Units.inchesToMeters(180), Units.inchesToMeters(-120), Rotation2d.fromDegrees(-90)),

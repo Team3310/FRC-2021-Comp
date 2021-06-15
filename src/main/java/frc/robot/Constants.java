@@ -182,12 +182,12 @@ public final class Constants
     public static final double DRIVE_COMPETITION_GYRO_HOME_ANGLE_DEGREES = -180.0;
 
     // Vision
-    public static final int LIMELIGHT_AUTO_PIPELINE = 2;
-    public static final int LIMELIGHT_MEDIUM_PIPELINE = 0;
-    public static final int LIMELIGHT_LEG_PIPELINE = 3;
-    public static final int LIMELIGHT_ALL_FIELD_PIPELINE = 3;
-    public static final int LIMELIGHT_BAR_PIPELINE = 3;
-    public static final int LIMELIGHT_SUPER_LONG_PIPELINE = 3;
+    public static final int LIMELIGHT_AUTO_PIPELINE = 5;
+    public static final int LIMELIGHT_MEDIUM_PIPELINE = 5;
+    public static final int LIMELIGHT_LEG_PIPELINE = 5;
+    public static final int LIMELIGHT_ALL_FIELD_PIPELINE = 5;
+    public static final int LIMELIGHT_BAR_PIPELINE = 5;
+    public static final int LIMELIGHT_SUPER_LONG_PIPELINE = 5;
 
     public static final int LIMELIGHT_LONG_PIPELINE = 1;
     public static final double LIMELIGHT_OFFSET_FENDER_SHOT_DEGREES = 0.0;

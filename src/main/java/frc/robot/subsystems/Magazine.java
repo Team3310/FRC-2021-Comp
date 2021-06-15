@@ -115,6 +115,23 @@ public class Magazine extends SubsystemBase {
         return (double)magMotor.getSelectedSensorPosition() / MAGAZINE_DEGREES_TO_ENCODER_TICKS + homePositionAngleDegrees;
     }
 
+    public double getMagazineShootRPMFromDistance() {
+        Limelight lime =  Limelight.getInstance();
+        if (lime.isOnTarget()) {
+            double rpm = 0.535 * lime.getFilteredDistanceFromTargetInches() + 27.0;
+            if (rpm > Constants.MAGAZINE_SHOOT_RPM) {
+                rpm = Constants.MAGAZINE_SHOOT_RPM;
+            }
+            else if (rpm < Constants.MAGAZINE_SHOOT_SLOW_RPM) {
+                rpm = Constants.MAGAZINE_SHOOT_SLOW_RPM;
+            }
+            return rpm;
+        }
+        else {
+            return Constants.MAGAZINE_SHOOT_RPM;
+        }
+    }
+
     // Motion Magic
     public synchronized void setMagazineMotionMagicPositionAbsolute(double angle) {
         setMagazineControlMode(MagazineControlMode.MOTION_MAGIC);

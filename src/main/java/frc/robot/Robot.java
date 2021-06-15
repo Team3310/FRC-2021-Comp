@@ -197,14 +197,12 @@ public class Robot extends TimedRobot
         autonTaskChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
 //        autonTaskChooser.addOption("Test 8 Feet Auto", new AutoTest8Feet());
         autonTaskChooser.addOption("Trench 8 Ball V2 Auto Michael", new AutoTrench8BallV2Michael());
-        autonTaskChooser.addOption("Auto Steal 2 Shoot 5 Steal ? Shoot ?", new AutoStealShoot5Shoot3Alex());
-        autonTaskChooser.addOption("Auto Trench Shoot 3 Grab 5 Shoot 5", new AutoTrenchShoot3Shoot5());
-        autonTaskChooser.addOption("Auto Ren Shoot 3 Grab 4 Shoot 4", new AutoRenShoot3DriveShoot4());
-        autonTaskChooser.addOption("Auto Trench Grab 2 Shoot 5 Grab 3 Shoot 3", new AutoTrenchShoot5Shoot3());
-        autonTaskChooser.addOption("Auto Ren Grab 2 Shoot 5 Grab ? Shoot ?", new AutoRenShoot5Shoot4());
-        autonTaskChooser.addOption("Auto Ren Test?", new AutoTestv2());
-
-
+        autonTaskChooser.addOption("Steal 2 Delay Shoot 5", new AutoStealShoot5Shoot3Alex());
+        autonTaskChooser.addOption("Trench 8 Shoot 3 Grab 5 Shoot 5", new AutoTrenchShoot3Shoot5());
+        autonTaskChooser.addOption("Trench 8 Delay Grab 2 Shoot 5 Grab 3 Shoot 3", new AutoTrenchShoot5Shoot3());
+        autonTaskChooser.addOption("Ren 7 Shoot 3 Grab 4 Shoot 4", new AutoRenShoot3DriveShoot4());
+        autonTaskChooser.addOption("Ren 9 Delay Grab 2 Shoot 5 Grab 4 Shoot 4", new AutoRenShoot5Shoot4());
+ //       autonTaskChooser.addOption("Ren Test?", new AutoTestv2());
 
         SmartDashboard.putData("Autonomous", autonTaskChooser);
     }

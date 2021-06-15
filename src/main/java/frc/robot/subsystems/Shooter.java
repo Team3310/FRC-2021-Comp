@@ -318,6 +318,8 @@ public class Shooter extends SubsystemBase {
     public void periodic() {
         if (getShooterControlMode() == ShooterControlMode.TRACK_LIMELIGHT) {
             updateLimelightTrackV2();
+ //           Magazine mag = Magazine.getInstance();
+ //           mag.setMagazineRPM(mag.getMagazineShootRPMFromDistance());
         }
  //       SmartDashboard.putNumber("Shooters Rotations", getMainRotations());
         SmartDashboard.putNumber("Shooters RPM", getMainRPM());

@@ -97,7 +97,7 @@ RobotContainer {
         intakeReverseTrigger.whenReleased(new IntakeSetSpeed(intake, 0));
 
         Button superLongShotButton = m_operator.getButtonY();
-        ShooterSetShot.ShooterParams paramsSuperLong = new ShooterSetShot.ShooterParams();
+        ShooterSetFixedShot.ShooterParams paramsSuperLong = new ShooterSetFixedShot.ShooterParams();
         paramsSuperLong.limelightOffset = Constants.LIMELIGHT_OFFSET_SUPER_LONG_SHOT_DEGREES;
         paramsSuperLong.hoodAngle = Constants.HOOD_SUPER_LONG_ANGLE_DEGREES;
         paramsSuperLong.kickerRPM = Constants.SHOOTER_KICKER_SUPER_LONG_RPM;
@@ -105,7 +105,7 @@ RobotContainer {
         paramsSuperLong.shooterRPM = Constants.SHOOTER_MAIN_SUPER_LONG_RPM;
         paramsSuperLong.turretGyroOffset = Constants.TURRET_GYRO_OFFSET_SUPER_LONG_SHOT_ANGLE_DEGREES;
         paramsSuperLong.magazineRPM = Constants.MAGAZINE_SHOOT_SLOW_RPM;
-        superLongShotButton.whenPressed(new ShooterSetShot(shooter, magazine, turret, paramsSuperLong));
+        superLongShotButton.whenPressed(new ShooterSetFixedShot(shooter, magazine, turret, paramsSuperLong));
 
         // Button longShotButton = m_operator.getButtonY();
         // ShooterSetShot.ShooterParams paramsLong = new ShooterSetShot.ShooterParams();
