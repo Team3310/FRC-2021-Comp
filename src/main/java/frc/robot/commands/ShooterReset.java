@@ -10,7 +10,7 @@ public class ShooterReset extends ParallelCommandGroup {
 
     public ShooterReset(Shooter shooter, Magazine magazine, Limelight limelight, Turret turret) {
         addCommands(
-                new MagazineSetSpeed(magazine,0),
+                new IntakeRetractAll(Intake.getInstance(), magazine),
 //                new ShooterSetSpeed(shooter, 0, 0),
                 new ShooterIntakeSetSpeed(shooter, 0),
                 new LimelightSetLED(limelight, Limelight.LightMode.OFF),

@@ -297,7 +297,11 @@ public class Robot extends TimedRobot
         Limelight.getInstance().setLedMode(Limelight.LightMode.OFF);
 //        Turret.getInstance().setTurretMotionMagicPositionAbsolute(-180 + turret.getLagAngle(drive) -drive.getNormalizeGyro(drive));
         drive.setBrakeMode(NeutralMode.Brake);
-      //  shooter.setHoodMotionMagicPositionAbsolute(Constants.HOOD_COMPETITION_HOME_POSITION_DEGREES);
+        shooter.setHoodMotionMagicPositionAbsolute(Constants.HOOD_RETRACT_HOME_POSITION_DEGREES);
+        shooter.setIntakeRPM(0);
+        shooter.setShooterControlMode(Shooter.ShooterControlMode.MANUAL);
+        intake.setRollerSpeed(0);
+        turret.setTurretMotionMagicPositionAbsolute(Constants.TURRET_COMPETITION_HOME_POSITION_DEGREES);
     }
 
     /**

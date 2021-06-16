@@ -77,7 +77,7 @@ public class Turret extends SubsystemBase {
         statorCurrentConfigs.triggerThresholdTime = 0.5;
         turretMotor.configStatorCurrentLimit(statorCurrentConfigs);
 
-        turretMotor.config_kF(kTurretMotionMagicSlot, 0.04);
+        turretMotor.config_kF(kTurretMotionMagicSlot, 0.0); //0.04
         turretMotor.config_kP(kTurretMotionMagicSlot, 0.9);
         turretMotor.config_kI(kTurretMotionMagicSlot, 0.004);
         turretMotor.config_kD(kTurretMotionMagicSlot, 0.0);

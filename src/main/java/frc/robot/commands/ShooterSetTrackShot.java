@@ -13,7 +13,7 @@ import frc.robot.subsystems.Turret;
 public class ShooterSetTrackShot extends SequentialCommandGroup {
 
     public static class ShooterParams{
-        public double limelightOffset = -9999.0;
+        public double limelightOffset = -1.0; //-9999.0;
         public int limelightPipeline;
         public boolean isLimelightActive = true;
         public double magazineRPM = Constants.MAGAZINE_SHOOT_RPM;

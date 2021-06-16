@@ -13,13 +13,13 @@ public class Limelight extends SubsystemBase {
     private static final double TARGET_HEIGHT_INCHES = 81.25;
     private static final double CAMERA_HEIGHT_INCHES = 24.0;
 
-    private MovingAverage txFilter;
-    private MovingAverage tyFilter;
-    private MovingAverage distanceFilter;
+    // private MovingAverage txFilter;
+    // private MovingAverage tyFilter;
+    // private MovingAverage distanceFilter;
 
-    private double txFilteredValue;
-    private double tyFilteredValue;
-    private double distanceFilteredValue;
+    // private double txFilteredValue;
+    // private double tyFilteredValue;
+    // private double distanceFilteredValue;
 
     private NetworkTableInstance table = null;
 
@@ -34,9 +34,9 @@ public class Limelight extends SubsystemBase {
     private final static Limelight INSTANCE = new Limelight();
 
     private Limelight() {
-        txFilter = new MovingAverage(5);
-        tyFilter = new MovingAverage(5);
-        distanceFilter = new MovingAverage(5);
+        // txFilter = new MovingAverage(2);
+        // tyFilter = new MovingAverage(2);
+        // distanceFilter = new MovingAverage(2);
     } 
 
     public static Limelight getInstance() {
@@ -57,7 +57,7 @@ public class Limelight extends SubsystemBase {
     }
 
     public double getFilteredTx() {
-        return txFilteredValue;
+        return getTx();
     }
 
     /**
@@ -70,7 +70,7 @@ public class Limelight extends SubsystemBase {
     }
 
     public double getFilteredTy() {
-        return tyFilteredValue;
+        return getTy();
     }
 
     /**
@@ -142,7 +142,7 @@ public class Limelight extends SubsystemBase {
     }
 
     public double getFilteredDistanceFromTargetInches() {
-        return distanceFilteredValue;
+        return getDistanceFromTargetInches();
     }
 
     /**
@@ -162,9 +162,9 @@ public class Limelight extends SubsystemBase {
 
     @Override
     public void periodic() {
-        txFilteredValue = txFilter.calculate(getTx());
-        tyFilteredValue = tyFilter.calculate(getTy());
-        distanceFilteredValue = distanceFilter.calculate(getDistanceFromTargetInches());
+        // txFilteredValue = txFilter.calculate(getTx());
+        // tyFilteredValue = tyFilter.calculate(getTy());
+        // distanceFilteredValue = distanceFilter.calculate(getDistanceFromTargetInches());
         SmartDashboard.putNumber("Limelight Distance", getDistanceFromTargetInches());
         SmartDashboard.putNumber("Limelight Ty", getTy());
         SmartDashboard.putNumber("Limelight Filtered Ty", getFilteredTy());

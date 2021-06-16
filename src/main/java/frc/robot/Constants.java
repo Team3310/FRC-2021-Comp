@@ -194,7 +194,7 @@ public final class Constants
     public static final double LIMELIGHT_OFFSET_KEY_SHOT_DEGREES = 0.0;
     public static final double LIMELIGHT_OFFSET_AUTON_SHORT_SHOT_DEGREES = 0.0;
     public static final double LIMELIGHT_OFFSET_AUTO_SHOT_DEGREES = 0.0;
-    public static final double LIMELIGHT_OFFSET_MEDIUM_SHOT_DEGREES = -2.5;//-3.5
+    public static final double LIMELIGHT_OFFSET_MEDIUM_SHOT_DEGREES = -1.5;//-2.5 -3.5
     public static final double LIMELIGHT_OFFSET_SUPER_LONG_SHOT_DEGREES = 0;
     public static final double LIMELIGHT_OFFSET_LONG_SHOT_DEGREES = -2.0;
     public static final double LIMELIGHT_OFFSET_LEG_SHOT_DEGREES = -1.5;
