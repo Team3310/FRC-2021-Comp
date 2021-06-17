@@ -197,6 +197,7 @@ public class Robot extends TimedRobot
         autonTaskChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
         autonTaskChooser.addOption("Ren Grab 2 Shoot 5 Trench 3 Ball V2 Auto Michael", new AutoTrench8BallV2Michael());
         autonTaskChooser.addOption("Steal 2 Shoot 5", new AutoStealShoot5Shoot3Alex());
+        autonTaskChooser.addOption("Trench 6 Shoot 3 Grab 3 Shoot 3", new AutoTrenchShoot3Shoot3());
         autonTaskChooser.addOption("Trench 8 Shoot 3 Grab 5 Shoot 5", new AutoTrenchShoot3Shoot5());
         autonTaskChooser.addOption("Trench 8 Grab 2 Shoot 5 Grab 3 Shoot 3", new AutoTrenchShoot5Shoot3());
         autonTaskChooser.addOption("Ren 7 Shoot 3 Grab 4 Shoot 4", new AutoRenShoot3DriveShoot4());

@@ -369,7 +369,7 @@ public class TrajectoryGenerator {
 
     }
 
-    public Trajectory getTrench5Ball() {
+    public Trajectory getTrench3BallV2() {
         Trajectory Trench5Ball;
         Trench5Ball = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-29.5), new Rotation2d(0)),
@@ -378,16 +378,48 @@ public class TrajectoryGenerator {
 
                 ),
 
-                new Pose2d(Units.inchesToMeters(389), Units.inchesToMeters(-29.5), new Rotation2d(0)),
+                new Pose2d(Units.inchesToMeters(340), Units.inchesToMeters(-29.5), new Rotation2d(0)),
                 forwardConfig
         );
         return Trench5Ball;
 
     }
+
+    public Trajectory getTrench5Ball() {
+        Trajectory Trench5Ball;
+        Trench5Ball = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                new Pose2d(Units.inchesToMeters(136), Units.inchesToMeters(-29.5), new Rotation2d(0)),
+                List.of(
+                        new Translation2d(Units.inchesToMeters(260.547), Units.inchesToMeters(-29.5))
+
+                ),
+
+                new Pose2d(Units.inchesToMeters(404), Units.inchesToMeters(-29.5), new Rotation2d(0)),
+                forwardConfig
+        );
+        return Trench5Ball;
+
+    }
+    public Trajectory getToMediumFrom3TrenchV2() {
+        Trajectory getToMediumFrom3Trench;
+        getToMediumFrom3Trench = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                new Pose2d(Units.inchesToMeters(340), Units.inchesToMeters(-29.5), new Rotation2d(Units.degreesToRadians(0))),
+                List.of(
+                        new Translation2d(Units.inchesToMeters(260.000), Units.inchesToMeters(-29.5))
+
+                ),
+
+                new Pose2d(Units.inchesToMeters(199.755), Units.inchesToMeters(-29.5), new Rotation2d(Units.degreesToRadians(0))),
+                reverseFastConfig
+        );
+        return getToMediumFrom3Trench;
+
+    }
+
     public Trajectory getToMediumFrom5Trench() {
         Trajectory getToMediumFrom5Trench;
         getToMediumFrom5Trench = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
-                new Pose2d(Units.inchesToMeters(389), Units.inchesToMeters(-29.5), new Rotation2d(Units.degreesToRadians(0))),
+                new Pose2d(Units.inchesToMeters(404), Units.inchesToMeters(-29.5), new Rotation2d(Units.degreesToRadians(0))),
                 List.of(
                         new Translation2d(Units.inchesToMeters(290.000), Units.inchesToMeters(-29.5))
 
@@ -399,7 +431,6 @@ public class TrajectoryGenerator {
         return getToMediumFrom5Trench;
 
     }
-
     public Trajectory getTrench2Ball() {
         Trajectory Trench2Ball;
         Trench2Ball = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
